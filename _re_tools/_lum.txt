@@ -1,0 +1,89 @@
+### lum  firstlineno=385 args=('h',) vars=('c',)
+386           0 LOAD_DEREF               0 (h)
+              2 LOAD_METHOD              0 (lstrip)
+              4 LOAD_CONST               1 ('#')
+              6 CALL_METHOD              1
+              8 STORE_DEREF              0 (h)
+
+387          10 LOAD_CLOSURE             0 (h)
+             12 BUILD_TUPLE              1
+             14 LOAD_CONST               2 (<code object <listcomp> at 0x000001D7805F28C0, file "theme.py", line 387>)
+             16 LOAD_CONST               3 ('contrast.<locals>.lum.<locals>.<listcomp>')
+             18 MAKE_FUNCTION            8 (closure)
+             20 LOAD_CONST               4 ((0, 2, 4))
+             22 GET_ITER
+             24 CALL_FUNCTION            1
+             26 STORE_FAST               1 (c)
+
+388          28 LOAD_CONST               5 (<code object <listcomp> at 0x000001D7805F2810, file "theme.py", line 388>)
+             30 LOAD_CONST               3 ('contrast.<locals>.lum.<locals>.<listcomp>')
+             32 MAKE_FUNCTION            0
+             34 LOAD_FAST                1 (c)
+             36 GET_ITER
+             38 CALL_FUNCTION            1
+             40 STORE_FAST               1 (c)
+
+389          42 LOAD_CONST               6 (0.2126)
+             44 LOAD_FAST                1 (c)
+             46 LOAD_CONST               7 (0)
+             48 BINARY_SUBSCR
+             50 BINARY_MULTIPLY
+             52 LOAD_CONST               8 (0.7152)
+             54 LOAD_FAST                1 (c)
+             56 LOAD_CONST               9 (1)
+             58 BINARY_SUBSCR
+             60 BINARY_MULTIPLY
+             62 BINARY_ADD
+             64 LOAD_CONST              10 (0.0722)
+             66 LOAD_FAST                1 (c)
+             68 LOAD_CONST              11 (2)
+             70 BINARY_SUBSCR
+             72 BINARY_MULTIPLY
+             74 BINARY_ADD
+             76 RETURN_VALUE
+
+Disassembly of <code object <listcomp> at 0x000001D7805F28C0, file "theme.py", line 387>:
+387           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                15 (to 36)
+              6 STORE_FAST               1 (i)
+              8 LOAD_GLOBAL              0 (int)
+             10 LOAD_DEREF               0 (h)
+             12 LOAD_FAST                1 (i)
+             14 LOAD_FAST                1 (i)
+             16 LOAD_CONST               0 (2)
+             18 BINARY_ADD
+             20 BUILD_SLICE              2
+             22 BINARY_SUBSCR
+             24 LOAD_CONST               1 (16)
+             26 CALL_FUNCTION            2
+             28 LOAD_CONST               2 (255.0)
+             30 BINARY_TRUE_DIVIDE
+             32 LIST_APPEND              2
+             34 JUMP_ABSOLUTE            2 (to 4)
+        >>   36 RETURN_VALUE
+
+Disassembly of <code object <listcomp> at 0x000001D7805F2810, file "theme.py", line 388>:
+388           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                18 (to 42)
+              6 STORE_FAST               1 (x)
+              8 LOAD_FAST                1 (x)
+             10 LOAD_CONST               0 (0.03928)
+             12 COMPARE_OP               1 (<=)
+             14 POP_JUMP_IF_FALSE       12 (to 24)
+             16 LOAD_FAST                1 (x)
+             18 LOAD_CONST               1 (12.92)
+             20 BINARY_TRUE_DIVIDE
+             22 JUMP_FORWARD             7 (to 38)
+        >>   24 LOAD_FAST                1 (x)
+             26 LOAD_CONST               2 (0.055)
+             28 BINARY_ADD
+             30 LOAD_CONST               3 (1.055)
+             32 BINARY_TRUE_DIVIDE
+             34 LOAD_CONST               4 (2.4)
+             36 BINARY_POWER
+        >>   38 LIST_APPEND              2
+             40 JUMP_ABSOLUTE            2 (to 4)
+        >>   42 RETURN_VALUE
+

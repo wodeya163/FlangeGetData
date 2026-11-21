@@ -1,0 +1,176 @@
+### recommend_oring  firstlineno=328 args=('d_shaft', 'seal_type', 'medium', 'rod_mode') vars=('candidates', 'd2', 'inner_list', 'd1', 'stretch', 'kmax', 'base_pri', 'stretch_bonus', 'seen', 'pri', 'key', 'result')
+338           0 BUILD_LIST               0
+              2 STORE_FAST               4 (candidates)
+
+339           4 LOAD_GLOBAL              0 (ORING_SIZES)
+              6 LOAD_METHOD              1 (items)
+              8 CALL_METHOD              0
+             10 GET_ITER
+        >>   12 FOR_ITER                83 (to 180)
+             14 UNPACK_SEQUENCE          2
+             16 STORE_FAST               5 (d2)
+             18 STORE_FAST               6 (inner_list)
+
+340          20 LOAD_FAST                6 (inner_list)
+             22 GET_ITER
+        >>   24 FOR_ITER                76 (to 178)
+             26 STORE_FAST               7 (d1)
+
+341          28 LOAD_FAST                0 (d_shaft)
+             30 LOAD_FAST                7 (d1)
+             32 BINARY_SUBTRACT
+             34 LOAD_FAST                7 (d1)
+             36 BINARY_TRUE_DIVIDE
+             38 LOAD_CONST               1 (100)
+             40 BINARY_MULTIPLY
+             42 STORE_FAST               8 (stretch)
+
+342          44 LOAD_FAST                3 (rod_mode)
+             46 POP_JUMP_IF_FALSE       46 (to 92)
+
+344          48 LOAD_FAST                7 (d1)
+             50 LOAD_FAST                0 (d_shaft)
+             52 COMPARE_OP               0 (<)
+             54 POP_JUMP_IF_FALSE       29 (to 58)
+
+345          56 JUMP_ABSOLUTE           12 (to 24)
+
+346     >>   58 LOAD_GLOBAL              2 (_precompression_limit)
+             60 LOAD_FAST                7 (d1)
+             62 LOAD_FAST                1 (seal_type)
+             64 CALL_FUNCTION            2
+             66 STORE_FAST               9 (kmax)
+
+347          68 LOAD_FAST                9 (kmax)
+             70 LOAD_CONST               2 (None)
+             72 IS_OP                    0
+             74 POP_JUMP_IF_FALSE       39 (to 78)
+
+348          76 JUMP_ABSOLUTE           12 (to 24)
+
+349     >>   78 LOAD_FAST                8 (stretch)
+             80 UNARY_NEGATIVE
+             82 LOAD_FAST                9 (kmax)
+             84 COMPARE_OP               4 (>)
+             86 POP_JUMP_IF_FALSE       45 (to 90)
+
+350          88 JUMP_ABSOLUTE           12 (to 24)
+
+349     >>   90 JUMP_FORWARD            20 (to 132)
+
+353     >>   92 LOAD_FAST                7 (d1)
+             94 LOAD_FAST                0 (d_shaft)
+             96 COMPARE_OP               4 (>)
+             98 POP_JUMP_IF_FALSE       51 (to 102)
+
+354         100 JUMP_ABSOLUTE           12 (to 24)
+
+355     >>  102 LOAD_GLOBAL              3 (_stretch_limit)
+            104 LOAD_FAST                7 (d1)
+            106 CALL_FUNCTION            1
+            108 STORE_FAST               9 (kmax)
+
+356         110 LOAD_FAST                9 (kmax)
+            112 LOAD_CONST               2 (None)
+            114 IS_OP                    0
+            116 POP_JUMP_IF_FALSE       60 (to 120)
+
+357         118 JUMP_ABSOLUTE           12 (to 24)
+
+358     >>  120 LOAD_GLOBAL              4 (_stretch_ok)
+            122 LOAD_FAST                8 (stretch)
+            124 LOAD_FAST                9 (kmax)
+            126 CALL_FUNCTION            2
+            128 POP_JUMP_IF_TRUE        66 (to 132)
+
+359         130 JUMP_ABSOLUTE           12 (to 24)
+
+360     >>  132 LOAD_GLOBAL              5 (_oring_priority)
+            134 LOAD_FAST                5 (d2)
+            136 LOAD_FAST                1 (seal_type)
+            138 CALL_FUNCTION            2
+            140 STORE_FAST              10 (base_pri)
+
+363         142 LOAD_GLOBAL              6 (abs)
+            144 LOAD_FAST                8 (stretch)
+            146 CALL_FUNCTION            1
+            148 UNARY_NEGATIVE
+            150 LOAD_CONST               3 (100.0)
+            152 BINARY_TRUE_DIVIDE
+            154 STORE_FAST              11 (stretch_bonus)
+
+364         156 LOAD_FAST                4 (candidates)
+            158 LOAD_METHOD              7 (append)
+            160 LOAD_FAST                7 (d1)
+            162 LOAD_FAST                5 (d2)
+            164 LOAD_FAST               10 (base_pri)
+            166 LOAD_FAST               11 (stretch_bonus)
+            168 BINARY_ADD
+            170 BUILD_TUPLE              3
+            172 CALL_METHOD              1
+            174 POP_TOP
+            176 JUMP_ABSOLUTE           12 (to 24)
+
+340     >>  178 JUMP_ABSOLUTE            6 (to 12)
+
+367     >>  180 BUILD_MAP                0
+            182 STORE_FAST              12 (seen)
+
+368         184 LOAD_FAST                4 (candidates)
+            186 GET_ITER
+        >>  188 FOR_ITER                26 (to 242)
+            190 UNPACK_SEQUENCE          3
+            192 STORE_FAST               7 (d1)
+            194 STORE_FAST               5 (d2)
+            196 STORE_FAST              13 (pri)
+
+369         198 LOAD_FAST                5 (d2)
+            200 STORE_FAST              14 (key)
+
+370         202 LOAD_FAST               14 (key)
+            204 LOAD_FAST               12 (seen)
+            206 CONTAINS_OP              1
+            208 POP_JUMP_IF_TRUE       113 (to 226)
+            210 LOAD_FAST               13 (pri)
+            212 LOAD_FAST               12 (seen)
+            214 LOAD_FAST               14 (key)
+            216 BINARY_SUBSCR
+            218 LOAD_CONST               4 (2)
+            220 BINARY_SUBSCR
+            222 COMPARE_OP               4 (>)
+            224 POP_JUMP_IF_FALSE      120 (to 240)
+
+371     >>  226 LOAD_FAST                7 (d1)
+            228 LOAD_FAST                5 (d2)
+            230 LOAD_FAST               13 (pri)
+            232 BUILD_TUPLE              3
+            234 LOAD_FAST               12 (seen)
+            236 LOAD_FAST               14 (key)
+            238 STORE_SUBSCR
+        >>  240 JUMP_ABSOLUTE           94 (to 188)
+
+372     >>  242 LOAD_GLOBAL              8 (sorted)
+            244 LOAD_FAST               12 (seen)
+            246 LOAD_METHOD              9 (values)
+            248 CALL_METHOD              0
+            250 LOAD_CONST               5 (<code object <lambda> at 0x0000023FB09223F0, file "seal_data.py", line 372>)
+            252 LOAD_CONST               6 ('recommend_oring.<locals>.<lambda>')
+            254 MAKE_FUNCTION            0
+            256 LOAD_CONST               7 (('key',))
+            258 CALL_FUNCTION_KW         2
+            260 STORE_FAST              15 (result)
+
+373         262 LOAD_FAST               15 (result)
+            264 LOAD_CONST               2 (None)
+            266 LOAD_CONST               8 (5)
+            268 BUILD_SLICE              2
+            270 BINARY_SUBSCR
+            272 RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x0000023FB09223F0, file "seal_data.py", line 372>:
+372           0 LOAD_FAST                0 (x)
+              2 LOAD_CONST               1 (2)
+              4 BINARY_SUBSCR
+              6 UNARY_NEGATIVE
+              8 RETURN_VALUE
+

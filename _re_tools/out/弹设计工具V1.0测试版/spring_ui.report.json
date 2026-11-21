@@ -1,0 +1,14 @@
+{
+  "failed": [],
+  "unplaced": [
+    "_fmt_allow"
+  ],
+  "broken": [
+    "<module>.MainWindow._render_result",
+    "<module>.MainWindow._calculate",
+    "<module>.MainWindow._export_3d",
+    "<module>.MainWindow",
+    "<module>._write_crash_log",
+    "<module>.main"
+  ]
+}

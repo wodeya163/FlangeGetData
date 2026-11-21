@@ -1,0 +1,180 @@
+### groove_depth_limits  firstlineno=168 args=('d2', 'seal_type') vars=()
+171           0 LOAD_FAST                1 (seal_type)
+              2 LOAD_CONST               1 ('static_axial')
+              4 COMPARE_OP               2 (==)
+              6 POP_JUMP_IF_FALSE        9 (to 18)
+
+172           8 LOAD_GLOBAL              0 (DEPTH_AXIAL)
+             10 LOAD_METHOD              1 (get)
+             12 LOAD_FAST                0 (d2)
+             14 CALL_METHOD              1
+             16 RETURN_VALUE
+
+173     >>   18 LOAD_FAST                1 (seal_type)
+             20 LOAD_CONST               2 (('hydraulic_dynamic', 'dynamic_recip', 'dynamic_rotate', 'low_friction'))
+             22 CONTAINS_OP              0
+             24 POP_JUMP_IF_FALSE       18 (to 36)
+
+175          26 LOAD_GLOBAL              2 (DEPTH_HYD_DYN)
+             28 LOAD_METHOD              1 (get)
+             30 LOAD_FAST                0 (d2)
+             32 CALL_METHOD              1
+             34 RETURN_VALUE
+
+176     >>   36 LOAD_FAST                1 (seal_type)
+             38 LOAD_CONST               3 ('pneumatic_dynamic')
+             40 COMPARE_OP               2 (==)
+             42 POP_JUMP_IF_FALSE       27 (to 54)
+
+177          44 LOAD_GLOBAL              3 (DEPTH_PNEU_DYN)
+             46 LOAD_METHOD              1 (get)
+             48 LOAD_FAST                0 (d2)
+             50 CALL_METHOD              1
+             52 RETURN_VALUE
+
+178     >>   54 LOAD_GLOBAL              4 (DEPTH_RADIAL_STATIC)
+             56 LOAD_METHOD              1 (get)
+             58 LOAD_FAST                0 (d2)
+             60 CALL_METHOD              1
+             62 RETURN_VALUE
+
+### compression_range  firstlineno=305 args=('d2', 'seal_type') vars=('table', 'w')
+308           0 LOAD_FAST                1 (seal_type)
+              2 LOAD_CONST               1 ('static_axial')
+              4 COMPARE_OP               2 (==)
+              6 POP_JUMP_IF_FALSE        7 (to 14)
+
+309           8 LOAD_GLOBAL              0 (COMPRESSION_AXIAL)
+             10 STORE_FAST               2 (table)
+             12 JUMP_FORWARD            38 (to 90)
+
+310     >>   14 LOAD_FAST                1 (seal_type)
+             16 LOAD_CONST               2 (('hydraulic_dynamic', 'dynamic_recip'))
+             18 CONTAINS_OP              0
+             20 POP_JUMP_IF_FALSE       14 (to 28)
+
+311          22 LOAD_GLOBAL              1 (COMPRESSION_HYD_DYN)
+             24 STORE_FAST               2 (table)
+             26 JUMP_FORWARD            31 (to 90)
+
+312     >>   28 LOAD_FAST                1 (seal_type)
+             30 LOAD_CONST               3 ('pneumatic_dynamic')
+             32 COMPARE_OP               2 (==)
+             34 POP_JUMP_IF_FALSE       21 (to 42)
+
+313          36 LOAD_GLOBAL              2 (COMPRESSION_PNEU_DYN)
+             38 STORE_FAST               2 (table)
+             40 JUMP_FORWARD            24 (to 90)
+
+314     >>   42 LOAD_FAST                1 (seal_type)
+             44 LOAD_CONST               4 (('dynamic_rotate', 'low_friction'))
+             46 CONTAINS_OP              0
+             48 POP_JUMP_IF_FALSE       43 (to 86)
+
+318          50 LOAD_GLOBAL              1 (COMPRESSION_HYD_DYN)
+             52 LOAD_METHOD              3 (get)
+             54 LOAD_FAST                0 (d2)
+             56 CALL_METHOD              1
+             58 STORE_FAST               3 (w)
+
+319          60 LOAD_FAST                3 (w)
+             62 POP_JUMP_IF_FALSE       41 (to 82)
+
+320          64 LOAD_FAST                3 (w)
+             66 LOAD_CONST               5 (0)
+             68 BINARY_SUBSCR
+             70 LOAD_FAST                3 (w)
+             72 LOAD_CONST               6 (1)
+             74 BINARY_SUBSCR
+
+321          76 LOAD_CONST               7 ('参考液压动密封(表A.3，标准未单列本工况)；行业资料旋转工况常用约2%~5%，以厂家样本为准')
+
+320          78 BUILD_TUPLE              3
+             80 RETURN_VALUE
+
+322     >>   82 LOAD_CONST               8 (None)
+             84 RETURN_VALUE
+
+324     >>   86 LOAD_GLOBAL              4 (COMPRESSION_RADIAL)
+             88 STORE_FAST               2 (table)
+
+325     >>   90 LOAD_FAST                2 (table)
+             92 LOAD_METHOD              3 (get)
+             94 LOAD_FAST                0 (d2)
+             96 CALL_METHOD              1
+             98 RETURN_VALUE
+
+### axial_diameter_limits  firstlineno=385 args=('d1', 'd2', 'pressure_dir') vars=()
+396           0 LOAD_FAST                0 (d1)
+              2 LOAD_CONST               1 (None)
+              4 IS_OP                    0
+              6 POP_JUMP_IF_TRUE        10 (to 20)
+              8 LOAD_FAST                1 (d2)
+             10 LOAD_CONST               1 (None)
+             12 IS_OP                    0
+             14 POP_JUMP_IF_TRUE        10 (to 20)
+             16 LOAD_FAST                2 (pressure_dir)
+             18 POP_JUMP_IF_TRUE        15 (to 30)
+
+397     >>   20 LOAD_CONST               2 (True)
+             22 LOAD_CONST               3 ('需要 O 型圈内径 d1 与截面直径 d2')
+             24 LOAD_CONST               4 (('undefined', 'note'))
+             26 BUILD_CONST_KEY_MAP      2
+             28 RETURN_VALUE
+
+398     >>   30 LOAD_FAST                2 (pressure_dir)
+             32 LOAD_CONST               5 ('internal')
+             34 COMPARE_OP               2 (==)
+             36 POP_JUMP_IF_FALSE       36 (to 72)
+
+400          38 LOAD_CONST               6 ('external_diameter')
+             40 LOAD_CONST               7 ('沟槽外径 d7')
+
+401          42 LOAD_GLOBAL              0 (round)
+             44 LOAD_FAST                0 (d1)
+             46 LOAD_CONST               8 (2)
+             48 LOAD_FAST                1 (d2)
+             50 BINARY_MULTIPLY
+             52 BINARY_ADD
+             54 LOAD_CONST               8 (2)
+             56 CALL_FUNCTION            2
+             58 LOAD_CONST               9 ('≤ d1+2d2')
+
+402          60 LOAD_CONST              10 ('式(3)：d7 ≤ d1+2d2')
+             62 LOAD_CONST              11 ('H11')
+
+403          64 LOAD_CONST              12 ('受内部压力沟槽外径上限（GB/T 3452.3-2005 式(3)，公差表3 H11）；标准表12推荐值本工具未收录，可自填实际值')
+
+399          66 LOAD_CONST              13 (('kind', 'label', 'limit', 'limit_text', 'formula', 'tol_class', 'note'))
+             68 BUILD_CONST_KEY_MAP      7
+             70 RETURN_VALUE
+
+406     >>   72 LOAD_FAST                2 (pressure_dir)
+             74 LOAD_CONST              14 ('external')
+             76 COMPARE_OP               2 (==)
+             78 POP_JUMP_IF_FALSE       53 (to 106)
+
+408          80 LOAD_CONST              15 ('internal_diameter')
+             82 LOAD_CONST              16 ('沟槽内径 d8')
+
+409          84 LOAD_GLOBAL              0 (round)
+             86 LOAD_FAST                0 (d1)
+             88 LOAD_CONST               8 (2)
+             90 CALL_FUNCTION            2
+             92 LOAD_CONST              17 ('≥ d1')
+
+410          94 LOAD_CONST              18 ('式(4)：d8 ≥ d1')
+             96 LOAD_CONST              11 ('H11')
+
+411          98 LOAD_CONST              19 ('受外部压力沟槽内径下限（GB/T 3452.3-2005 式(4)，公差表3 H11）；标准表13推荐值本工具未收录，可自填实际值')
+
+407         100 LOAD_CONST              13 (('kind', 'label', 'limit', 'limit_text', 'formula', 'tol_class', 'note'))
+            102 BUILD_CONST_KEY_MAP      7
+            104 RETURN_VALUE
+
+414     >>  106 LOAD_CONST               2 (True)
+            108 LOAD_CONST              20 ('轴向密封需先选择受内压/受外压')
+            110 LOAD_CONST               4 (('undefined', 'note'))
+            112 BUILD_CONST_KEY_MAP      2
+            114 RETURN_VALUE
+

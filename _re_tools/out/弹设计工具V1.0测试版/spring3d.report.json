@@ -1,0 +1,11 @@
+{
+  "failed": [],
+  "unplaced": [],
+  "broken": [
+    "<module>._signed_volume",
+    "<module>.write_stl",
+    "<module>._ascii_safe",
+    "<module>.write_step.complex_add",
+    "<module>.write_step"
+  ]
+}

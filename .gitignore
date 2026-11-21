@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.log
+.pytest_cache/
+.ruff_cache/
+
+# Build outputs
+FlangeQueryV2/build/
+FlangeQueryV2/dist/
+FlangeQueryV2/dist_onedir/
+FlangeQueryV2/_打包/
+FlangeQueryV2/Data/data.db
+FlangeQueryV2/Data/manifest.json
+FlangeQueryV2/FlangeQueryV2_EXE便携版.zip
+FlangeQueryV2-*.zip
+
+# Temporary verification helpers
+_pyqt5_probe/
+_patch_result.txt
+_test_pages.log
+_audit_run.log
+
+# Archived assets（逆向资料、未引用模板；不参与打包）
+_archive/
+
+# 反编译/解包产物 + 第三方工具 exe（非本项目源码，历史误提交）
+_decompiled_tools/
+*_extracted/
+*.exe
+*.dll
+*.pyd
+*.pyz
+*.qm
+*.onnx
+
+# Legacy assets / standards PDFs / stray release zips
+FlangeSheet_V1.00/
+标准规范/*
+!标准规范/*.md
+FlangeQueryV2*.zip
+_geom_full.txt
+_icon_preview.png
+
+# Local runtime data
+*.tmp
+.workbuddy/
+
+# Release artifacts (含令牌的发布脚本 + 更新包，不进源码库)
+发布/
+
+# CadQuery/OCP runtime and wheel cache (not part of source)
+_cadquery_env/
+_cadquery_wheels/

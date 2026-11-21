@@ -1,0 +1,407 @@
+*** Begin Patch
+*** Update File: _re_tools/out/单位换算工具/app.py
+@@
+ 
+ def _sync_theme():
+     '''按配置主题同步对话框配色（v3.3），在 main() 创建任何对话框前调用'''
+-    if not THEMES.get(get_theme_key()):
+-        t = THEMES['purple']
+-        g = globals()
+-        for src, dst in (('BG', 'BG'), ('CARD_BG', 'CARD'), ('BORDER', 'BORDER'), ('TEXT_W', 'TEXT'), ('TEXT_G', 'TEXT2'), ('ACCENT', 'ACCENT'), ('ORANGE', 'ORANGE'), ('HOVER', 'HOVER'), ('DANGER', 'DANGER')):
+-            g[dst] = t[src]
+-            return None
+-class WelcomeDialog:
+-
+-    def __init__(self, parent):
+-        super().__init__(parent)
+-        self.setWindowTitle('工程单位换算 — 使用说明')
+-        self.setFixedSize(480, 360)
+-        self.setStyleSheet(f'''QDialog {{ background: {BG}; }}''')
+-        root = QVBoxLayout(self)
+-        root.setSpacing(10)
+-        root.setContentsMargins(28, 20, 28, 20)
+-        title = QLabel('⚙ 单位换算工具')
+-        title.setFont(QFont('Microsoft YaHei', 16, QFont.Weight.Bold))
+-        title.setStyleSheet(f'''color: {TEXT};''')
+-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        root.addWidget(title)
+-        sub = QLabel('v3.5  |  21类单位  |  分类标签+单位按钮点选  |  热工三件套/粘度/转速 · 5套主题')
+-        sub.setStyleSheet(f'''color: {TEXT2}; font-size: 13px;''')
+-        sub.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        root.addWidget(sub)
+-        line = QFrame()
+-        line.setFrameShape(QFrame.Shape.HLine)
+-        line.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
+-        root.addWidget(line)
+-        for icon_title, desc in (('📏  长度 / 面积 / 体积', 'mm, in, 海里, 亩, L, 油桶…'), ('⚖  质量 / 力 / 扭矩', 'kg, t, 斤, lb, N, kgf, N·m, lbf·ft…'), ('📐  角度 / 温度 / 密度', '度分秒 DMS, rad, gon, °C, °F, K…'), ('⚙  压力 / 流量 / 功率 / 硬度', 'MPa, psi, GPM, kW, hp, HRC, HV…')):
+-            row = QLabel(f'''  {icon_title}  —  {desc}''')
+-            row.setStyleSheet(f'''color: {TEXT}; font-size: 12px; padding: 3px 0;''')
+-            root.addWidget(row)
+-            line2 = QFrame()
+-            line2.setFrameShape(QFrame.Shape.HLine)
+-            line2.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
+-            root.addWidget(line2)
+-            hint = QLabel('点击「开始使用」后，请扫描公众号「机械领域-0-开」二维码获取解锁密码')
+-            hint.setStyleSheet(f'''color: {TEXT2}; font-size: 11px;''')
+-            hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-            root.addWidget(hint)
+-            btn = QPushButton('开始使用 →')
+-            btn.setFixedHeight(36)
+-            btn.setCursor(Qt.CursorShape.PointingHandCursor)
+-            btn.setStyleSheet(f'''QPushButton {{ background: {ACCENT}; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; }} QPushButton:hover {{ background: {HOVER}; }}''')
+-            btn.clicked.connect(self.accept)
+-            root.addWidget(btn)
+-            return None
+-    __classcell__ = None
+-class LockDialog:
+-
+-    def __init__(self, parent):
+-        super().__init__(parent)
+-        self.setWindowTitle('工程单位换算 — 解锁')
+-        self.setFixedSize(420, 480)
+-        self.setStyleSheet(f'''QDialog {{ background: {BG}; }}''')
+-        self._ok = False
+-        root = QVBoxLayout(self)
+-        root.setSpacing(10)
+-        root.setContentsMargins(28, 20, 28, 20)
+-        title = QLabel('🔒 工程单位换算')
+-        title.setFont(QFont('Microsoft YaHei', 15, QFont.Weight.Bold))
+-        title.setStyleSheet(f'''color: {TEXT};''')
+-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        root.addWidget(title)
+-        sub = QLabel('使用前请先解锁')
+-        sub.setStyleSheet(f'''color: {TEXT2}; font-size: 12px;''')
+-        sub.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        root.addWidget(sub)
+-        qr_label = QLabel()
+-        qr_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        qr_file = _qr_path()
+-        if os.path.exists(qr_file):
+-            pixmap = QPixmap(qr_file)
+-            qr_label.setPixmap(pixmap.scaled(180, 180, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+-        else:
+-            qr_label.setText('[ 请将公众号二维码放到 assets/qrcode.jpg ]')
+-            qr_label.setStyleSheet(f'''color: {ORANGE}; font-size: 12px;''')
+-            qr_label.setFixedHeight(180)
+-        root.addWidget(qr_label)
+-        hint = QLabel('扫码关注公众号「机械领域-0-开」获取解锁密码\n一次解锁，永久使用')
+-        hint.setStyleSheet(f'''color: {TEXT2}; font-size: 12px;''')
+-        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        root.addWidget(hint)
+-        line = QFrame()
+-        line.setFrameShape(QFrame.Shape.HLine)
+-        line.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
+-        root.addWidget(line)
+-        pwd_label = QLabel('请输入解锁密码：')
+-        pwd_label.setStyleSheet(f'''color: {TEXT}; font-size: 12px;''')
+-        root.addWidget(pwd_label)
+-        self.pwd_input = QLineEdit()
+-        self.pwd_input.setPlaceholderText('请输入密码…')
+-        self.pwd_input.setEchoMode(QLineEdit.EchoMode.Password)
+-        self.pwd_input.setFixedHeight(34)
+-        self.pwd_input.setStyleSheet(f'''QLineEdit {{ background: {CARD}; color: {TEXT}; border: 1px solid {BORDER}; border-radius: 6px; padding: 0 12px; font-size: 13px; }} QLineEdit:focus {{ border-color: {ACCENT}; }}''')
+-        self.pwd_input.returnPressed.connect(self._check)
+-        root.addWidget(self.pwd_input)
+-        self.err_label = QLabel('')
+-        self.err_label.setStyleSheet(f'''color: {DANGER}; font-size: 11px;''')
+-        self.err_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        root.addWidget(self.err_label)
+-        btn = QPushButton('🔓 解锁')
+-        btn.setFixedHeight(36)
+-        btn.setCursor(Qt.CursorShape.PointingHandCursor)
+-        btn.setStyleSheet(f'''QPushButton {{ background: {ACCENT}; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; }} QPushButton:hover {{ background: {HOVER}; }}''')
+-        btn.clicked.connect(self._check)
+-        root.addWidget(btn)
+-    def _check(self):
+-        digest = hashlib.sha256(self.pwd_input.text().strip().encode('utf-8')).hexdigest()
+-        if digest == PASSWORD_HASH:
+-            self._ok = True
+-            cfg = _load_config()
+-            cfg['unlocked'] = True
+-            _save_config(cfg)
+-            self.accept()
+-            return None
+-        None.err_label.setText('❌ 密码错误，请关注公众号获取正确密码')
+-        self.pwd_input.clear()
+-        self.pwd_input.setFocus()
+-    __classcell__ = None
+-class DisclaimerDialog:
+-    '''免责声明（免责声明）'''
+-
+-    def __init__(self, parent):
+-        super().__init__(parent)
+-        self.setWindowTitle('工程单位换算 — 使用说明')
+-        self.setFixedSize(480, 360)
+-        self.setStyleSheet(f'''QDialog {{ background: {BG}; }}''')
+-        root = QVBoxLayout(self)
+-        root.setSpacing(10)
+-        root.setContentsMargins(28, 20, 28, 20)
+-        title = QLabel('⚠️ 使用说明')
+-        title.setFont(QFont('Microsoft YaHei', 16, QFont.Weight.Bold))
+-        title.setStyleSheet(f'''color: {TEXT};''')
+-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-        root.addWidget(title)
+-        line = QFrame()
+-        line.setFrameShape(QFrame.Shape.HLine)
+-        line.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
+-        root.addWidget(line)
+-        items = [
+-            '1. 本工具仅供参考，数据以国家标准原文为准',
+-            '2. 单位换算结果请自行复核',
+-            '3. 本工具不对使用后果承担法律责任',
+-            '4. 支持21类工程单位实时互转（含度分秒/热工/粘度/转速）',
+-            '5. 先点分类标签，再点单位按钮进入换算；支持全角/千分位，点击结果行单位名可反向换算',
+-            '6. 右上角 5 个主题色圆点，点一下就地换肤（窗口不重建），选择自动记住',
+-            '7. 数据来源：GB/T 80000 + ISO 80000']
+-        for item in items:
+-            row = QLabel(f'''  {item}''')
+-            row.setStyleSheet(f'''color: {TEXT}; font-size: 12px; padding: 3px 0;''')
+-            root.addWidget(row)
+-            line2 = QFrame()
+-            line2.setFrameShape(QFrame.Shape.HLine)
+-            line2.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
+-            root.addWidget(line2)
+-            hint = QLabel('点击「同意」表示您已阅读并理解以上说明')
+-            hint.setStyleSheet(f'''color: {TEXT2}; font-size: 11px;''')
+-            hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
+-            root.addWidget(hint)
+-            btn = QPushButton('✅ 同意')
+-            btn.setFixedHeight(36)
+-            btn.setCursor(Qt.CursorShape.PointingHandCursor)
+-            btn.setStyleSheet(f'''QPushButton {{ background: {ACCENT}; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; }} QPushButton:hover {{ background: {HOVER}; }}''')
+-            btn.clicked.connect(self.accept)
+-            root.addWidget(btn)
+-            return None
+-def main():
+-    app = QApplication(sys.argv)
+-    app.setFont(QFont('Microsoft YaHei', 10))
+-    _sync_theme()
+-    first_run = is_first_run()
+-    if first_run:
+-        w = WelcomeDialog()
+-        if w.exec() != QDialog.Accepted:
+-            return None
+-    if not is_unlocked():
+-        lock = LockDialog()
+-        if lock.exec() != QDialog.Accepted:
+-            return None
+-    if first_run:
+-        disclaimer = DisclaimerDialog()
+-        if disclaimer.exec() != QDialog.Accepted:
+-            return None
+-        cfg = _load_config()
+-        cfg['disclaimer_accepted'] = True
+-        _save_config(cfg)
+-    from main import MainWindow
+-    win = MainWindow()
+-    win.show()
+-    sys.exit(app.exec())
+-if __name__ == '__main__':
+-    try:
+-        main()
+-    except Exception:
+-        import traceback
+-        crash_path = os.path.join(os.path.dirname(os.path.abspath(sys.executable)) if getattr(sys, 'frozen', False) else os.path.dirname(__file__), 'crash.log')
+-        with open(crash_path, 'a', encoding='utf-8') as f:
+-            f.write('=== Crash ===\n')
+-            traceback.print_exc(file=f)
+-        sys.exit(1)
+-
++    t = THEMES.get(get_theme_key()) or THEMES['purple']
++    g = globals()
++    for src, dst in (('BG', 'BG'), ('CARD_BG', 'CARD'), ('BORDER', 'BORDER'), ('TEXT_W', 'TEXT'), ('TEXT_G', 'TEXT2'), ('ACCENT', 'ACCENT'), ('ORANGE', 'ORANGE'), ('HOVER', 'HOVER'), ('DANGER', 'DANGER')):
++        g[dst] = t[src]
++class WelcomeDialog(QDialog):
++
++    def __init__(self, parent=None):
++        super().__init__(parent)
++        self.setWindowTitle('工程单位换算 — 使用说明')
++        self.setFixedSize(480, 360)
++        self.setStyleSheet(f'''QDialog {{ background: {BG}; }}''')
++        root = QVBoxLayout(self)
++        root.setSpacing(10)
++        root.setContentsMargins(28, 20, 28, 20)
++        title = QLabel('⚙ 单位换算工具')
++        title.setFont(QFont('Microsoft YaHei', 16, QFont.Weight.Bold))
++        title.setStyleSheet(f'''color: {TEXT};''')
++        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(title)
++        sub = QLabel('v3.5  |  21类单位  |  分类标签+单位按钮点选  |  热工三件套/粘度/转速 · 5套主题')
++        sub.setStyleSheet(f'''color: {TEXT2}; font-size: 13px;''')
++        sub.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(sub)
++        line = QFrame()
++        line.setFrameShape(QFrame.Shape.HLine)
++        line.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
++        root.addWidget(line)
++        for icon_title, desc in (('📏  长度 / 面积 / 体积', 'mm, in, 海里, 亩, L, 油桶…'), ('⚖  质量 / 力 / 扭矩', 'kg, t, 斤, lb, N, kgf, N·m, lbf·ft…'), ('📐  角度 / 温度 / 密度', '度分秒 DMS, rad, gon, °C, °F, K…'), ('⚙  压力 / 流量 / 功率 / 硬度', 'MPa, psi, GPM, kW, hp, HRC, HV…')):
++            row = QLabel(f'''  {icon_title}  —  {desc}''')
++            row.setStyleSheet(f'''color: {TEXT}; font-size: 12px; padding: 3px 0;''')
++            root.addWidget(row)
++        line2 = QFrame()
++        line2.setFrameShape(QFrame.Shape.HLine)
++        line2.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
++        root.addWidget(line2)
++        hint = QLabel('点击「开始使用」后，请扫描公众号「机械领域-0-开」二维码获取解锁密码')
++        hint.setStyleSheet(f'''color: {TEXT2}; font-size: 11px;''')
++        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(hint)
++        btn = QPushButton('开始使用 →')
++        btn.setFixedHeight(36)
++        btn.setCursor(Qt.CursorShape.PointingHandCursor)
++        btn.setStyleSheet(f'''QPushButton {{ background: {ACCENT}; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; }} QPushButton:hover {{ background: {HOVER}; }}''')
++        btn.clicked.connect(self.accept)
++        root.addWidget(btn)
++class LockDialog(QDialog):
++
++    def __init__(self, parent=None):
++        super().__init__(parent)
++        self.setWindowTitle('工程单位换算 — 解锁')
++        self.setFixedSize(420, 480)
++        self.setStyleSheet(f'''QDialog {{ background: {BG}; }}''')
++        self._ok = False
++        root = QVBoxLayout(self)
++        root.setSpacing(10)
++        root.setContentsMargins(28, 20, 28, 20)
++        title = QLabel('🔒 工程单位换算')
++        title.setFont(QFont('Microsoft YaHei', 15, QFont.Weight.Bold))
++        title.setStyleSheet(f'''color: {TEXT};''')
++        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(title)
++        sub = QLabel('使用前请先解锁')
++        sub.setStyleSheet(f'''color: {TEXT2}; font-size: 12px;''')
++        sub.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(sub)
++        qr_label = QLabel()
++        qr_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        qr_file = _qr_path()
++        if os.path.exists(qr_file):
++            pixmap = QPixmap(qr_file)
++            qr_label.setPixmap(pixmap.scaled(180, 180, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
++        else:
++            qr_label.setText('[ 请将公众号二维码放到 assets/qrcode.jpg ]')
++            qr_label.setStyleSheet(f'''color: {ORANGE}; font-size: 12px;''')
++            qr_label.setFixedHeight(180)
++        root.addWidget(qr_label)
++        hint = QLabel('扫码关注公众号「机械领域-0-开」获取解锁密码\n一次解锁，永久使用')
++        hint.setStyleSheet(f'''color: {TEXT2}; font-size: 12px;''')
++        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(hint)
++        line = QFrame()
++        line.setFrameShape(QFrame.Shape.HLine)
++        line.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
++        root.addWidget(line)
++        pwd_label = QLabel('请输入解锁密码：')
++        pwd_label.setStyleSheet(f'''color: {TEXT}; font-size: 12px;''')
++        root.addWidget(pwd_label)
++        self.pwd_input = QLineEdit()
++        self.pwd_input.setPlaceholderText('请输入密码…')
++        self.pwd_input.setEchoMode(QLineEdit.EchoMode.Password)
++        self.pwd_input.setFixedHeight(34)
++        self.pwd_input.setStyleSheet(f'''QLineEdit {{ background: {CARD}; color: {TEXT}; border: 1px solid {BORDER}; border-radius: 6px; padding: 0 12px; font-size: 13px; }} QLineEdit:focus {{ border-color: {ACCENT}; }}''')
++        self.pwd_input.returnPressed.connect(self._check)
++        root.addWidget(self.pwd_input)
++        self.err_label = QLabel('')
++        self.err_label.setStyleSheet(f'''color: {DANGER}; font-size: 11px;''')
++        self.err_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(self.err_label)
++        btn = QPushButton('🔓 解锁')
++        btn.setFixedHeight(36)
++        btn.setCursor(Qt.CursorShape.PointingHandCursor)
++        btn.setStyleSheet(f'''QPushButton {{ background: {ACCENT}; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; }} QPushButton:hover {{ background: {HOVER}; }}''')
++        btn.clicked.connect(self._check)
++        root.addWidget(btn)
++    def _check(self):
++        digest = hashlib.sha256(self.pwd_input.text().strip().encode('utf-8')).hexdigest()
++        if digest == PASSWORD_HASH:
++            self._ok = True
++            cfg = _load_config()
++            cfg['unlocked'] = True
++            _save_config(cfg)
++            self.accept()
++            return None
++        self.err_label.setText('❌ 密码错误，请关注公众号获取正确密码')
++        self.pwd_input.clear()
++        self.pwd_input.setFocus()
++class DisclaimerDialog(QDialog):
++    '''免责声明（免责声明）'''
++
++    def __init__(self, parent=None):
++        super().__init__(parent)
++        self.setWindowTitle('工程单位换算 — 使用说明')
++        self.setFixedSize(480, 360)
++        self.setStyleSheet(f'''QDialog {{ background: {BG}; }}''')
++        root = QVBoxLayout(self)
++        root.setSpacing(10)
++        root.setContentsMargins(28, 20, 28, 20)
++        title = QLabel('⚠️ 使用说明')
++        title.setFont(QFont('Microsoft YaHei', 16, QFont.Weight.Bold))
++        title.setStyleSheet(f'''color: {TEXT};''')
++        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(title)
++        line = QFrame()
++        line.setFrameShape(QFrame.Shape.HLine)
++        line.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
++        root.addWidget(line)
++        items = [
++            '1. 本工具仅供参考，数据以国家标准原文为准',
++            '2. 单位换算结果请自行复核',
++            '3. 本工具不对使用后果承担法律责任',
++            '4. 支持21类工程单位实时互转（含度分秒/热工/粘度/转速）',
++            '5. 先点分类标签，再点单位按钮进入换算；支持全角/千分位，点击结果行单位名可反向换算',
++            '6. 右上角 5 个主题色圆点，点一下就地换肤（窗口不重建），选择自动记住',
++            '7. 数据来源：GB/T 80000 + ISO 80000']
++        for item in items:
++            row = QLabel(f'''  {item}''')
++            row.setStyleSheet(f'''color: {TEXT}; font-size: 12px; padding: 3px 0;''')
++            root.addWidget(row)
++        line2 = QFrame()
++        line2.setFrameShape(QFrame.Shape.HLine)
++        line2.setStyleSheet(f'''background: {BORDER}; max-height: 1px;''')
++        root.addWidget(line2)
++        hint = QLabel('点击「同意」表示您已阅读并理解以上说明')
++        hint.setStyleSheet(f'''color: {TEXT2}; font-size: 11px;''')
++        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
++        root.addWidget(hint)
++        btn = QPushButton('✅ 同意')
++        btn.setFixedHeight(36)
++        btn.setCursor(Qt.CursorShape.PointingHandCursor)
++        btn.setStyleSheet(f'''QPushButton {{ background: {ACCENT}; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; }} QPushButton:hover {{ background: {HOVER}; }}''')
++        btn.clicked.connect(self.accept)
++        root.addWidget(btn)
++def main():
++    app = QApplication(sys.argv)
++    app.setFont(QFont('Microsoft YaHei', 10))
++    _sync_theme()
++    first_run = is_first_run()
++    if first_run:
++        w = WelcomeDialog()
++        if w.exec() != QDialog.Accepted:
++            return None
++    if not is_unlocked():
++        lock = LockDialog()
++        if lock.exec() != QDialog.Accepted:
++            return None
++    if first_run:
++        disclaimer = DisclaimerDialog()
++        if disclaimer.exec() != QDialog.Accepted:
++            return None
++        cfg = _load_config()
++        cfg['disclaimer_accepted'] = True
++        _save_config(cfg)
++    from main import MainWindow
++    win = MainWindow()
++    win.show()
++    sys.exit(app.exec())
++if __name__ == '__main__':
++    try:
++        main()
++    except Exception:
++        import traceback
++        crash_path = os.path.join(os.path.dirname(os.path.abspath(sys.executable)) if getattr(sys, 'frozen', False) else os.path.dirname(__file__), 'crash.log')
++        with open(crash_path, 'a', encoding='utf-8') as f:
++            f.write('=== Crash ===\n')
++            traceback.print_exc(file=f)
++        sys.exit(1)
++
+*** End Patch

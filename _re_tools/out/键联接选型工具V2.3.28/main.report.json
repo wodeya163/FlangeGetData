@@ -1,0 +1,31 @@
+{
+  "failed": [
+    "<module>.SmartTab._clear_output",
+    "<module>.SmartTab._do_query",
+    "<module>.DesignTab._do_design",
+    "<module>.LibraryTab._refresh_links",
+    "<module>.LibraryTab._rm_link"
+  ],
+  "unplaced": [
+    "_plain_stress",
+    "_chain_row"
+  ],
+  "broken": [
+    "<module>.confirm_dup",
+    "<module>.SmartTab",
+    "<module>.ParallelKeyTab._do_query",
+    "<module>.ParallelKeyTab._save_to_library",
+    "<module>.ParallelKeyTab",
+    "<module>.WoodruffKeyTab._do_query",
+    "<module>.WoodruffKeyTab",
+    "<module>.TaperKeyTab._do_query",
+    "<module>.TaperKeyTab",
+    "<module>.SplineTab._do_query",
+    "<module>.SplineTab",
+    "<module>.OverviewTab.refresh",
+    "<module>.OverviewTab",
+    "<module>.LibraryTab._auto_fill",
+    "<module>.LibraryTab._open_drawing",
+    "<module>.LibraryTab"
+  ]
+}

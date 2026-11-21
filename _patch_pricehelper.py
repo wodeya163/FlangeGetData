@@ -1,0 +1,9 @@
+import io
+p=r'E:\AI作品\work\FlangeGetData\FlangeQueryV2\ui\weight_page.py'
+t=io.open(p,encoding='utf-8').read()
+t=t.replace("    def calculate(self):\n        try:","    def _with_price(self, res):\n        \"\"\"公共公斤单价：新增重量子页统一调用，价格随质量自动计算。\"\"\"\n        price = self.unit_price.value()\n        res['price'] = res['mass'] * price if price > 0 else None\n        return res\n\n    def calculate(self):\n        try:")
+t=t.replace("                res = pipe_weight(values['od'], values['wall'],\n                                  values['length'], values['density'])\n                res['price'] = (res['mass'] * self.unit_price.value()\n                                if self.unit_price.value() > 0 else None)","                res = self._with_price(pipe_weight(\n                    values['od'], values['wall'], values['length'],\n                    values['density']))")
+t=t.replace("                res = large_radius_elbow_weight(\n                    values['od'], values['wall'], values['radius'],\n                    values['angle'], values['tangent1'],\n                    values['tangent2'], density)\n                res['price'] = (res['mass'] * self.unit_price.value()\n                                if self.unit_price.value() > 0 else None)","                res = self._with_price(large_radius_elbow_weight(\n                    values['od'], values['wall'], values['radius'],\n                    values['angle'], values['tangent1'],\n                    values['tangent2'], density))")
+t=t.replace("                res = elbow_weight(**values)\n                res['price'] = (res['mass'] * self.unit_price.value()\n                                if self.unit_price.value() > 0 else None)","                res = self._with_price(elbow_weight(**values))")
+io.open(p,'w',encoding='utf-8',newline='\n').write(t)
+print('price helper')

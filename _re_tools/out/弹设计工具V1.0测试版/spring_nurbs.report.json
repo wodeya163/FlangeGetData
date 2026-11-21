@@ -1,0 +1,18 @@
+{
+  "failed": [
+    "<module>._find_span"
+  ],
+  "unplaced": [],
+  "broken": [
+    "<module>._basis",
+    "<module>._solve",
+    "<module>._band_build",
+    "<module>._band_factor",
+    "<module>._band_solve",
+    "<module>._knots_avg",
+    "<module>._interp_curve",
+    "<module>._closed_interp_curve",
+    "<module>._piece",
+    "<module>.build_tube_surface"
+  ]
+}

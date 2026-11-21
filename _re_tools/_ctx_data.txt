@@ -1,0 +1,354 @@
+=====    (378 vs 370 insns, first diff 11)
+  O      4     8 LIST_EXTEND              1
+  O      5    10 STORE_NAME               '_D1_ROWS'
+  O      6    12 LOAD_CONST               (1.8, 50)
+  O      7    14 LOAD_CONST               (10.6, 150)
+  O      8    16 LOAD_CONST               (18, 272)
+  O      9    18 LOAD_CONST               (40, 538)
+  O     10    20 LOAD_CONST               (109, 670)
+  O >   11    22 LOAD_CONST               (1.8, 2.65, 3.55, 5.3, 7.0)
+  O     12    24 BUILD_CONST_KEY_MAP      5
+  O     13    26 STORE_NAME               '_D2_RANGES'
+  O     14    28 LOAD_CONST               <code <dictcomp>>
+  O     15    30 LOAD_CONST               '<dictcomp>'
+  O     16    32 MAKE_FUNCTION            0
+  O     17    34 LOAD_NAME                '_D2_RANGES'
+  O     18    36 LOAD_METHOD              'items'
+  N      4     8 LIST_EXTEND              1
+  N      5    10 STORE_NAME               '_D1_ROWS'
+  N      6    12 LOAD_CONST               (1.8, 50)
+  N      7    14 LOAD_CONST               (10.6, 150)
+  N      8    16 LOAD_CONST               (18, 272)
+  N      9    18 LOAD_CONST               (40, 538)
+  N     10    20 LOAD_CONST               (109, 670)
+  N >   11    22 LOAD_CONST               (1.8, 2.65, 3.55, 5.3, 7)
+  N     12    24 BUILD_CONST_KEY_MAP      5
+  N     13    26 STORE_NAME               '_D2_RANGES'
+  N     14    28 LOAD_CONST               <code <dictcomp>>
+  N     15    30 LOAD_CONST               '<dictcomp>'
+  N     16    32 MAKE_FUNCTION            0
+  N     17    34 LOAD_NAME                '_D2_RANGES'
+  N     18    36 LOAD_METHOD              'items'
+  co_consts O=["'\\nO型密封圈数据模块\\n数据来源：GB/T 3452.1-2005（尺寸系列）、GB/T 3452.3-2005（沟槽尺寸、附录A设计准则）\\nV2.4：挡圈判定多因素化（压力+挤出间隙+硬度+温度）、承压方向（受内/外压、单向/交替）、\\n     拉伸率按下限0修正（附录A.1.1 最小预拉伸率可为零）、压缩率按图A.1~A.4 分工况取值\\n'", '(1.8, 2, 2.24, 2.5, 2.8, 3.15, 3.55, 3.75, 4, 4.5, 4.75, 4.87, 5, 5.15, 5.3, 5.6, 6, 6.3, 6.7, 6.9, 7.1, 7.5, 8, 8.5, 8.75, 9, 9.5, 9.75, 10, 10.6, 11.2, 11.6, 11.8, 12.1, 12.5, 12.8, 13.2, 14, 14.5, 15, 15.5, 16, 17, 18, 19, 20, 20.6, 21.2, 22.4, 23, 23.6, 24.3, 25, 25.8, 26.5, 27.3, 28, 29, 30, 31.5, 32.5, 33.5, 34.5, 35.5, 36.5, 37.5, 38.7, 40, 41.2, 42.5, 43.7, 45, 46.2, 47.5, 48.7, 50, 51.5, 53, 54.5, 56, 58, 60, 61.5, 63, 65, 67, 69, 71, 73, 75, 77.5, 80, 82.5, 85, 87.5, 90, 92.5, 95, 97.5, 100, 103, 106, 109, 112, 115, 118, 122, 125, 128, 132, 136, 140, 142.5, 145, 147.5, 150, 152.5, 155, 157.5, 160, 162.5, 165, 167.5, 170, 172.5, 175, 177.5, 180, 182.5, 185, 187.5, 190, 195, 200, 203, 206, 212, 218, 224, 227, 230, 236, 239, 243, 250, 254, 258, 261, 265, 268, 272, 276, 280, 283, 286, 290, 295, 300, 303, 307, 311, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 379, 383, 387, 391, 395, 400, 406, 412, 418, 425, 429, 433, 437, 443, 450, 456, 462, 466, 470, 475, 479, 483, 487, 493, 500, 508, 515, 523, 530, 538, 545, 553, 560, 570, 580, 590, 600, 608, 615, 623, 630, 640, 650, 660, 670)', '(1.8, 50)', '(10.6, 150)', '(18, 272)', '(40, 538)', '(109, 670)', '(1.8, 2.65, 3.55, 5.3, 7.0)', '<code <dictcomp>>', "'<dictcomp>'", '0.08', '0.09', '0.1', '0.13', '0.15', '<code get_d1_tolerance>', "'get_d1_tolerance'", '(1.32, 1.35, 1.4, 2.2, 2.4, 3.8, 5.2)', '(2.0, 2.1, 2.15, 3.4, 3.6, 5.0, 6.4)', '(2.9, 2.85, 2.95, 4.6, 4.8, 6.2, 7.6)', '(4.31, 4.35, 4.5, 6.9, 7.1, 9.0, 10.9)', '(5.85, 5.85, 6.1, 9.3, 9.5, 12.3, 15.1)', '1.1', '1.5', '1.8', '2.7', '3.6', '(1.28, 2.6)', '(1.97, 3.8)', '(2.75, 5.0)', '(4.24, 7.3)', '(5.72, 9.7)', '(0.2, 0.4)', '(0.4, 0.8)', '(0.8, 1.2)', '10.0', "(13.5, 30.5, '径向静密封(表A.3)')", "(13.0, 28.0, '径向静密封(表A.3)')", "(11.5, 27.5, '径向静密封(表A.3)')", "(11.0, 26.0, '径向静密封(表A.3)')", "(10.5, 24.0, '径向静密封(表A.3)')", "(13.5, 28.5, '液压动密封(表A.3)')", "(11.5, 24.0, '液压动密封(表A.3)')", "(9.5, 23.0, '液压动密封(表A.3)')", "(9.0, 20.5, '液压动密封(表A.3)')", "(9.0, 19.5, '液压动密封(表A.3)')", "(9.5, 25.5, '气动动密封(表A.3)')", "(8.5, 22.0, '气动动密封(表A.3)')", "(6.5, 20.0, '气动动密封(表A.3)')", "(5.5, 17.0, '气动动密封(表A.3)')", "(5.0, 15.5, '气动动密封(表A.3)')", "(22.5, 34.5, '轴向密封(表A.4)')", "(21.0, 30.0, '轴向密封(表A.4)')", "(19.0, 26.0, '轴向密封(表A.4)')", "(16.0, 24.0, '轴向密封(表A.4)')", "(15.0, 21.0, '轴向密封(表A.4)')", '(1.34, 1.49)', '(2.08, 2.27)', '(2.81, 3.12)', '(4.32, 4.7)', '(5.75, 6.23)', '(1.4, 1.56)', '(2.14, 2.34)', '(2.92, 3.23)', '(4.51, 4.89)', '(6.04, 6.51)', '(1.31, 1.49)', '(1.97, 2.23)', '(2.8, 3.07)', '(4.3, 4.63)', '(5.83, 6.16)', '(1.23, 1.33)', '(1.92, 2.02)', '(2.7, 2.79)', '(4.13, 4.34)', '(5.65, 5.82)', '<code groove_depth_limits>', "'groove_depth_limits'", '((4.87, 13.2, 8), (14.0, 38.7, 6), (40.0, 97.5, 5), (100, 200, 4), (206, 250, 3), (258, 400, 3), (412, 670, 2))', "((3.75, 10.0, 8, '动密封或静密封'), (10.6, 25, 6, '动密封或静密封'), (25.8, 60, 5, '动密封或静密封'), (61.5, 125, 4, '动密封或静密封'), (126, 250, 3, '动密封或静密封'), (258, 670, 2, '仅静密封'))", '<code _precompression_limit>', "'_precompression_limit'", "'丁腈橡胶'", '(-10, 120)', '170', "'10~100'", "'可~优'", "'优'", "'可~良'", "'良'", "('oil', 'veg', 'alkali', 'acid_s', 'acid_w', 'water', 'steam')", "'耐油最常用，耐寒与耐臭氧一般'", "('name', 'temp', 'tmax', 'hard', 'rates', 'note')", "'三元乙丙橡胶'", '(-50, 130)', '150', "'30~90'", "'劣'", "'良~优'", "'耐蒸汽与耐老化好，不耐矿物油'", "'氟橡胶'", '(-10, 280)', '315', "'50~60'", "'耐高温耐油耐介质，价格较高、耐寒较差'", "'硅橡胶'", '(-100, 250)', "'30~80'", "'次~良'", "'次'", "'耐高低温与耐老化，耐油与机械强度一般'", "'氯丁橡胶'", '(-40, 120)', "'20~95'", "'耐老化耐燃，耐蒸汽差、耐寒一般'", "'丁基橡胶'", '(-40, 130)', "'15~75'", "'气密与耐蒸汽好，不耐矿物油'", "'丙烯酸酯橡胶'", '(-10, 180)', '180', "'30~95'", "'可'", "'次~可'", "'劣~可'", "'耐热油，耐水与耐寒较差'", "'聚氨酯橡胶'", '(-30, 70)', '80', "'40~100'", "'高强度高耐磨耐油，耐热耐水耐酸碱较差'", "('NBR', 'EPDM', 'FPM', 'VMQ', 'CR', 'IIR', 'ACM', 'PU')", "'矿物基液压油，最常用'", "'水-乙二醇难燃液压液'", "'磷酸酯难燃液压液'", "'压缩空气/气动系统'", "'汽油/柴油/航空燃油'", "'矿物基齿轮润滑油'", "'硅基润滑/密封介质'", "'R134a/R410a等制冷剂'", "'饱和/过热蒸汽'", "'NaOH/KOH等碱性溶液'", "'稀酸溶液'", "'自来水/纯净水'", "('液压油', '水-乙二醇', '磷酸酯液压油', '空气', '燃油', '齿轮油', '硅油', '制冷剂', '蒸汽', '碱液', '酸液', '水')", "('oil', '耐矿物油')", "('water', '耐水性')", "('steam', '抗蒸汽性')", "('acid_w', '耐弱酸性')", "('alkali', '耐碱性')", "('液压油', '齿轮油', '燃油', '水', '蒸汽', '酸液', '碱液')", '4', '3', '2', '1', '0', "('优', '良~优', '良', '可~优', '可~良', '可', '次~可', '次', '劣~可', '劣')", '<code _stretch_limit>', "'_stretch_limit'", '<code _stretch_ok>', "'_stretch_ok'", '<code compression_range>', "'compression_range'", 'None', 'False', '<code recommend_oring>', "'recommend_oring'", '<code _oring_priority>', "'_oring_priority'", '<code axial_diameter_limits>', "'axial_diameter_limits'", "'static_radial'", '<code calc_groove>', "'calc_groove'", '<code get_compression_check>', "'get_compression_check'", '<code recommend_material>', "'recommend_material'", '<code recommend_material_ex>', "'recommend_material_ex'", '<code recommend_backup_ring>', "'recommend_backup_ring'", '<code assess_backup_ring>', "'assess_backup_ring'", '(None, False)', "('static_radial', False, False, None, None)", "('static_radial',)", '(None, None, None)']
+            N=["'\\nO型密封圈数据模块\\n数据来源：GB/T 3452.1-2005（尺寸系列）、GB/T 3452.3-2005（沟槽尺寸、附录A设计准则）\\nV2.4：挡圈判定多因素化（压力+挤出间隙+硬度+温度）、承压方向（受内/外压、单向/交替）、\\n     拉伸率按下限0修正（附录A.1.1 最小预拉伸率可为零）、压缩率按图A.1~A.4 分工况取值\\n'", '(1.8, 2, 2.24, 2.5, 2.8, 3.15, 3.55, 3.75, 4, 4.5, 4.75, 4.87, 5, 5.15, 5.3, 5.6, 6, 6.3, 6.7, 6.9, 7.1, 7.5, 8, 8.5, 8.75, 9, 9.5, 9.75, 10, 10.6, 11.2, 11.6, 11.8, 12.1, 12.5, 12.8, 13.2, 14, 14.5, 15, 15.5, 16, 17, 18, 19, 20, 20.6, 21.2, 22.4, 23, 23.6, 24.3, 25, 25.8, 26.5, 27.3, 28, 29, 30, 31.5, 32.5, 33.5, 34.5, 35.5, 36.5, 37.5, 38.7, 40, 41.2, 42.5, 43.7, 45, 46.2, 47.5, 48.7, 50, 51.5, 53, 54.5, 56, 58, 60, 61.5, 63, 65, 67, 69, 71, 73, 75, 77.5, 80, 82.5, 85, 87.5, 90, 92.5, 95, 97.5, 100, 103, 106, 109, 112, 115, 118, 122, 125, 128, 132, 136, 140, 142.5, 145, 147.5, 150, 152.5, 155, 157.5, 160, 162.5, 165, 167.5, 170, 172.5, 175, 177.5, 180, 182.5, 185, 187.5, 190, 195, 200, 203, 206, 212, 218, 224, 227, 230, 236, 239, 243, 250, 254, 258, 261, 265, 268, 272, 276, 280, 283, 286, 290, 295, 300, 303, 307, 311, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 379, 383, 387, 391, 395, 400, 406, 412, 418, 425, 429, 433, 437, 443, 450, 456, 462, 466, 470, 475, 479, 483, 487, 493, 500, 508, 515, 523, 530, 538, 545, 553, 560, 570, 580, 590, 600, 608, 615, 623, 630, 640, 650, 660, 670)', '(1.8, 50)', '(10.6, 150)', '(18, 272)', '(40, 538)', '(109, 670)', '(1.8, 2.65, 3.55, 5.3, 7)', '<code <dictcomp>>', "'<dictcomp>'", '0.08', '0.09', '0.1', '0.13', '0.15', '<code get_d1_tolerance>', "'get_d1_tolerance'", '(1.32, 1.35, 1.4, 2.2, 2.4, 3.8, 5.2)', '(2, 2.1, 2.15, 3.4, 3.6, 5, 6.4)', '(2.9, 2.85, 2.95, 4.6, 4.8, 6.2, 7.6)', '(4.31, 4.35, 4.5, 6.9, 7.1, 9, 10.9)', '(5.85, 5.85, 6.1, 9.3, 9.5, 12.3, 15.1)', '1.1', '1.5', '1.8', '2.7', '3.6', '(1.28, 2.6)', '(1.97, 3.8)', '(2.75, 5)', '(4.24, 7.3)', '(5.72, 9.7)', '(0.2, 0.4)', '(0.4, 0.8)', '(0.8, 1.2)', '10', "(13.5, 30.5, '径向静密封(表A.3)')", "(13, 28, '径向静密封(表A.3)')", "(11.5, 27.5, '径向静密封(表A.3)')", "(11, 26, '径向静密封(表A.3)')", "(10.5, 24, '径向静密封(表A.3)')", "(13.5, 28.5, '液压动密封(表A.3)')", "(11.5, 24, '液压动密封(表A.3)')", "(9.5, 23, '液压动密封(表A.3)')", "(9, 20.5, '液压动密封(表A.3)')", "(9, 19.5, '液压动密封(表A.3)')", "(9.5, 25.5, '气动动密封(表A.3)')", "(8.5, 22, '气动动密封(表A.3)')", "(6.5, 20, '气动动密封(表A.3)')", "(5.5, 17, '气动动密封(表A.3)')", "(5, 15.5, '气动动密封(表A.3)')", "(22.5, 34.5, '轴向密封(表A.4)')", "(21, 30, '轴向密封(表A.4)')", "(19, 26, '轴向密封(表A.4)')", "(16, 24, '轴向密封(表A.4)')", "(15, 21, '轴向密封(表A.4)')", '(1.34, 1.49)', '(2.08, 2.27)', '(2.81, 3.12)', '(4.32, 4.7)', '(5.75, 6.23)', '(1.4, 1.56)', '(2.14, 2.34)', '(2.92, 3.23)', '(4.51, 4.89)', '(6.04, 6.51)', '(1.31, 1.49)', '(1.97, 2.23)', '(2.8, 3.07)', '(4.3, 4.63)', '(5.83, 6.16)', '(1.23, 1.33)', '(1.92, 2.02)', '(2.7, 2.79)', '(4.13, 4.34)', '(5.65, 5.82)', '<code groove_depth_limits>', "'groove_depth_limits'", '((4.87, 13.2, 8), (14, 38.7, 6), (40, 97.5, 5), (100, 200, 4), (206, 250, 3), (258, 400, 3), (412, 670, 2))', "((3.75, 10, 8, '动密封或静密封'), (10.6, 25, 6, '动密封或静密封'), (25.8, 60, 5, '动密封或静密封'), (61.5, 125, 4, '动密封或静密封'), (126, 250, 3, '动密封或静密封'), (258, 670, 2, '仅静密封'))", '<code _precompression_limit>', "'_precompression_limit'", "'丁腈橡胶'", '(-10, 120)', '170', "'10~100'", "'可~优'", "'优'", "'可~良'", "'良'", "('oil', 'veg', 'alkali', 'acid_s', 'acid_w', 'water', 'steam')", "'耐油最常用，耐寒与耐臭氧一般'", "('name', 'temp', 'tmax', 'hard', 'rates', 'note')", "'三元乙丙橡胶'", '(-50, 130)', '150', "'30~90'", "'劣'", "'良~优'", "'耐蒸汽与耐老化好，不耐矿物油'", "'氟橡胶'", '(-10, 280)', '315', "'50~60'", "'耐高温耐油耐介质，价格较高、耐寒较差'", "'硅橡胶'", '(-100, 250)', "'30~80'", "'次~良'", "'次'", "'耐高低温与耐老化，耐油与机械强度一般'", "'氯丁橡胶'", '(-40, 120)', "'20~95'", "'耐老化耐燃，耐蒸汽差、耐寒一般'", "'丁基橡胶'", '(-40, 130)', "'15~75'", "'气密与耐蒸汽好，不耐矿物油'", "'丙烯酸酯橡胶'", '(-10, 180)', '180', "'30~95'", "'可'", "'次~可'", "'劣~可'", "'耐热油，耐水与耐寒较差'", "'聚氨酯橡胶'", '(-30, 70)', '80', "'40~100'", "'高强度高耐磨耐油，耐热耐水耐酸碱较差'", "('NBR', 'EPDM', 'FPM', 'VMQ', 'CR', 'IIR', 'ACM', 'PU')", "'矿物基液压油，最常用'", "'水-乙二醇难燃液压液'", "'磷酸酯难燃液压液'", "'压缩空气/气动系统'", "'汽油/柴油/航空燃油'", "'矿物基齿轮润滑油'", "'硅基润滑/密封介质'", "'R134a/R410a等制冷剂'", "'饱和/过热蒸汽'", "'NaOH/KOH等碱性溶液'", "'稀酸溶液'", "'自来水/纯净水'", "('液压油', '水-乙二醇', '磷酸酯液压油', '空气', '燃油', '齿轮油', '硅油', '制冷剂', '蒸汽', '碱液', '酸液', '水')", "('oil', '耐矿物油')", "('water', '耐水性')", "('steam', '抗蒸汽性')", "('acid_w', '耐弱酸性')", "('alkali', '耐碱性')", "('液压油', '齿轮油', '燃油', '水', '蒸汽', '酸液', '碱液')", '4', '3', '2', '1', '0', "('优', '良~优', '良', '可~优', '可~良', '可', '次~可', '次', '劣~可', '劣')", '<code _stretch_limit>', "'_stretch_limit'", '<code _stretch_ok>', "'_stretch_ok'", '<code compression_range>', "'compression_range'", '<code recommend_oring>', "'recommend_oring'", '<code _oring_priority>', "'_oring_priority'", '<code axial_diameter_limits>', "'axial_diameter_limits'", '<code calc_groove>', "'calc_groove'", '<code get_compression_check>', "'get_compression_check'", '<code recommend_material>', "'recommend_material'", '<code recommend_material_ex>', "'recommend_material_ex'", '<code recommend_backup_ring>', "'recommend_backup_ring'", '<code assess_backup_ring>', "'assess_backup_ring'", 'None']
+===== groove_depth_limits   (32 vs 32 insns, first diff 9)
+  O      2     4 COMPARE_OP               '=='
+  O      3     6 POP_JUMP_IF_FALSE        18
+  O      4     8 LOAD_GLOBAL              'DEPTH_AXIAL'
+  O      5    10 LOAD_METHOD              'get'
+  O      6    12 LOAD_FAST                'd2'
+  O      7    14 CALL_METHOD              1
+  O      8    16 RETURN_VALUE             None
+  O >    9    18 LOAD_FAST                'seal_type'
+  O     10    20 LOAD_CONST               ('hydraulic_dynamic', 'dynamic_recip', 'dynamic_rotate', 'low_friction')
+  O     11    22 CONTAINS_OP              0
+  O     12    24 POP_JUMP_IF_FALSE        36
+  O     13    26 LOAD_GLOBAL              'DEPTH_HYD_DYN'
+  O     14    28 LOAD_METHOD              'get'
+  O     15    30 LOAD_FAST                'd2'
+  O     16    32 CALL_METHOD              1
+  N      2     4 COMPARE_OP               '=='
+  N      3     6 POP_JUMP_IF_FALSE        18
+  N      4     8 LOAD_GLOBAL              'DEPTH_AXIAL'
+  N      5    10 LOAD_METHOD              'get'
+  N      6    12 LOAD_FAST                'd2'
+  N      7    14 CALL_METHOD              1
+  N      8    16 RETURN_VALUE             None
+  N >    9    18 LOAD_CONST               None
+  N     10    20 LOAD_CONST               ('hydraulic_dynamic', 'dynamic_recip', 'dynamic_rotate', 'low_friction')
+  N     11    22 CONTAINS_OP              0
+  N     12    24 POP_JUMP_IF_FALSE        36
+  N     13    26 LOAD_GLOBAL              'DEPTH_HYD_DYN'
+  N     14    28 LOAD_METHOD              'get'
+  N     15    30 LOAD_FAST                'd2'
+  N     16    32 CALL_METHOD              1
+  co_consts O=["'按工况取沟槽深度极限值（GB/T 3452.3-2005 表A.3/表A.4，资料性）\\n    返回 (t_min, t_max) 或 None'", "'static_axial'", "('hydraulic_dynamic', 'dynamic_recip', 'dynamic_rotate', 'low_friction')", "'pneumatic_dynamic'"]
+            N=["'按工况取沟槽深度极限值（GB/T 3452.3-2005 表A.3/表A.4，资料性）\\n    返回 (t_min, t_max) 或 None'", "'static_axial'", 'None', "('hydraulic_dynamic', 'dynamic_recip', 'dynamic_rotate', 'low_friction')", "'pneumatic_dynamic'"]
+  co_names O=["'DEPTH_AXIAL'", "'get'", "'DEPTH_HYD_DYN'", "'DEPTH_PNEU_DYN'", "'DEPTH_RADIAL_STATIC'"]
+           N=["'DEPTH_AXIAL'", "'get'", "'DEPTH_HYD_DYN'", "'DEPTH_PNEU_DYN'"]
+===== _precompression_limit   (38 vs 38 insns, first diff 8)
+  O      1     2 GET_ITER                 None
+  O      2     4 FOR_ITER                 72
+  O      3     6 UNPACK_SEQUENCE          4
+  O      4     8 STORE_FAST               'lo'
+  O      5    10 STORE_FAST               'hi'
+  O      6    12 STORE_FAST               'kmax'
+  O      7    14 STORE_FAST               'scope'
+  O >    8    16 LOAD_FAST                'lo'
+  O      9    18 LOAD_FAST                'd1'
+  O     10    20 DUP_TOP                  None
+  O     11    22 ROT_THREE                None
+  O     12    24 COMPARE_OP               '<='
+  O     13    26 POP_JUMP_IF_FALSE        36
+  O     14    28 LOAD_FAST                'hi'
+  O     15    30 COMPARE_OP               '<='
+  N      1     2 GET_ITER                 None
+  N      2     4 FOR_ITER                 72
+  N      3     6 UNPACK_SEQUENCE          4
+  N      4     8 STORE_FAST               'lo'
+  N      5    10 STORE_FAST               'hi'
+  N      6    12 STORE_FAST               'kmax'
+  N      7    14 STORE_FAST               'scope'
+  N >    8    16 LOAD_FAST                'd1'
+  N      9    18 LOAD_FAST                'd1'
+  N     10    20 COMPARE_OP               '<='
+  N     11    22 POP_JUMP_IF_TRUE         32
+  N     12    24 LOAD_FAST                'd1'
+  N     13    26 LOAD_FAST                'hi'
+  N     14    28 COMPARE_OP               '<='
+  N     15    30 POP_JUMP_IF_FALSE        34
+===== compression_range   (50 vs 50 insns, first diff 6)
+  O      0     0 LOAD_FAST                'seal_type'
+  O      1     2 LOAD_CONST               'static_axial'
+  O      2     4 COMPARE_OP               '=='
+  O      3     6 POP_JUMP_IF_FALSE        14
+  O      4     8 LOAD_GLOBAL              'COMPRESSION_AXIAL'
+  O      5    10 STORE_FAST               'table'
+  O >    6    12 JUMP_FORWARD             90
+  O      7    14 LOAD_FAST                'seal_type'
+  O      8    16 LOAD_CONST               ('hydraulic_dynamic', 'dynamic_recip')
+  O      9    18 CONTAINS_OP              0
+  O     10    20 POP_JUMP_IF_FALSE        28
+  O     11    22 LOAD_GLOBAL              'COMPRESSION_HYD_DYN'
+  O     12    24 STORE_FAST               'table'
+  O     13    26 JUMP_FORWARD             90
+  N      0     0 LOAD_FAST                'seal_type'
+  N      1     2 LOAD_CONST               'static_axial'
+  N      2     4 COMPARE_OP               '=='
+  N      3     6 POP_JUMP_IF_FALSE        14
+  N      4     8 LOAD_GLOBAL              'COMPRESSION_AXIAL'
+  N      5    10 STORE_FAST               'table'
+  N >    6    12 JUMP_FORWARD             86
+  N      7    14 LOAD_FAST                'seal_type'
+  N      8    16 LOAD_CONST               ('hydraulic_dynamic', 'dynamic_recip')
+  N      9    18 CONTAINS_OP              0
+  N     10    20 POP_JUMP_IF_FALSE        28
+  N     11    22 LOAD_GLOBAL              'COMPRESSION_HYD_DYN'
+  N     12    24 STORE_FAST               'table'
+  N     13    26 JUMP_FORWARD             86
+===== recommend_oring   (137 vs 139 insns, first diff 6)
+  O      0     0 BUILD_LIST               0
+  O      1     2 STORE_FAST               'candidates'
+  O      2     4 LOAD_GLOBAL              'ORING_SIZES'
+  O      3     6 LOAD_METHOD              'items'
+  O      4     8 CALL_METHOD              0
+  O      5    10 GET_ITER                 None
+  O >    6    12 FOR_ITER                 180
+  O      7    14 UNPACK_SEQUENCE          2
+  O      8    16 STORE_FAST               'd2'
+  O      9    18 STORE_FAST               'inner_list'
+  O     10    20 LOAD_FAST                'inner_list'
+  O     11    22 GET_ITER                 None
+  O     12    24 FOR_ITER                 178
+  O     13    26 STORE_FAST               'd1'
+  N      0     0 BUILD_LIST               0
+  N      1     2 STORE_FAST               'candidates'
+  N      2     4 LOAD_GLOBAL              'ORING_SIZES'
+  N      3     6 LOAD_METHOD              'items'
+  N      4     8 CALL_METHOD              0
+  N      5    10 GET_ITER                 None
+  N >    6    12 FOR_ITER                 178
+  N      7    14 UNPACK_SEQUENCE          2
+  N      8    16 STORE_FAST               'd2'
+  N      9    18 STORE_FAST               'inner_list'
+  N     10    20 LOAD_FAST                'inner_list'
+  N     11    22 GET_ITER                 None
+  N     12    24 FOR_ITER                 176
+  N     13    26 STORE_FAST               'd1'
+  co_consts O=["'\\n    根据配合面直径推荐O型圈规格（纯几何匹配，不含材料/介质过滤）\\n    rod_mode=False（默认）：沟槽在轴上（活塞密封），配合面为孔，\\n        O圈内径 d1 ≤ 配合直径，受拉伸，上限按表A.1（资料性）；\\n    rod_mode=True：沟槽在孔内（活塞杆密封），配合面为杆，\\n        O圈内径 d1 ≥ 杆径，杆对圈形成预压缩（拉伸率为负），\\n        上限按表A.2 预压缩率 k_max（资料性，末档仅静密封）。\\n    返回: [(内径, 截面直径, 优先级分), ...]\\n    '", '100', 'None', '100.0', '2', '<code <lambda>>', "'recommend_oring.<locals>.<lambda>'", "('key',)", '5']
+            N=["'\\n    根据配合面直径推荐O型圈规格（纯几何匹配，不含材料/介质过滤）\\n    rod_mode=False（默认）：沟槽在轴上（活塞密封），配合面为孔，\\n        O圈内径 d1 ≤ 配合直径，受拉伸，上限按表A.1（资料性）；\\n    rod_mode=True：沟槽在孔内（活塞杆密封），配合面为杆，\\n        O圈内径 d1 ≥ 杆径，杆对圈形成预压缩（拉伸率为负），\\n        上限按表A.2 预压缩率 k_max（资料性，末档仅静密封）。\\n    返回: [(内径, 截面直径, 优先级分), ...]\\n    '", '100', 'None', '2', '<code <lambda>>', "'recommend_oring.<locals>.<lambda>'", "('key',)", '5']
+===== _oring_priority   (28 vs 28 insns, first diff 9)
+  O      2     4 CONTAINS_OP              0
+  O      3     6 POP_JUMP_IF_FALSE        32
+  O      4     8 LOAD_CONST               3
+  O      5    10 LOAD_CONST               3
+  O      6    12 LOAD_CONST               2
+  O      7    14 LOAD_CONST               1
+  O      8    16 LOAD_CONST               0
+  O >    9    18 LOAD_CONST               (1.8, 2.65, 3.55, 5.3, 7.0)
+  O     10    20 BUILD_CONST_KEY_MAP      5
+  O     11    22 LOAD_METHOD              'get'
+  O     12    24 LOAD_FAST                'd2'
+  O     13    26 LOAD_CONST               0
+  O     14    28 CALL_METHOD              2
+  O     15    30 RETURN_VALUE             None
+  O     16    32 LOAD_CONST               3
+  N      2     4 CONTAINS_OP              0
+  N      3     6 POP_JUMP_IF_FALSE        32
+  N      4     8 LOAD_CONST               3
+  N      5    10 LOAD_CONST               3
+  N      6    12 LOAD_CONST               2
+  N      7    14 LOAD_CONST               1
+  N      8    16 LOAD_CONST               0
+  N >    9    18 LOAD_CONST               (1.8, 2.65, 3.55, 5.3, 7)
+  N     10    20 BUILD_CONST_KEY_MAP      5
+  N     11    22 LOAD_METHOD              'get'
+  N     12    24 LOAD_FAST                'd2'
+  N     13    26 LOAD_CONST               0
+  N     14    28 CALL_METHOD              2
+  N     15    30 RETURN_VALUE             None
+  N     16    32 LOAD_CONST               None
+  co_consts O=["'根据截面直径和密封类型计算基础优先级'", "('dynamic_recip', 'dynamic_rotate')", '3', '2', '1', '0', '(1.8, 2.65, 3.55, 5.3, 7.0)', '(3.55, 2.65, 5.3, 1.8, 7.0)']
+            N=["'根据截面直径和密封类型计算基础优先级'", "('dynamic_recip', 'dynamic_rotate')", '3', '2', '1', '0', '(1.8, 2.65, 3.55, 5.3, 7)', 'None', '(3.55, 2.65, 5.3, 1.8, 7)']
+===== axial_diameter_limits   (58 vs 58 insns, first diff 2)
+  O      0     0 LOAD_FAST                'd1'
+  O      1     2 LOAD_CONST               None
+  O >    2     4 IS_OP                    0
+  O      3     6 POP_JUMP_IF_TRUE         20
+  O      4     8 LOAD_FAST                'd2'
+  O      5    10 LOAD_CONST               None
+  O      6    12 IS_OP                    0
+  O      7    14 POP_JUMP_IF_TRUE         20
+  O      8    16 LOAD_FAST                'pressure_dir'
+  O      9    18 POP_JUMP_IF_TRUE         30
+  N      0     0 LOAD_FAST                'd1'
+  N      1     2 LOAD_CONST               None
+  N >    2     4 IS_OP                    1
+  N      3     6 POP_JUMP_IF_FALSE        16
+  N      4     8 LOAD_FAST                'd2'
+  N      5    10 LOAD_CONST               None
+  N      6    12 IS_OP                    0
+  N      7    14 POP_JUMP_IF_TRUE         20
+  N      8    16 LOAD_FAST                'pressure_dir'
+  N      9    18 POP_JUMP_IF_FALSE        30
+===== calc_groove   (149 vs 150 insns, first diff 18)
+  O     11    22 POP_JUMP_IF_FALSE        60
+  O     12    24 LOAD_FAST                'd2'
+  O     13    26 LOAD_GLOBAL              'GROOVE_AXIAL'
+  O     14    28 CONTAINS_OP              1
+  O     15    30 POP_JUMP_IF_FALSE        36
+  O     16    32 LOAD_CONST               None
+  O     17    34 RETURN_VALUE             None
+  O >   18    36 LOAD_GLOBAL              'GROOVE_AXIAL'
+  O     19    38 LOAD_FAST                'd2'
+  O     20    40 BINARY_SUBSCR            None
+  O     21    42 UNPACK_SEQUENCE          2
+  O     22    44 STORE_FAST               'h'
+  O     23    46 STORE_FAST               'b'
+  O     24    48 LOAD_GLOBAL              'GROOVE_BOTTOM_R'
+  O     25    50 LOAD_METHOD              'get'
+  N     11    22 POP_JUMP_IF_FALSE        60
+  N     12    24 LOAD_FAST                'd2'
+  N     13    26 LOAD_GLOBAL              'GROOVE_AXIAL'
+  N     14    28 CONTAINS_OP              1
+  N     15    30 POP_JUMP_IF_FALSE        36
+  N     16    32 LOAD_CONST               None
+  N     17    34 RETURN_VALUE             None
+  N >   18    36 LOAD_CONST               None
+  N     19    38 LOAD_FAST                'd2'
+  N     20    40 BINARY_SUBSCR            None
+  N     21    42 UNPACK_SEQUENCE          2
+  N     22    44 STORE_FAST               'h'
+  N     23    46 STORE_FAST               'b'
+  N     24    48 LOAD_GLOBAL              'GROOVE_BOTTOM_R'
+  N     25    50 LOAD_METHOD              'get'
+===== get_compression_check   (50 vs 48 insns, first diff 25)
+  O     18    36 LOAD_FAST                'w'
+  O     19    38 LOAD_CONST               '.1f'
+  O     20    40 FORMAT_VALUE             (None, True)
+  O     21    42 LOAD_CONST               '%（本工况无标准推荐带）'
+  O     22    44 BUILD_STRING             3
+  O     23    46 BUILD_TUPLE              3
+  O     24    48 RETURN_VALUE             None
+  O >   25    50 LOAD_FAST                'rng'
+  O     26    52 UNPACK_SEQUENCE          3
+  O     27    54 STORE_FAST               'w_min'
+  O     28    56 STORE_FAST               'w_max'
+  O     29    58 STORE_FAST               '_label'
+  O     30    60 LOAD_FAST                'w'
+  O     31    62 LOAD_FAST                'w_min'
+  O     32    64 LOAD_FAST                'w'
+  N     18    36 LOAD_FAST                'w'
+  N     19    38 LOAD_CONST               '.1f'
+  N     20    40 FORMAT_VALUE             (None, True)
+  N     21    42 LOAD_CONST               '%（本工况无标准推荐带）'
+  N     22    44 BUILD_STRING             3
+  N     23    46 BUILD_TUPLE              3
+  N     24    48 RETURN_VALUE             None
+  N >   25    50 LOAD_CONST               None
+  N     26    52 UNPACK_SEQUENCE          3
+  N     27    54 STORE_FAST               'w_min'
+  N     28    56 STORE_FAST               'w_max'
+  N     29    58 STORE_FAST               '_label'
+  N     30    60 LOAD_CONST               None
+  N     31    62 LOAD_FAST                'w'
+  N     32    64 LOAD_FAST                'w'
+===== recommend_material_ex   (225 vs 224 insns, first diff 3)
+  O      0     0 LOAD_GLOBAL              '_MEDIA_RATE_KEY'
+  O      1     2 LOAD_METHOD              'get'
+  O      2     4 LOAD_FAST                'medium'
+  O >    3     6 JUMP_IF_TRUE_OR_POP      10
+  O      4     8 LOAD_CONST               ''
+  O      5    10 LOAD_METHOD              'strip'
+  O      6    12 CALL_METHOD              0
+  O      7    14 CALL_METHOD              1
+  O      8    16 STORE_FAST               'mkey'
+  O      9    18 BUILD_LIST               0
+  O     10    20 BUILD_LIST               0
+  N      0     0 LOAD_GLOBAL              '_MEDIA_RATE_KEY'
+  N      1     2 LOAD_METHOD              'get'
+  N      2     4 LOAD_FAST                'medium'
+  N >    3     6 LOAD_CONST               ''
+  N      4     8 CALL_METHOD              2
+  N      5    10 LOAD_METHOD              'strip'
+  N      6    12 CALL_METHOD              0
+  N      7    14 STORE_FAST               'mkey'
+  N      8    16 BUILD_LIST               0
+  N      9    18 BUILD_LIST               0
+  N     10    20 ROT_TWO                  None
+  co_consts O=["'同 recommend_material，并附带被筛掉的材料及原因（界面透明展示用）。\\n    起因（2026-10-24 试用单 T1）：默认温度-20℃把丁腈（长期低温-10℃，手册表3-3-2\\n    原文值）静默滤掉，读者看不到最常用材料的存在；改为明示「未列入+原因」。\\n    返回 (ok_list, excluded_list)；ok 项为 (代号, 说明)，\\n    excluded 项为 (代号, 原因)。'", "''", "'temp'", 'None', 'True', "'温度'", "'~'", "'℃'", "'℃覆盖工况'", "(False, '')", "'温度不符：长期工作温度'", "'℃，工况最低'", "'.0f'", "'℃低于下限'", "'℃（手册表3-3-2/3-3-3 原文值）'", "'℃，工况最高'", "'℃高于上限'", "'rates'", "'-'", '0', '2', "'介质不符：'", "'评级「'", "'」，不适合该介质'", "' '", "'；'", "'手册表未收录该介质评级，按温度筛选（'", "'）'", '<code <lambda>>', "'recommend_material_ex.<locals>.<lambda>'", "('key',)", '<code <listcomp>>', "'recommend_material_ex.<locals>.<listcomp>'"]
+            N=["'按介质评级与温度筛选材料，返回 (推荐列表[(code, reason)], 排除列表[(code, why)])。\\n\\n    评级等级：优 > 良 > 可 > 劣 > -，只保留「良」及以上。\\n    temp_min/temp_max 为 None 时视为不限温度。\\n    '", "''", "'temp'", 'None', 'True', "'温度'", "'~'", "'℃'", "'℃覆盖工况'", "(False, '')", "'温度不符：长期工作温度'", "'℃，工况最低'", "'.0f'", "'℃低于下限'", "'℃（手册表3-3-2/3-3-3 原文值）'", "'℃，工况最高'", "'℃高于上限'", "'rates'", "'-'", '0', '2', "'介质不符：'", "'评级「'", "'」，不适合该介质'", "' '", "'；'", "'手册表未收录该介质评级，按温度筛选（'", "'）'", '<code <lambda>>', "'recommend_material_ex.<locals>.<lambda>'", "('key',)", '<code <listcomp>>', "'recommend_material_ex.<locals>.<listcomp>'"]
+===== recommend_backup_ring   (10 vs 10 insns, first diff 6)
+  O      0     0 LOAD_FAST                'pressure_mpa'
+  O      1     2 LOAD_CONST               None
+  O      2     4 IS_OP                    0
+  O      3     6 POP_JUMP_IF_FALSE        12
+  O      4     8 LOAD_CONST               False
+  O      5    10 RETURN_VALUE             None
+  O >    6    12 LOAD_FAST                'pressure_mpa'
+  O      7    14 LOAD_GLOBAL              'BACKUP_RING_PRESSURE'
+  O      8    16 COMPARE_OP               '>'
+  O      9    18 RETURN_VALUE             None
+  N      0     0 LOAD_FAST                'pressure_mpa'
+  N      1     2 LOAD_CONST               None
+  N      2     4 IS_OP                    0
+  N      3     6 POP_JUMP_IF_FALSE        12
+  N      4     8 LOAD_CONST               False
+  N      5    10 RETURN_VALUE             None
+  N >    6    12 LOAD_CONST               None
+  N      7    14 LOAD_GLOBAL              'BACKUP_RING_PRESSURE'
+  N      8    16 COMPARE_OP               '>'
+  N      9    18 RETURN_VALUE             None
+===== assess_backup_ring   (145 vs 145 insns, first diff 14)
+  O      7    14 STORE_FAST               'review'
+  O      8    16 LOAD_FAST                'pressure_mpa'
+  O      9    18 LOAD_CONST               None
+  O     10    20 IS_OP                    1
+  O     11    22 POP_JUMP_IF_FALSE        28
+  O     12    24 LOAD_FAST                'pressure_mpa'
+  O     13    26 JUMP_FORWARD             30
+  O >   14    28 LOAD_CONST               0.0
+  O     15    30 STORE_FAST               'p'
+  O     16    32 LOAD_FAST                'need'
+  O     17    34 POP_JUMP_IF_FALSE        68
+  O     18    36 LOAD_FAST                'factors'
+  O     19    38 LOAD_METHOD              'append'
+  O     20    40 LOAD_CONST               '压力'
+  O     21    42 LOAD_FAST                'p'
+  N      7    14 STORE_FAST               'review'
+  N      8    16 LOAD_FAST                'pressure_mpa'
+  N      9    18 LOAD_CONST               None
+  N     10    20 IS_OP                    1
+  N     11    22 POP_JUMP_IF_FALSE        28
+  N     12    24 LOAD_FAST                'pressure_mpa'
+  N     13    26 JUMP_FORWARD             30
+  N >   14    28 LOAD_CONST               0
+  N     15    30 STORE_FAST               'p'
+  N     16    32 LOAD_FAST                'need'
+  N     17    34 POP_JUMP_IF_FALSE        68
+  N     18    36 LOAD_FAST                'factors'
+  N     19    38 LOAD_METHOD              'append'
+  N     20    40 LOAD_CONST               '压力'
+  N     21    42 LOAD_FAST                'p'
+  co_consts O=["'\\n    挡圈多因素判定（V2.4，回应读者反馈）\\n    返回 dict:\\n      need     — 标准压力判据是否触发（GB/T 3452.3-2005 第1章，>10MPa 需带挡圈）\\n      factors  — [(因素, 取值, 说明), ...] 各因素如实列出\\n      review   — 需要结合其他资料复核时的提示列表（标准未给数值限值的因素）\\n    （2026-10-24 曾按第二轮外部验证加过 industry_note「行业经验80~90A」提示，\\n      用户定调「不能确保对就不要写」→ 已撤销：该数值带仅有厂家文章转述支撑、\\n      无法对照权威原文逐格核实，回归「标准未规定不给结论」）\\n    依据边界（零幻觉）：\\n      - 压力>10MPa：本标准第1章，明确条款\\n      - 挤出间隙g/材料硬度/工作温度：挤出失效的公认影响因素，但本标准只定义了\\n        g=单边径向间隙符号（第3章），未给与挡圈选择关联的数值限值 → 只列因素、\\n        不编造阈值，提示结合挡圈/密封件供应商手册复核\\n    '", 'None', '0.0', "'压力'", "' MPa'", "'超过'", "'MPa → 需带挡圈（GB/T 3452.3-2005 第1章）'", "'未超过'", "'MPa阈值（GB/T 3452.3-2005 第1章）'", '0', "'挤出间隙'", "'g = '", "'g'", "' mm（单边径向间隙）'", "'标准仅定义符号未给限值；间隙越大，胶料被挤出的风险越高'", "'挤出间隙本标准未给数值限值，如间隙偏大，可结合挡圈供应商手册复核'", "('挤出间隙', '未提供', '标准仅定义符号未给限值（第3章 g），可补充后一并复核')", "'材料硬度'", "' 邵A'", "'硬度越低越易被挤出；本标准未给硬度与挡圈的关联限值'", "'材料硬度本标准未给数值限值，可结合挡圈供应商手册复核'", "'工作温度'", "'最高 '", "' ℃'", "'温度接近材料长期使用上限时弹性下降，挤出风险增加；本标准未给温度与挡圈的关联限值'", "'工作温度本标准未给数值限值，可结合材料与挡圈供应商手册复核'", "'如挤出间隙偏大、硬度偏低或温度接近材料上限，可结合挡圈供应商手册复核（本标准仅给出10MPa压力判据）'", "('need', 'factors', 'review')"]
+            N=["'\\n    挡圈多因素判定（V2.4，回应读者反馈）\\n    返回 dict:\\n      need     — 标准压力判据是否触发（GB/T 3452.3-2005 第1章，>10MPa 需带挡圈）\\n      factors  — [(因素, 取值, 说明), ...] 各因素如实列出\\n      review   — 需要结合其他资料复核时的提示列表（标准未给数值限值的因素）\\n    （2026-10-24 曾按第二轮外部验证加过 industry_note「行业经验80~90A」提示，\\n      用户定调「不能确保对就不要写」→ 已撤销：该数值带仅有厂家文章转述支撑、\\n      无法对照权威原文逐格核实，回归「标准未规定不给结论」）\\n    依据边界（零幻觉）：\\n      - 压力>10MPa：本标准第1章，明确条款\\n      - 挤出间隙g/材料硬度/工作温度：挤出失效的公认影响因素，但本标准只定义了\\n        g=单边径向间隙符号（第3章），未给与挡圈选择关联的数值限值 → 只列因素、\\n        不编造阈值，提示结合挡圈/密封件供应商手册复核\\n    '", 'None', '0', "'压力'", "' MPa'", "'超过'", "'MPa → 需带挡圈（GB/T 3452.3-2005 第1章）'", "'未超过'", "'MPa阈值（GB/T 3452.3-2005 第1章）'", "'挤出间隙'", "'g = '", "'g'", "' mm（单边径向间隙）'", "'标准仅定义符号未给限值；间隙越大，胶料被挤出的风险越高'", "'挤出间隙本标准未给数值限值，如间隙偏大，可结合挡圈供应商手册复核'", "('挤出间隙', '未提供', '标准仅定义符号未给限值（第3章 g），可补充后一并复核')", "'材料硬度'", "' 邵A'", "'硬度越低越易被挤出；本标准未给硬度与挡圈的关联限值'", "'材料硬度本标准未给数值限值，可结合挡圈供应商手册复核'", "'工作温度'", "'最高 '", "' ℃'", "'温度接近材料长期使用上限时弹性下降，挤出风险增加；本标准未给温度与挡圈的关联限值'", "'工作温度本标准未给数值限值，可结合材料与挡圈供应商手册复核'", "'如挤出间隙偏大、硬度偏低或温度接近材料上限，可结合挡圈供应商手册复核（本标准仅给出10MPa压力判据）'", "('need', 'factors', 'review')"]

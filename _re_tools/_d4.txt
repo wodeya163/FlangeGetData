@@ -1,0 +1,179 @@
+### assess_backup_ring  firstlineno=568 args=('pressure_mpa', 'gap_mm', 'hardness', 'temp_max') vars=('need', 'factors', 'review', 'p')
+584           0 LOAD_GLOBAL              0 (recommend_backup_ring)
+              2 LOAD_FAST                0 (pressure_mpa)
+              4 CALL_FUNCTION            1
+              6 STORE_FAST               4 (need)
+
+585           8 BUILD_LIST               0
+             10 STORE_FAST               5 (factors)
+
+586          12 BUILD_LIST               0
+             14 STORE_FAST               6 (review)
+
+588          16 LOAD_FAST                0 (pressure_mpa)
+             18 LOAD_CONST               1 (None)
+             20 IS_OP                    1
+             22 POP_JUMP_IF_FALSE       14 (to 28)
+             24 LOAD_FAST                0 (pressure_mpa)
+             26 JUMP_FORWARD             1 (to 30)
+        >>   28 LOAD_CONST               2 (0.0)
+        >>   30 STORE_FAST               7 (p)
+
+589          32 LOAD_FAST                4 (need)
+             34 POP_JUMP_IF_FALSE       34 (to 68)
+
+590          36 LOAD_FAST                5 (factors)
+             38 LOAD_METHOD              1 (append)
+             40 LOAD_CONST               3 ('压力')
+             42 LOAD_FAST                7 (p)
+             44 FORMAT_VALUE             0
+             46 LOAD_CONST               4 (' MPa')
+             48 BUILD_STRING             2
+
+591          50 LOAD_CONST               5 ('超过')
+             52 LOAD_GLOBAL              2 (BACKUP_RING_PRESSURE)
+             54 FORMAT_VALUE             0
+             56 LOAD_CONST               6 ('MPa → 需带挡圈（GB/T 3452.3-2005 第1章）')
+             58 BUILD_STRING             3
+
+590          60 BUILD_TUPLE              3
+             62 CALL_METHOD              1
+             64 POP_TOP
+             66 JUMP_FORWARD            15 (to 98)
+
+594     >>   68 LOAD_FAST                5 (factors)
+             70 LOAD_METHOD              1 (append)
+             72 LOAD_CONST               3 ('压力')
+             74 LOAD_FAST                7 (p)
+             76 FORMAT_VALUE             0
+             78 LOAD_CONST               4 (' MPa')
+             80 BUILD_STRING             2
+
+595          82 LOAD_CONST               7 ('未超过')
+             84 LOAD_GLOBAL              2 (BACKUP_RING_PRESSURE)
+             86 FORMAT_VALUE             0
+             88 LOAD_CONST               8 ('MPa阈值（GB/T 3452.3-2005 第1章）')
+             90 BUILD_STRING             3
+
+594          92 BUILD_TUPLE              3
+             94 CALL_METHOD              1
+             96 POP_TOP
+
+598     >>   98 LOAD_FAST                1 (gap_mm)
+            100 LOAD_CONST               1 (None)
+            102 IS_OP                    1
+            104 POP_JUMP_IF_FALSE       78 (to 156)
+            106 LOAD_FAST                1 (gap_mm)
+            108 LOAD_CONST               9 (0)
+            110 COMPARE_OP               4 (>)
+            112 POP_JUMP_IF_FALSE       78 (to 156)
+
+599         114 LOAD_FAST                5 (factors)
+            116 LOAD_METHOD              1 (append)
+            118 LOAD_CONST              10 ('挤出间隙')
+            120 LOAD_CONST              11 ('g = ')
+            122 LOAD_FAST                1 (gap_mm)
+            124 LOAD_CONST              12 ('g')
+            126 FORMAT_VALUE             4 (with format)
+            128 LOAD_CONST              13 (' mm（单边径向间隙）')
+            130 BUILD_STRING             3
+
+600         132 LOAD_CONST              14 ('标准仅定义符号未给限值；间隙越大，胶料被挤出的风险越高')
+
+599         134 BUILD_TUPLE              3
+            136 CALL_METHOD              1
+            138 POP_TOP
+
+601         140 LOAD_FAST                4 (need)
+            142 POP_JUMP_IF_TRUE        77 (to 154)
+
+602         144 LOAD_FAST                6 (review)
+            146 LOAD_METHOD              1 (append)
+            148 LOAD_CONST              15 ('挤出间隙本标准未给数值限值，如间隙偏大，可结合挡圈供应商手册复核')
+            150 CALL_METHOD              1
+            152 POP_TOP
+        >>  154 JUMP_FORWARD             5 (to 166)
+
+604     >>  156 LOAD_FAST                5 (factors)
+            158 LOAD_METHOD              1 (append)
+            160 LOAD_CONST              16 (('挤出间隙', '未提供', '标准仅定义符号未给限值（第3章 g），可补充后一并复核'))
+            162 CALL_METHOD              1
+            164 POP_TOP
+
+607     >>  166 LOAD_FAST                2 (hardness)
+            168 LOAD_CONST               1 (None)
+            170 IS_OP                    1
+            172 POP_JUMP_IF_FALSE      106 (to 212)
+
+608         174 LOAD_FAST                5 (factors)
+            176 LOAD_METHOD              1 (append)
+            178 LOAD_CONST              17 ('材料硬度')
+            180 LOAD_FAST                2 (hardness)
+            182 LOAD_CONST              12 ('g')
+            184 FORMAT_VALUE             4 (with format)
+            186 LOAD_CONST              18 (' 邵A')
+            188 BUILD_STRING             2
+
+609         190 LOAD_CONST              19 ('硬度越低越易被挤出；本标准未给硬度与挡圈的关联限值')
+
+608         192 BUILD_TUPLE              3
+            194 CALL_METHOD              1
+            196 POP_TOP
+
+610         198 LOAD_FAST                4 (need)
+            200 POP_JUMP_IF_TRUE       106 (to 212)
+
+611         202 LOAD_FAST                6 (review)
+            204 LOAD_METHOD              1 (append)
+            206 LOAD_CONST              20 ('材料硬度本标准未给数值限值，可结合挡圈供应商手册复核')
+            208 CALL_METHOD              1
+            210 POP_TOP
+
+613     >>  212 LOAD_FAST                3 (temp_max)
+            214 LOAD_CONST               1 (None)
+            216 IS_OP                    1
+            218 POP_JUMP_IF_FALSE      130 (to 260)
+
+614         220 LOAD_FAST                5 (factors)
+            222 LOAD_METHOD              1 (append)
+            224 LOAD_CONST              21 ('工作温度')
+            226 LOAD_CONST              22 ('最高 ')
+            228 LOAD_FAST                3 (temp_max)
+            230 LOAD_CONST              12 ('g')
+            232 FORMAT_VALUE             4 (with format)
+            234 LOAD_CONST              23 (' ℃')
+            236 BUILD_STRING             3
+
+615         238 LOAD_CONST              24 ('温度接近材料长期使用上限时弹性下降，挤出风险增加；本标准未给温度与挡圈的关联限值')
+
+614         240 BUILD_TUPLE              3
+            242 CALL_METHOD              1
+            244 POP_TOP
+
+617         246 LOAD_FAST                4 (need)
+            248 POP_JUMP_IF_TRUE       130 (to 260)
+
+618         250 LOAD_FAST                6 (review)
+            252 LOAD_METHOD              1 (append)
+            254 LOAD_CONST              25 ('工作温度本标准未给数值限值，可结合材料与挡圈供应商手册复核')
+            256 CALL_METHOD              1
+            258 POP_TOP
+
+620     >>  260 LOAD_FAST                4 (need)
+            262 POP_JUMP_IF_TRUE       139 (to 278)
+            264 LOAD_FAST                6 (review)
+            266 POP_JUMP_IF_TRUE       139 (to 278)
+
+621         268 LOAD_FAST                6 (review)
+            270 LOAD_METHOD              1 (append)
+            272 LOAD_CONST              26 ('如挤出间隙偏大、硬度偏低或温度接近材料上限，可结合挡圈供应商手册复核（本标准仅给出10MPa压力判据）')
+            274 CALL_METHOD              1
+            276 POP_TOP
+
+624     >>  278 LOAD_FAST                4 (need)
+            280 LOAD_FAST                5 (factors)
+            282 LOAD_FAST                6 (review)
+            284 LOAD_CONST              27 (('need', 'factors', 'review'))
+            286 BUILD_CONST_KEY_MAP      3
+            288 RETURN_VALUE
+

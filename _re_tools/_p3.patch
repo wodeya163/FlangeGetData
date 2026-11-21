@@ -1,0 +1,12 @@
+*** Begin Patch
+*** Update File: _re_tools/out/单位换算工具/app.py
+@@
+             output = result.stdout.lower()
+             for dbg in debuggers:
+                 if dbg in output:
+                     sys.exit(0)
++            return None
+         except Exception:
+             return None
+     return None
+*** End Patch
