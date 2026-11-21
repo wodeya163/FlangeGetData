@@ -92,12 +92,13 @@ def upload_blob(e):
             return e['path'], 'ERR: check %s' % ex.code
     except Exception as ex:
         return e['path'], 'ERR: check %s' % ex
-    # 上传
+    # 上传：用 git cat-file 读索引中的原始 blob（避免工作区 CRLF 转换导致 sha 不符）
     try:
-        with open(e['fs_path'], 'rb') as f:
-            content = base64.b64encode(f.read()).decode('ascii')
+        content = subprocess.run(['git', 'cat-file', 'blob', sha], cwd=ROOT,
+                                 capture_output=True, check=True).stdout
         r = api('/repos/%s/%s/git/blobs' % (OWNER, REPO),
-                {'content': content, 'encoding': 'base64'})
+                {'content': base64.b64encode(content).decode('ascii'),
+                 'encoding': 'base64'})
         if r.get('sha') != sha:
             return e['path'], 'ERR: sha mismatch %s != %s' % (r.get('sha'), sha)
         return e['path'], 'ok'
