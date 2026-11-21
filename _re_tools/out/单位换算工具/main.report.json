@@ -1,0 +1,12 @@
+{
+  "failed": [],
+  "unplaced": [],
+  "broken": [
+    "<module>.MainWindow._restore_state",
+    "<module>.MainWindow._on_unit_btn",
+    "<module>.MainWindow._update",
+    "<module>.MainWindow._set_source",
+    "<module>.MainWindow._show_history",
+    "<module>.MainWindow"
+  ]
+}

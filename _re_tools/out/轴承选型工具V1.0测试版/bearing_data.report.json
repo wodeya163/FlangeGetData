@@ -1,0 +1,8 @@
+{
+  "failed": [],
+  "unplaced": [],
+  "broken": [
+    "<module>.type_guide",
+    "<module>.variant_guide"
+  ]
+}

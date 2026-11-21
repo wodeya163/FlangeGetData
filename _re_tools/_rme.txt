@@ -1,0 +1,297 @@
+### recommend_material_ex  firstlineno=516 args=('medium', 'temp_min', 'temp_max') vars=('mkey', 'ok', 'excluded', 'code', 'm', 'lo', 'hi', 'temp_ok', 'temp_part', 'why', 'rkey', 'rlabel', 'rating', 'rank', 'reason', 'score')
+522           0 LOAD_GLOBAL              0 (_MEDIA_RATE_KEY)
+              2 LOAD_METHOD              1 (get)
+              4 LOAD_FAST                0 (medium)
+              6 JUMP_IF_TRUE_OR_POP      5 (to 10)
+              8 LOAD_CONST               1 ('')
+        >>   10 LOAD_METHOD              2 (strip)
+             12 CALL_METHOD              0
+             14 CALL_METHOD              1
+             16 STORE_FAST               3 (mkey)
+
+523          18 BUILD_LIST               0
+             20 BUILD_LIST               0
+             22 ROT_TWO
+             24 STORE_FAST               4 (ok)
+             26 STORE_FAST               5 (excluded)
+
+524          28 LOAD_GLOBAL              3 (MATERIALS)
+             30 LOAD_METHOD              4 (items)
+             32 CALL_METHOD              0
+             34 GET_ITER
+        >>   36 FOR_ITER               189 (to 416)
+             38 UNPACK_SEQUENCE          2
+             40 STORE_FAST               6 (code)
+             42 STORE_FAST               7 (m)
+
+525          44 LOAD_FAST                7 (m)
+             46 LOAD_CONST               2 ('temp')
+             48 BINARY_SUBSCR
+             50 UNPACK_SEQUENCE          2
+             52 STORE_FAST               8 (lo)
+             54 STORE_FAST               9 (hi)
+
+527          56 LOAD_FAST                1 (temp_min)
+             58 LOAD_CONST               3 (None)
+             60 IS_OP                    0
+             62 POP_JUMP_IF_TRUE        36 (to 72)
+             64 LOAD_FAST                2 (temp_max)
+             66 LOAD_CONST               3 (None)
+             68 IS_OP                    0
+             70 POP_JUMP_IF_FALSE       49 (to 98)
+
+528     >>   72 LOAD_CONST               4 (True)
+             74 LOAD_CONST               5 ('温度')
+             76 LOAD_FAST                8 (lo)
+             78 FORMAT_VALUE             0
+             80 LOAD_CONST               6 ('~')
+             82 LOAD_FAST                9 (hi)
+             84 FORMAT_VALUE             0
+             86 LOAD_CONST               7 ('℃')
+             88 BUILD_STRING             5
+             90 ROT_TWO
+             92 STORE_FAST              10 (temp_ok)
+             94 STORE_FAST              11 (temp_part)
+             96 JUMP_FORWARD            25 (to 148)
+
+529     >>   98 LOAD_FAST                1 (temp_min)
+            100 LOAD_FAST                8 (lo)
+            102 COMPARE_OP               5 (>=)
+            104 POP_JUMP_IF_FALSE       70 (to 140)
+            106 LOAD_FAST                2 (temp_max)
+            108 LOAD_FAST                9 (hi)
+            110 COMPARE_OP               1 (<=)
+            112 POP_JUMP_IF_FALSE       70 (to 140)
+
+530         114 LOAD_CONST               4 (True)
+            116 LOAD_CONST               5 ('温度')
+            118 LOAD_FAST                8 (lo)
+            120 FORMAT_VALUE             0
+            122 LOAD_CONST               6 ('~')
+            124 LOAD_FAST                9 (hi)
+            126 FORMAT_VALUE             0
+            128 LOAD_CONST               8 ('℃覆盖工况')
+            130 BUILD_STRING             5
+            132 ROT_TWO
+            134 STORE_FAST              10 (temp_ok)
+            136 STORE_FAST              11 (temp_part)
+            138 JUMP_FORWARD             4 (to 148)
+
+532     >>  140 LOAD_CONST               9 ((False, ''))
+            142 UNPACK_SEQUENCE          2
+            144 STORE_FAST              10 (temp_ok)
+            146 STORE_FAST              11 (temp_part)
+
+533     >>  148 LOAD_FAST               10 (temp_ok)
+            150 POP_JUMP_IF_TRUE       121 (to 242)
+
+534         152 LOAD_FAST                1 (temp_min)
+            154 LOAD_FAST                8 (lo)
+            156 COMPARE_OP               0 (<)
+            158 POP_JUMP_IF_FALSE       97 (to 194)
+
+535         160 LOAD_CONST              10 ('温度不符：长期工作温度')
+            162 LOAD_FAST                8 (lo)
+            164 FORMAT_VALUE             0
+            166 LOAD_CONST               6 ('~')
+            168 LOAD_FAST                9 (hi)
+            170 FORMAT_VALUE             0
+            172 LOAD_CONST              11 ('℃，工况最低')
+
+536         174 LOAD_FAST                1 (temp_min)
+            176 LOAD_CONST              12 ('.0f')
+
+535         178 FORMAT_VALUE             4 (with format)
+            180 LOAD_CONST              13 ('℃低于下限')
+
+536         182 LOAD_FAST                8 (lo)
+
+535         184 FORMAT_VALUE             0
+            186 LOAD_CONST              14 ('℃（手册表3-3-2/3-3-3 原文值）')
+            188 BUILD_STRING             9
+            190 STORE_FAST              12 (why)
+            192 JUMP_FORWARD            16 (to 226)
+
+538     >>  194 LOAD_CONST              10 ('温度不符：长期工作温度')
+            196 LOAD_FAST                8 (lo)
+            198 FORMAT_VALUE             0
+            200 LOAD_CONST               6 ('~')
+            202 LOAD_FAST                9 (hi)
+            204 FORMAT_VALUE             0
+            206 LOAD_CONST              15 ('℃，工况最高')
+
+539         208 LOAD_FAST                2 (temp_max)
+            210 LOAD_CONST              12 ('.0f')
+
+538         212 FORMAT_VALUE             4 (with format)
+            214 LOAD_CONST              16 ('℃高于上限')
+
+539         216 LOAD_FAST                9 (hi)
+
+538         218 FORMAT_VALUE             0
+            220 LOAD_CONST              14 ('℃（手册表3-3-2/3-3-3 原文值）')
+            222 BUILD_STRING             9
+            224 STORE_FAST              12 (why)
+
+540     >>  226 LOAD_FAST                5 (excluded)
+            228 LOAD_METHOD              5 (append)
+            230 LOAD_FAST                6 (code)
+            232 LOAD_FAST               12 (why)
+            234 BUILD_TUPLE              2
+            236 CALL_METHOD              1
+            238 POP_TOP
+
+541         240 JUMP_ABSOLUTE           18 (to 36)
+
+543     >>  242 LOAD_FAST                3 (mkey)
+            244 POP_JUMP_IF_FALSE      182 (to 364)
+
+544         246 LOAD_FAST                3 (mkey)
+            248 UNPACK_SEQUENCE          2
+            250 STORE_FAST              13 (rkey)
+            252 STORE_FAST              14 (rlabel)
+
+545         254 LOAD_FAST                7 (m)
+            256 LOAD_CONST              17 ('rates')
+            258 BINARY_SUBSCR
+            260 LOAD_METHOD              1 (get)
+            262 LOAD_FAST               13 (rkey)
+            264 LOAD_CONST              18 ('-')
+            266 CALL_METHOD              2
+            268 STORE_FAST              15 (rating)
+
+546         270 LOAD_GLOBAL              6 (_RATE_RANK)
+            272 LOAD_METHOD              1 (get)
+            274 LOAD_FAST               15 (rating)
+            276 LOAD_CONST              19 (0)
+            278 CALL_METHOD              2
+            280 STORE_FAST              16 (rank)
+
+547         282 LOAD_FAST               16 (rank)
+            284 LOAD_CONST              20 (2)
+            286 COMPARE_OP               0 (<)
+            288 POP_JUMP_IF_FALSE      160 (to 320)
+
+548         290 LOAD_FAST                5 (excluded)
+            292 LOAD_METHOD              5 (append)
+
+549         294 LOAD_FAST                6 (code)
+            296 LOAD_CONST              21 ('介质不符：')
+            298 LOAD_FAST               14 (rlabel)
+            300 FORMAT_VALUE             0
+            302 LOAD_CONST              22 ('评级「')
+            304 LOAD_FAST               15 (rating)
+            306 FORMAT_VALUE             0
+            308 LOAD_CONST              23 ('」，不适合该介质')
+            310 BUILD_STRING             5
+            312 BUILD_TUPLE              2
+
+548         314 CALL_METHOD              1
+            316 POP_TOP
+
+550         318 JUMP_ABSOLUTE           18 (to 36)
+
+551     >>  320 LOAD_FAST               14 (rlabel)
+            322 FORMAT_VALUE             0
+            324 LOAD_CONST              24 (' ')
+            326 LOAD_FAST               15 (rating)
+            328 FORMAT_VALUE             0
+            330 LOAD_CONST              25 ('；')
+            332 LOAD_FAST               11 (temp_part)
+            334 FORMAT_VALUE             0
+            336 BUILD_STRING             5
+            338 STORE_FAST              17 (reason)
+
+552         340 LOAD_FAST               16 (rank)
+            342 LOAD_FAST                9 (hi)
+            344 LOAD_GLOBAL              7 (max)
+            346 LOAD_FAST                2 (temp_max)
+            348 JUMP_IF_TRUE_OR_POP    176 (to 352)
+            350 LOAD_FAST                9 (hi)
+        >>  352 LOAD_FAST                8 (lo)
+            354 CALL_FUNCTION            2
+            356 BINARY_SUBTRACT
+            358 BUILD_TUPLE              2
+            360 STORE_FAST              18 (score)
+            362 JUMP_FORWARD            17 (to 398)
+
+554     >>  364 LOAD_CONST              26 ('手册表未收录该介质评级，按温度筛选（')
+            366 LOAD_FAST               11 (temp_part)
+            368 FORMAT_VALUE             0
+            370 LOAD_CONST              27 ('）')
+            372 BUILD_STRING             3
+            374 STORE_FAST              17 (reason)
+
+555         376 LOAD_CONST              19 (0)
+            378 LOAD_FAST                9 (hi)
+            380 LOAD_GLOBAL              7 (max)
+            382 LOAD_FAST                2 (temp_max)
+            384 JUMP_IF_TRUE_OR_POP    194 (to 388)
+            386 LOAD_FAST                9 (hi)
+        >>  388 LOAD_FAST                8 (lo)
+            390 CALL_FUNCTION            2
+            392 BINARY_SUBTRACT
+            394 BUILD_TUPLE              2
+            396 STORE_FAST              18 (score)
+
+556     >>  398 LOAD_FAST                4 (ok)
+            400 LOAD_METHOD              5 (append)
+            402 LOAD_FAST                6 (code)
+            404 LOAD_FAST               17 (reason)
+            406 LOAD_FAST               18 (score)
+            408 BUILD_TUPLE              3
+            410 CALL_METHOD              1
+            412 POP_TOP
+            414 JUMP_ABSOLUTE           18 (to 36)
+
+557     >>  416 LOAD_FAST                4 (ok)
+            418 LOAD_ATTR                8 (sort)
+            420 LOAD_CONST              28 (<code object <lambda> at 0x0000029E3C6D1F20, file "seal_data.py", line 557>)
+            422 LOAD_CONST              29 ('recommend_material_ex.<locals>.<lambda>')
+            424 MAKE_FUNCTION            0
+            426 LOAD_CONST              30 (('key',))
+            428 CALL_FUNCTION_KW         1
+            430 POP_TOP
+
+558         432 LOAD_CONST              31 (<code object <listcomp> at 0x0000029E3C6D1E70, file "seal_data.py", line 558>)
+            434 LOAD_CONST              32 ('recommend_material_ex.<locals>.<listcomp>')
+            436 MAKE_FUNCTION            0
+            438 LOAD_FAST                4 (ok)
+            440 GET_ITER
+            442 CALL_FUNCTION            1
+            444 LOAD_FAST                5 (excluded)
+            446 BUILD_TUPLE              2
+            448 RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x0000029E3C6D1F20, file "seal_data.py", line 557>:
+557           0 LOAD_FAST                0 (x)
+              2 LOAD_CONST               1 (2)
+              4 BINARY_SUBSCR
+              6 LOAD_CONST               2 (0)
+              8 BINARY_SUBSCR
+             10 UNARY_NEGATIVE
+             12 LOAD_CONST               3 (1000)
+             14 BINARY_MULTIPLY
+             16 LOAD_FAST                0 (x)
+             18 LOAD_CONST               1 (2)
+             20 BINARY_SUBSCR
+             22 LOAD_CONST               4 (1)
+             24 BINARY_SUBSCR
+             26 BINARY_SUBTRACT
+             28 RETURN_VALUE
+
+Disassembly of <code object <listcomp> at 0x0000029E3C6D1E70, file "seal_data.py", line 558>:
+558           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                 9 (to 24)
+              6 UNPACK_SEQUENCE          3
+              8 STORE_FAST               1 (code)
+             10 STORE_FAST               2 (reason)
+             12 STORE_FAST               3 (_)
+             14 LOAD_FAST                1 (code)
+             16 LOAD_FAST                2 (reason)
+             18 BUILD_TUPLE              2
+             20 LIST_APPEND              2
+             22 JUMP_ABSOLUTE            2 (to 4)
+        >>   24 RETURN_VALUE
+

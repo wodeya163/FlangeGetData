@@ -1,0 +1,8 @@
+{
+  "failed": [],
+  "unplaced": [],
+  "broken": [
+    "<module>._interpolate",
+    "<module>._hrc_from_table"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "failed": [],
+  "unplaced": [],
+  "broken": [
+    "<module>.design_compression",
+    "<module>.design_torsion"
+  ]
+}

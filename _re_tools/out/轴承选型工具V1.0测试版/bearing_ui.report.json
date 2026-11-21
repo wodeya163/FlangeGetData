@@ -1,0 +1,21 @@
+{
+  "failed": [
+    "<module>.CheckTab.on_check",
+    "<module>.CollectionTab._filled_n",
+    "<module>.CollectionTab._tip",
+    "<module>.CollectionTab._update_count",
+    "<module>.CollectionTab.on_apply_contact",
+    "<module>.CollectionTab._apply_contact"
+  ],
+  "unplaced": [],
+  "broken": [
+    "<module>.CheckTab.__init__",
+    "<module>.CheckTab",
+    "<module>.ReverseTab.__init__",
+    "<module>.ReverseTab",
+    "<module>.CollectionTab.update_detail",
+    "<module>.CollectionTab",
+    "<module>._write_crash_log",
+    "<module>.main"
+  ]
+}

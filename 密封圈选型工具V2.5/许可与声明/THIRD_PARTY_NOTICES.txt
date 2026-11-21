@@ -1,0 +1,55 @@
+第三方组件版权声明 / THIRD PARTY NOTICES
+========================================
+
+本程序（密封圈选型工具 V2.3，以下称"本程序"）在分发包内捆绑了下列第三方
+开源组件。各组件的著作权归其各自的权利人所有，本程序对这些组件的使用遵循
+其各自的开源许可证条款。
+
+1. PySide6（含 shiboken6）与 Qt 库
+   版本：PySide6 / shiboken6（内含 Qt 运行库 DLL，以打包时实际版本为准）
+   许可证：LGPL-3.0-only 或 GPL-2.0-only 或 GPL-3.0-only（三选一，本程序按
+           LGPL-3.0-only 条款分发）
+   本程序以 PyInstaller 打包方式动态捆绑上述库的二进制文件，未修改其源码。
+   许可证全文见本目录：LICENSE-PySide6-LGPL-3.0.txt
+   项目地址：https://code.qt.io/cgit/pyside/pyside6.git
+            https://www.qt.io
+
+2. Python 标准库与运行时
+   版本：随 PyInstaller 打包的 Python 运行时（以打包时实际版本为准）
+   许可证：PSF License（Python Software Foundation License Version 2）
+   许可证全文见本目录：LICENSE-Python-PSF.txt
+   项目地址：https://www.python.org/psf/license/
+
+3. PyInstaller 引导运行时（bootloader）
+   许可证：GPLv2 with runtime exception（带运行时例外的 GPLv2）
+   本程序使用 PyInstaller 构建，其 bootloader 二进制以原样链接，未修改。
+   项目地址：https://github.com/pyinstaller/pyinstaller
+
+说明：
+- 本程序自身的代码为原创实现，不含上述组件的源码副本以外的第三方代码。
+- 上述许可证全文随本程序分发包一同打包在 licences 目录中，可供查阅。
+- 本程序内嵌的尺寸/沟槽/材料数据为对国家标准（GB/T 3452.1-2005、
+  GB/T 3452.3-2005）与机械设计手册（成大先）表3-3-2/表3-3-3 中事实性
+  参数值的整理录入，不含上述出版物的原文内容；请以标准/手册原文为准。
+- LGPL 允许使用者在遵守其条款的前提下运行、分发本程序；对 LGPL 组件的
+  修改需按其条款提供相应源码。本程序未对 PySide6/Qt 组件做任何修改。
+
+===== 随包第三方组件清单（自动核对，请勿手改本段） =====
+本清单由 handbook/sync_notices.py 对照该分发包实际捆绑的组件自动生成（解析已构建产物 + 扫描运行期源码）：
+  - 本清单是该分发包内第三方组件的完整列表；若与上文较早的人工描述不一致，以本清单为准。
+  - 版本号取自构建环境的已安装信息，具体以分发包内实际捆绑版本为准。
+  - 本段之外的文字为人工撰写，脚本不会改动。
+
+1. PyInstaller（引导运行时 / Bootloader）　版本：以打包时实际版本为准
+   许可证：GPL-2.0-or-later WITH Bootloader-exception（该例外明确许可把引导器随打包程序分发，不影响本程序自身的许可）
+   许可文本（本目录）：pyinstaller-GPLv2-with-exception.txt
+   项目地址：https://pyinstaller.org
+2. Python 运行时与标准库　版本：以打包时实际版本为准
+   许可证：PSF License Version 2
+   许可文本（本目录）：LICENSE-Python-PSF.txt
+   项目地址：https://www.python.org/psf/license/
+3. PySide6（含 shiboken6）与 Qt 库　版本：以打包时实际版本为准
+   许可证：LGPL-3.0-only（本程序按此分发；备选 GPL-2.0-only / GPL-3.0-only）
+   许可文本（本目录）：LICENSE-PySide6-LGPL-3.0.txt、LICENSE-PySide6-GPL-3.0.txt
+   项目地址：https://code.qt.io/cgit/pyside/pyside6.git
+===== 自动核对段落结束 =====

@@ -1,0 +1,73 @@
+*** Begin Patch
+*** Update File: _re_tools/out/单位换算工具/app.py
+@@
+     try:
+         if os.path.getsize(sys.executable) < 102400:
+             sys.exit(0)
+-            return None
+-        return None
+     except Exception:
+         return None
+@@
+-    __classcell__ = None
+ def main():
+     app = QApplication(sys.argv)
+     app.setFont(QFont('Microsoft YaHei', 10))
+     _sync_theme()
+     first_run = is_first_run()
+     if first_run:
+         w = WelcomeDialog()
+         if w.exec() != QDialog.Accepted:
+             return None
+-        if not None():
+-            lock = LockDialog()
+-            if lock.exec() != QDialog.Accepted:
+-                return None
+-            if None:
+-                disclaimer = DisclaimerDialog()
+-                if disclaimer.exec() != QDialog.Accepted:
+-                    return None
+-                cfg = None()
+-                cfg['disclaimer_accepted'] = True
+-                _save_config(cfg)
+-    MainWindow = MainWindow
+-    import main
++    if not is_unlocked():
++        lock = LockDialog()
++        if lock.exec() != QDialog.Accepted:
++            return None
++    if first_run:
++        disclaimer = DisclaimerDialog()
++        if disclaimer.exec() != QDialog.Accepted:
++            return None
++        cfg = _load_config()
++        cfg['disclaimer_accepted'] = True
++        _save_config(cfg)
++    from main import MainWindow
+     win = MainWindow()
+     win.show()
+     sys.exit(app.exec())
+ if __name__ == '__main__':
+-    
+     try:
+         main()
+-        return None
+     except Exception:
+         import traceback
+         crash_path = os.path.join(os.path.dirname(os.path.abspath(sys.executable)) if getattr(sys, 'frozen', False) else os.path.dirname(__file__), 'crash.log')
+-        f = open(crash_path, 'a', encoding = 'utf-8')
+-        f.write('=== Crash ===\n')
+-        traceback.print_exc(file = f)
+-        None(None, None)
+-    except:
+-        with None:
+-            if not None:
+-                pass
+-
+-    sys.exit(1)
+-    return None
++        with open(crash_path, 'a', encoding='utf-8') as f:
++            f.write('=== Crash ===\n')
++            traceback.print_exc(file=f)
++        sys.exit(1)
+*** End Patch

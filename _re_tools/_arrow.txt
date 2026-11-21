@@ -1,0 +1,230 @@
+### _arrow_pngs  firstlineno=186 args=('color_hex',) vars=('hashlib', 'tempfile', 'QSize', 'QColor', 'QPainter', 'QPixmap', 'QPolygonF', 'up_poly', 'dn_poly', 'key', 'd', 'up_p', 'dn_p', 'path', 'poly', 'pm', 'p')
+195           0 LOAD_CONST               1 (0)
+              2 LOAD_CONST               2 (None)
+              4 IMPORT_NAME              0 (hashlib)
+              6 STORE_FAST               1 (hashlib)
+
+196           8 LOAD_CONST               1 (0)
+             10 LOAD_CONST               2 (None)
+             12 IMPORT_NAME              1 (tempfile)
+             14 STORE_FAST               2 (tempfile)
+
+197          16 LOAD_CONST               1 (0)
+             18 LOAD_CONST               3 (('QPointF', 'QSize'))
+             20 IMPORT_NAME              2 (PySide6.QtCore)
+             22 IMPORT_FROM              3 (QPointF)
+             24 STORE_DEREF              0 (QPointF)
+             26 IMPORT_FROM              4 (QSize)
+             28 STORE_FAST               3 (QSize)
+             30 POP_TOP
+
+198          32 LOAD_CONST               1 (0)
+             34 LOAD_CONST               4 (('QColor', 'QPainter', 'QPixmap', 'QPolygonF'))
+             36 IMPORT_NAME              5 (PySide6.QtGui)
+             38 IMPORT_FROM              6 (QColor)
+             40 STORE_FAST               4 (QColor)
+             42 IMPORT_FROM              7 (QPainter)
+             44 STORE_FAST               5 (QPainter)
+             46 IMPORT_FROM              8 (QPixmap)
+             48 STORE_FAST               6 (QPixmap)
+             50 IMPORT_FROM              9 (QPolygonF)
+             52 STORE_FAST               7 (QPolygonF)
+             54 POP_TOP
+
+199          56 BUILD_LIST               0
+             58 LOAD_CONST               5 (((5, 1), (9, 8), (1, 8)))
+             60 LIST_EXTEND              1
+             62 STORE_FAST               8 (up_poly)
+
+200          64 BUILD_LIST               0
+             66 LOAD_CONST               6 (((5, 8), (9, 2), (1, 2)))
+             68 LIST_EXTEND              1
+             70 STORE_FAST               9 (dn_poly)
+
+202          72 LOAD_FAST                1 (hashlib)
+             74 LOAD_METHOD             10 (md5)
+
+203          76 LOAD_FAST                0 (color_hex)
+             78 LOAD_GLOBAL             11 (repr)
+             80 LOAD_FAST                8 (up_poly)
+             82 LOAD_FAST                9 (dn_poly)
+             84 BUILD_TUPLE              2
+             86 CALL_FUNCTION            1
+             88 BINARY_ADD
+             90 LOAD_METHOD             12 (encode)
+             92 LOAD_CONST               7 ('utf-8')
+             94 CALL_METHOD              1
+
+202          96 CALL_METHOD              1
+
+203          98 LOAD_METHOD             13 (hexdigest)
+            100 CALL_METHOD              0
+            102 LOAD_CONST               2 (None)
+            104 LOAD_CONST               8 (8)
+            106 BUILD_SLICE              2
+
+202         108 BINARY_SUBSCR
+            110 STORE_FAST              10 (key)
+
+204         112 LOAD_GLOBAL             14 (os)
+            114 LOAD_ATTR               15 (path)
+            116 LOAD_METHOD             16 (join)
+            118 LOAD_FAST                2 (tempfile)
+            120 LOAD_METHOD             17 (gettempdir)
+            122 CALL_METHOD              0
+            124 LOAD_CONST               9 ('sealtool_arrows')
+            126 CALL_METHOD              2
+            128 STORE_FAST              11 (d)
+
+205         130 LOAD_GLOBAL             14 (os)
+            132 LOAD_ATTR               18 (makedirs)
+            134 LOAD_FAST               11 (d)
+            136 LOAD_CONST              10 (True)
+            138 LOAD_CONST              11 (('exist_ok',))
+            140 CALL_FUNCTION_KW         2
+            142 POP_TOP
+
+206         144 LOAD_GLOBAL             14 (os)
+            146 LOAD_ATTR               15 (path)
+            148 LOAD_METHOD             16 (join)
+            150 LOAD_FAST               11 (d)
+            152 LOAD_CONST              12 ('up_')
+            154 LOAD_FAST               10 (key)
+            156 FORMAT_VALUE             0
+            158 LOAD_CONST              13 ('.png')
+            160 BUILD_STRING             3
+            162 CALL_METHOD              2
+            164 LOAD_METHOD             19 (replace)
+            166 LOAD_CONST              14 ('\\')
+            168 LOAD_CONST              15 ('/')
+            170 CALL_METHOD              2
+            172 STORE_FAST              12 (up_p)
+
+207         174 LOAD_GLOBAL             14 (os)
+            176 LOAD_ATTR               15 (path)
+            178 LOAD_METHOD             16 (join)
+            180 LOAD_FAST               11 (d)
+            182 LOAD_CONST              16 ('dn_')
+            184 LOAD_FAST               10 (key)
+            186 FORMAT_VALUE             0
+            188 LOAD_CONST              13 ('.png')
+            190 BUILD_STRING             3
+            192 CALL_METHOD              2
+            194 LOAD_METHOD             19 (replace)
+            196 LOAD_CONST              14 ('\\')
+            198 LOAD_CONST              15 ('/')
+            200 CALL_METHOD              2
+            202 STORE_FAST              13 (dn_p)
+
+208         204 LOAD_GLOBAL             14 (os)
+            206 LOAD_ATTR               15 (path)
+            208 LOAD_METHOD             20 (exists)
+            210 LOAD_FAST               12 (up_p)
+            212 CALL_METHOD              1
+            214 POP_JUMP_IF_FALSE      114 (to 228)
+            216 LOAD_GLOBAL             14 (os)
+            218 LOAD_ATTR               15 (path)
+            220 LOAD_METHOD             20 (exists)
+            222 LOAD_FAST               13 (dn_p)
+            224 CALL_METHOD              1
+            226 POP_JUMP_IF_TRUE       186 (to 372)
+
+209     >>  228 LOAD_FAST               12 (up_p)
+            230 LOAD_FAST                8 (up_poly)
+            232 BUILD_TUPLE              2
+            234 LOAD_FAST               13 (dn_p)
+            236 LOAD_FAST                9 (dn_poly)
+            238 BUILD_TUPLE              2
+            240 BUILD_TUPLE              2
+            242 GET_ITER
+        >>  244 FOR_ITER                63 (to 372)
+            246 UNPACK_SEQUENCE          2
+            248 STORE_FAST              14 (path)
+            250 STORE_FAST              15 (poly)
+
+210         252 LOAD_FAST                6 (QPixmap)
+            254 LOAD_FAST                3 (QSize)
+            256 LOAD_CONST              17 (10)
+            258 LOAD_CONST              17 (10)
+            260 CALL_FUNCTION            2
+            262 CALL_FUNCTION            1
+            264 STORE_FAST              16 (pm)
+
+211         266 LOAD_FAST               16 (pm)
+            268 LOAD_METHOD             21 (fill)
+            270 LOAD_GLOBAL             22 (Qt)
+            272 LOAD_ATTR               23 (transparent)
+            274 CALL_METHOD              1
+            276 POP_TOP
+
+212         278 LOAD_FAST                5 (QPainter)
+            280 LOAD_FAST               16 (pm)
+            282 CALL_FUNCTION            1
+            284 STORE_FAST              17 (p)
+
+213         286 LOAD_FAST               17 (p)
+            288 LOAD_METHOD             24 (setRenderHint)
+            290 LOAD_FAST                5 (QPainter)
+            292 LOAD_ATTR               25 (Antialiasing)
+            294 CALL_METHOD              1
+            296 POP_TOP
+
+214         298 LOAD_FAST               17 (p)
+            300 LOAD_METHOD             26 (setBrush)
+            302 LOAD_FAST                4 (QColor)
+            304 LOAD_FAST                0 (color_hex)
+            306 CALL_FUNCTION            1
+            308 CALL_METHOD              1
+            310 POP_TOP
+
+215         312 LOAD_FAST               17 (p)
+            314 LOAD_METHOD             27 (setPen)
+            316 LOAD_GLOBAL             22 (Qt)
+            318 LOAD_ATTR               28 (NoPen)
+            320 CALL_METHOD              1
+            322 POP_TOP
+
+216         324 LOAD_FAST               17 (p)
+            326 LOAD_METHOD             29 (drawPolygon)
+            328 LOAD_FAST                7 (QPolygonF)
+            330 LOAD_CLOSURE             0 (QPointF)
+            332 BUILD_TUPLE              1
+            334 LOAD_CONST              18 (<code object <listcomp> at 0x0000014B1A1499A0, file "theme.py", line 216>)
+            336 LOAD_CONST              19 ('_arrow_pngs.<locals>.<listcomp>')
+            338 MAKE_FUNCTION            8 (closure)
+            340 LOAD_FAST               15 (poly)
+            342 GET_ITER
+            344 CALL_FUNCTION            1
+            346 CALL_FUNCTION            1
+            348 CALL_METHOD              1
+            350 POP_TOP
+
+217         352 LOAD_FAST               17 (p)
+            354 LOAD_METHOD             30 (end)
+            356 CALL_METHOD              0
+            358 POP_TOP
+
+218         360 LOAD_FAST               16 (pm)
+            362 LOAD_METHOD             31 (save)
+            364 LOAD_FAST               14 (path)
+            366 CALL_METHOD              1
+            368 POP_TOP
+            370 JUMP_ABSOLUTE          122 (to 244)
+
+219     >>  372 LOAD_FAST               12 (up_p)
+            374 LOAD_FAST               13 (dn_p)
+            376 BUILD_TUPLE              2
+            378 RETURN_VALUE
+
+Disassembly of <code object <listcomp> at 0x0000014B1A1499A0, file "theme.py", line 216>:
+216           0 BUILD_LIST               0
+              2 LOAD_FAST                0 (.0)
+        >>    4 FOR_ITER                 6 (to 18)
+              6 STORE_FAST               1 (pt)
+              8 LOAD_DEREF               0 (QPointF)
+             10 LOAD_FAST                1 (pt)
+             12 CALL_FUNCTION_EX         0
+             14 LIST_APPEND              2
+             16 JUMP_ABSOLUTE            2 (to 4)
+        >>   18 RETURN_VALUE
+

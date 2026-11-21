@@ -1,0 +1,9 @@
+{
+  "failed": [],
+  "unplaced": [],
+  "broken": [
+    "<module>._anti_debug",
+    "<module>._load_config",
+    "<module>.main"
+  ]
+}

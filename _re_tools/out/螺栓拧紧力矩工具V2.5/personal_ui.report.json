@@ -1,0 +1,17 @@
+{
+  "failed": [
+    "<module>.PersonalCompareCard.clear_body",
+    "<module>.PersonalTab._mat_edit"
+  ],
+  "unplaced": [
+    "_diff_item"
+  ],
+  "broken": [
+    "<module>.RecordDialog.__init__",
+    "<module>.RecordDialog",
+    "<module>.ImportDialog._load_file",
+    "<module>.ImportDialog",
+    "<module>.PersonalTab._fill_qs_grade",
+    "<module>.PersonalTab"
+  ]
+}

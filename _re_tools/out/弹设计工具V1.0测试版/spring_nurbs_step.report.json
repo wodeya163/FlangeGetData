@@ -1,0 +1,16 @@
+{
+  "failed": [
+    "<module>._wrap_data_lines"
+  ],
+  "unplaced": [],
+  "broken": [
+    "<module>._knots_to_step",
+    "<module>._pt",
+    "<module>._bspline_curve",
+    "<module>._bspline_surface",
+    "<module>._plane",
+    "<module>.write_step_smooth.vertex",
+    "<module>.write_step_smooth.complex_add",
+    "<module>.write_step_smooth"
+  ]
+}

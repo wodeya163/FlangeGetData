@@ -1,0 +1,10 @@
+{
+  "failed": [
+    "<module>.set_file",
+    "<module>.set_text"
+  ],
+  "unplaced": [],
+  "broken": [
+    "<module>.load_lib"
+  ]
+}

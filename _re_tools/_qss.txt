@@ -1,0 +1,928 @@
+### qss  firstlineno=222 args=('t', 'for_dialog') vars=('r', 'arrow', 'arrow_up', 'arrow_dn', 'common')
+228           0 LOAD_FAST                0 (t)
+              2 JUMP_IF_TRUE_OR_POP      4 (to 8)
+              4 LOAD_GLOBAL              0 (current)
+              6 CALL_FUNCTION            0
+        >>    8 STORE_FAST               0 (t)
+
+229          10 LOAD_FAST                0 (t)
+             12 LOAD_CONST               1 ('radius')
+             14 BINARY_SUBSCR
+             16 STORE_FAST               2 (r)
+
+230          18 LOAD_FAST                0 (t)
+             20 LOAD_CONST               2 ('text2')
+             22 BINARY_SUBSCR
+             24 STORE_FAST               3 (arrow)
+
+231          26 LOAD_GLOBAL              1 (_arrow_pngs)
+             28 LOAD_FAST                3 (arrow)
+             30 CALL_FUNCTION            1
+             32 UNPACK_SEQUENCE          2
+             34 STORE_FAST               4 (arrow_up)
+             36 STORE_FAST               5 (arrow_dn)
+
+232          38 LOAD_CONST               3 ('')
+             40 LOAD_METHOD              2 (join)
+             42 BUILD_LIST               0
+             44 LOAD_CONST               4 ('\n        QDialog { background: ')
+             46 LIST_APPEND              1
+
+233          48 LOAD_FAST                0 (t)
+             50 LOAD_CONST               5 ('bg')
+             52 BINARY_SUBSCR
+
+232          54 FORMAT_VALUE             0
+             56 LIST_APPEND              1
+             58 LOAD_CONST               6 ('; }\n        QWidget { background: ')
+             60 LIST_APPEND              1
+
+234          62 LOAD_FAST                0 (t)
+             64 LOAD_CONST               5 ('bg')
+             66 BINARY_SUBSCR
+
+232          68 FORMAT_VALUE             0
+             70 LIST_APPEND              1
+             72 LOAD_CONST               7 ('; color: ')
+             74 LIST_APPEND              1
+
+234          76 LOAD_FAST                0 (t)
+             78 LOAD_CONST               8 ('text')
+             80 BINARY_SUBSCR
+
+232          82 FORMAT_VALUE             0
+             84 LIST_APPEND              1
+             86 LOAD_CONST               9 ('; font-family: ')
+             88 LIST_APPEND              1
+
+234          90 LOAD_FAST                0 (t)
+             92 LOAD_CONST              10 ('font')
+             94 BINARY_SUBSCR
+
+232          96 FORMAT_VALUE             0
+             98 LIST_APPEND              1
+            100 LOAD_CONST              11 ('; }\n        QLabel { color: ')
+            102 LIST_APPEND              1
+
+235         104 LOAD_FAST                0 (t)
+            106 LOAD_CONST               8 ('text')
+            108 BINARY_SUBSCR
+
+232         110 FORMAT_VALUE             0
+            112 LIST_APPEND              1
+            114 LOAD_CONST              12 ('; background: transparent; }\n        QLineEdit, QComboBox, QDoubleSpinBox, QTextEdit, QTableWidget {\n            background: ')
+            116 LIST_APPEND              1
+
+237         118 LOAD_FAST                0 (t)
+            120 LOAD_CONST              13 ('card2')
+            122 BINARY_SUBSCR
+
+232         124 FORMAT_VALUE             0
+            126 LIST_APPEND              1
+            128 LOAD_CONST               7 ('; color: ')
+            130 LIST_APPEND              1
+
+237         132 LOAD_FAST                0 (t)
+            134 LOAD_CONST               8 ('text')
+            136 BINARY_SUBSCR
+
+232         138 FORMAT_VALUE             0
+            140 LIST_APPEND              1
+            142 LOAD_CONST              14 (';\n            border: 1px solid ')
+            144 LIST_APPEND              1
+
+238         146 LOAD_FAST                0 (t)
+            148 LOAD_CONST              15 ('border')
+            150 BINARY_SUBSCR
+
+232         152 FORMAT_VALUE             0
+            154 LIST_APPEND              1
+            156 LOAD_CONST              16 ('; border-radius: ')
+            158 LIST_APPEND              1
+
+238         160 LOAD_FAST                2 (r)
+
+232         162 FORMAT_VALUE             0
+            164 LIST_APPEND              1
+            166 LOAD_CONST              17 (';\n            padding: 4px 8px; selection-background-color: ')
+            168 LIST_APPEND              1
+
+239         170 LOAD_FAST                0 (t)
+            172 LOAD_CONST              18 ('accent')
+            174 BINARY_SUBSCR
+
+232         176 FORMAT_VALUE             0
+            178 LIST_APPEND              1
+            180 LOAD_CONST              19 (';\n            selection-color: ')
+            182 LIST_APPEND              1
+
+240         184 LOAD_FAST                0 (t)
+            186 LOAD_CONST              20 ('accent_text')
+            188 BINARY_SUBSCR
+
+232         190 FORMAT_VALUE             0
+            192 LIST_APPEND              1
+            194 LOAD_CONST              21 (';\n        }\n        QTextEdit, QTableWidget { padding: 4px; }\n        QLineEdit:focus, QComboBox:focus, QDoubleSpinBox:focus, QTextEdit:focus {\n            border-color: ')
+            196 LIST_APPEND              1
+
+244         198 LOAD_FAST                0 (t)
+            200 LOAD_CONST              18 ('accent')
+            202 BINARY_SUBSCR
+
+232         204 FORMAT_VALUE             0
+            206 LIST_APPEND              1
+            208 LOAD_CONST              22 (';\n        }\n        QComboBox { padding: 5px 8px; min-height: 20px; }\n        QComboBox:hover { border-color: ')
+            210 LIST_APPEND              1
+
+247         212 LOAD_FAST                0 (t)
+            214 LOAD_CONST              18 ('accent')
+            216 BINARY_SUBSCR
+
+232         218 FORMAT_VALUE             0
+            220 LIST_APPEND              1
+            222 LOAD_CONST              23 ('; }\n        QComboBox::drop-down { border: none; width: 24px; background: transparent; }\n        QComboBox::down-arrow { image: url(')
+            224 LIST_APPEND              1
+
+249         226 LOAD_FAST                5 (arrow_dn)
+
+232         228 FORMAT_VALUE             0
+            230 LIST_APPEND              1
+            232 LOAD_CONST              24 (');\n            width: 10px; height: 10px; margin-right: 6px; }\n        QComboBox QAbstractItemView {\n            background: ')
+            234 LIST_APPEND              1
+
+252         236 LOAD_FAST                0 (t)
+            238 LOAD_CONST              25 ('card')
+            240 BINARY_SUBSCR
+
+232         242 FORMAT_VALUE             0
+            244 LIST_APPEND              1
+            246 LOAD_CONST               7 ('; color: ')
+            248 LIST_APPEND              1
+
+252         250 LOAD_FAST                0 (t)
+            252 LOAD_CONST               8 ('text')
+            254 BINARY_SUBSCR
+
+232         256 FORMAT_VALUE             0
+            258 LIST_APPEND              1
+            260 LOAD_CONST              14 (';\n            border: 1px solid ')
+            262 LIST_APPEND              1
+
+253         264 LOAD_FAST                0 (t)
+            266 LOAD_CONST              15 ('border')
+            268 BINARY_SUBSCR
+
+232         270 FORMAT_VALUE             0
+            272 LIST_APPEND              1
+            274 LOAD_CONST              26 (';\n            selection-background-color: ')
+            276 LIST_APPEND              1
+
+254         278 LOAD_FAST                0 (t)
+            280 LOAD_CONST              18 ('accent')
+            282 BINARY_SUBSCR
+
+232         284 FORMAT_VALUE             0
+            286 LIST_APPEND              1
+            288 LOAD_CONST              19 (';\n            selection-color: ')
+            290 LIST_APPEND              1
+
+255         292 LOAD_FAST                0 (t)
+            294 LOAD_CONST              20 ('accent_text')
+            296 BINARY_SUBSCR
+
+232         298 FORMAT_VALUE             0
+            300 LIST_APPEND              1
+            302 LOAD_CONST              27 ('; outline: none;\n        }\n        QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {\n            background: transparent; border: none; width: 16px; }\n        QDoubleSpinBox::up-arrow { image: url(')
+            304 LIST_APPEND              1
+
+259         306 LOAD_FAST                4 (arrow_up)
+
+232         308 FORMAT_VALUE             0
+            310 LIST_APPEND              1
+            312 LOAD_CONST              28 (');\n            width: 10px; height: 10px; }\n        QDoubleSpinBox::down-arrow { image: url(')
+            314 LIST_APPEND              1
+
+261         316 LOAD_FAST                5 (arrow_dn)
+
+232         318 FORMAT_VALUE             0
+            320 LIST_APPEND              1
+            322 LOAD_CONST              29 (');\n            width: 10px; height: 10px; }\n        QPushButton {\n            background: ')
+            324 LIST_APPEND              1
+
+264         326 LOAD_FAST                0 (t)
+            328 LOAD_CONST              13 ('card2')
+            330 BINARY_SUBSCR
+
+232         332 FORMAT_VALUE             0
+            334 LIST_APPEND              1
+            336 LOAD_CONST               7 ('; color: ')
+            338 LIST_APPEND              1
+
+264         340 LOAD_FAST                0 (t)
+            342 LOAD_CONST               8 ('text')
+            344 BINARY_SUBSCR
+
+232         346 FORMAT_VALUE             0
+            348 LIST_APPEND              1
+            350 LOAD_CONST              14 (';\n            border: 1px solid ')
+            352 LIST_APPEND              1
+
+265         354 LOAD_FAST                0 (t)
+            356 LOAD_CONST              15 ('border')
+            358 BINARY_SUBSCR
+
+232         360 FORMAT_VALUE             0
+            362 LIST_APPEND              1
+            364 LOAD_CONST              16 ('; border-radius: ')
+            366 LIST_APPEND              1
+
+265         368 LOAD_FAST                2 (r)
+
+232         370 FORMAT_VALUE             0
+            372 LIST_APPEND              1
+            374 LOAD_CONST              30 (';\n            padding: 6px 14px; font-weight: bold; min-height: 22px;\n        }\n        QPushButton:hover { background: ')
+            376 LIST_APPEND              1
+
+268         378 LOAD_FAST                0 (t)
+            380 LOAD_CONST              15 ('border')
+            382 BINARY_SUBSCR
+
+232         384 FORMAT_VALUE             0
+            386 LIST_APPEND              1
+            388 LOAD_CONST              31 ('; border-color: ')
+            390 LIST_APPEND              1
+
+268         392 LOAD_FAST                0 (t)
+            394 LOAD_CONST              18 ('accent')
+            396 BINARY_SUBSCR
+
+232         398 FORMAT_VALUE             0
+            400 LIST_APPEND              1
+            402 LOAD_CONST              32 ('; }\n        QPushButton:pressed { background: ')
+            404 LIST_APPEND              1
+
+269         406 LOAD_FAST                0 (t)
+            408 LOAD_CONST              18 ('accent')
+            410 BINARY_SUBSCR
+
+232         412 FORMAT_VALUE             0
+            414 LIST_APPEND              1
+            416 LOAD_CONST               7 ('; color: ')
+            418 LIST_APPEND              1
+
+269         420 LOAD_FAST                0 (t)
+            422 LOAD_CONST              20 ('accent_text')
+            424 BINARY_SUBSCR
+
+232         426 FORMAT_VALUE             0
+            428 LIST_APPEND              1
+            430 LOAD_CONST              33 ('; }\n        QPushButton:disabled {\n            background: ')
+            432 LIST_APPEND              1
+
+271         434 LOAD_FAST                0 (t)
+            436 LOAD_CONST              34 ('disabled_bg')
+            438 BINARY_SUBSCR
+
+232         440 FORMAT_VALUE             0
+            442 LIST_APPEND              1
+            444 LOAD_CONST               7 ('; color: ')
+            446 LIST_APPEND              1
+
+271         448 LOAD_FAST                0 (t)
+            450 LOAD_CONST              35 ('disabled_text')
+            452 BINARY_SUBSCR
+
+232         454 FORMAT_VALUE             0
+            456 LIST_APPEND              1
+            458 LOAD_CONST              14 (';\n            border: 1px solid ')
+            460 LIST_APPEND              1
+
+272         462 LOAD_FAST                0 (t)
+            464 LOAD_CONST              15 ('border')
+            466 BINARY_SUBSCR
+
+232         468 FORMAT_VALUE             0
+            470 LIST_APPEND              1
+            472 LOAD_CONST              36 (';\n        }\n        QScrollArea { border: none; background: transparent; }\n        QScrollBar:vertical { background: ')
+            474 LIST_APPEND              1
+
+275         476 LOAD_FAST                0 (t)
+            478 LOAD_CONST               5 ('bg')
+            480 BINARY_SUBSCR
+
+232         482 FORMAT_VALUE             0
+            484 LIST_APPEND              1
+            486 LOAD_CONST              37 ('; width: 10px; margin: 0; }\n        QScrollBar::handle:vertical {\n            background: ')
+            488 LIST_APPEND              1
+
+277         490 LOAD_FAST                0 (t)
+            492 LOAD_CONST              15 ('border')
+            494 BINARY_SUBSCR
+
+232         496 FORMAT_VALUE             0
+            498 LIST_APPEND              1
+            500 LOAD_CONST              38 ('; border-radius: 5px; min-height: 24px; }\n        QScrollBar:horizontal { background: ')
+            502 LIST_APPEND              1
+
+278         504 LOAD_FAST                0 (t)
+            506 LOAD_CONST               5 ('bg')
+            508 BINARY_SUBSCR
+
+232         510 FORMAT_VALUE             0
+            512 LIST_APPEND              1
+            514 LOAD_CONST              39 ('; height: 10px; margin: 0; }\n        QScrollBar::handle:horizontal {\n            background: ')
+            516 LIST_APPEND              1
+
+280         518 LOAD_FAST                0 (t)
+            520 LOAD_CONST              15 ('border')
+            522 BINARY_SUBSCR
+
+232         524 FORMAT_VALUE             0
+            526 LIST_APPEND              1
+            528 LOAD_CONST              40 ('; border-radius: 5px; min-width: 24px; }\n        QToolTip {\n            background: ')
+            530 LIST_APPEND              1
+
+282         532 LOAD_FAST                0 (t)
+            534 LOAD_CONST              25 ('card')
+            536 BINARY_SUBSCR
+
+232         538 FORMAT_VALUE             0
+            540 LIST_APPEND              1
+            542 LOAD_CONST               7 ('; color: ')
+            544 LIST_APPEND              1
+
+282         546 LOAD_FAST                0 (t)
+            548 LOAD_CONST               8 ('text')
+            550 BINARY_SUBSCR
+
+232         552 FORMAT_VALUE             0
+            554 LIST_APPEND              1
+            556 LOAD_CONST              14 (';\n            border: 1px solid ')
+            558 LIST_APPEND              1
+
+283         560 LOAD_FAST                0 (t)
+            562 LOAD_CONST              15 ('border')
+            564 BINARY_SUBSCR
+
+232         566 FORMAT_VALUE             0
+            568 LIST_APPEND              1
+            570 LOAD_CONST              41 ('; padding: 4px 6px;\n        }\n        QLabel#errText { color: ')
+            572 LIST_APPEND              1
+
+285         574 LOAD_FAST                0 (t)
+            576 LOAD_CONST              42 ('red')
+            578 BINARY_SUBSCR
+
+232         580 FORMAT_VALUE             0
+            582 LIST_APPEND              1
+            584 LOAD_CONST              43 ('; font-size: 11px; }\n        QLabel#warnText { color: ')
+            586 LIST_APPEND              1
+
+286         588 LOAD_FAST                0 (t)
+            590 LOAD_CONST              44 ('orange')
+            592 BINARY_SUBSCR
+
+232         594 FORMAT_VALUE             0
+            596 LIST_APPEND              1
+            598 LOAD_CONST              45 ('; font-size: 12px; }\n        QLabel#hintSm { color: ')
+            600 LIST_APPEND              1
+
+287         602 LOAD_FAST                0 (t)
+            604 LOAD_CONST               2 ('text2')
+            606 BINARY_SUBSCR
+
+232         608 FORMAT_VALUE             0
+            610 LIST_APPEND              1
+            612 LOAD_CONST              46 ('; font-size: 10px; }\n        QTableWidget { alternate-background-color: ')
+            614 LIST_APPEND              1
+
+288         616 LOAD_FAST                0 (t)
+            618 LOAD_CONST              25 ('card')
+            620 BINARY_SUBSCR
+
+232         622 FORMAT_VALUE             0
+            624 LIST_APPEND              1
+            626 LOAD_CONST              47 ('; }\n        QLabel#stdBadge {\n            background: ')
+            628 LIST_APPEND              1
+
+290         630 LOAD_FAST                0 (t)
+            632 LOAD_CONST              18 ('accent')
+            634 BINARY_SUBSCR
+
+232         636 FORMAT_VALUE             0
+            638 LIST_APPEND              1
+            640 LOAD_CONST               7 ('; color: ')
+            642 LIST_APPEND              1
+
+290         644 LOAD_FAST                0 (t)
+            646 LOAD_CONST              20 ('accent_text')
+            648 BINARY_SUBSCR
+
+232         650 FORMAT_VALUE             0
+            652 LIST_APPEND              1
+            654 LOAD_CONST              48 (';\n            border-radius: 4px; padding: 2px 10px; font-size: 11px;\n        }\n        QFrame#readoutCard {\n            background: ')
+            656 LIST_APPEND              1
+
+294         658 LOAD_FAST                0 (t)
+            660 LOAD_CONST              13 ('card2')
+            662 BINARY_SUBSCR
+
+232         664 FORMAT_VALUE             0
+            666 LIST_APPEND              1
+            668 LOAD_CONST              49 ('; border: 1px solid ')
+            670 LIST_APPEND              1
+
+294         672 LOAD_FAST                0 (t)
+            674 LOAD_CONST              15 ('border')
+            676 BINARY_SUBSCR
+
+232         678 FORMAT_VALUE             0
+            680 LIST_APPEND              1
+            682 LOAD_CONST              50 (';\n            border-radius: 6px;\n        }\n        QLabel#readoutLabel { color: ')
+            684 LIST_APPEND              1
+
+297         686 LOAD_FAST                0 (t)
+            688 LOAD_CONST               2 ('text2')
+            690 BINARY_SUBSCR
+
+232         692 FORMAT_VALUE             0
+            694 LIST_APPEND              1
+            696 LOAD_CONST              51 ('; font-size: 11px;\n            background: transparent; }\n        QLabel#readoutValue { color: ')
+            698 LIST_APPEND              1
+
+299         700 LOAD_FAST                0 (t)
+            702 LOAD_CONST               8 ('text')
+            704 BINARY_SUBSCR
+
+232         706 FORMAT_VALUE             0
+            708 LIST_APPEND              1
+            710 LOAD_CONST              52 ('; font-size: 17px;\n            font-weight: bold; background: transparent; }\n        QFrame#lampStrip {\n            background: ')
+            712 LIST_APPEND              1
+
+302         714 LOAD_FAST                0 (t)
+            716 LOAD_CONST              13 ('card2')
+            718 BINARY_SUBSCR
+
+232         720 FORMAT_VALUE             0
+            722 LIST_APPEND              1
+            724 LOAD_CONST              49 ('; border: 1px solid ')
+            726 LIST_APPEND              1
+
+302         728 LOAD_FAST                0 (t)
+            730 LOAD_CONST              15 ('border')
+            732 BINARY_SUBSCR
+
+232         734 FORMAT_VALUE             0
+            736 LIST_APPEND              1
+            738 LOAD_CONST              53 (';\n            border-radius: 6px;\n        }\n        QLabel#lampDot { border-radius: 5px; background: ')
+            740 LIST_APPEND              1
+
+305         742 LOAD_FAST                0 (t)
+            744 LOAD_CONST               2 ('text2')
+            746 BINARY_SUBSCR
+
+232         748 FORMAT_VALUE             0
+            750 LIST_APPEND              1
+            752 LOAD_CONST              54 ('; }\n        QLabel#lampText { color: ')
+            754 LIST_APPEND              1
+
+306         756 LOAD_FAST                0 (t)
+            758 LOAD_CONST               8 ('text')
+            760 BINARY_SUBSCR
+
+232         762 FORMAT_VALUE             0
+            764 LIST_APPEND              1
+            766 LOAD_CONST              55 ('; font-size: 12px;\n            background: transparent; }\n    ')
+            768 LIST_APPEND              1
+            770 CALL_METHOD              1
+            772 STORE_FAST               6 (common)
+
+309         774 LOAD_FAST                1 (for_dialog)
+            776 EXTENDED_ARG             1
+            778 POP_JUMP_IF_FALSE      392 (to 784)
+
+310         780 LOAD_FAST                6 (common)
+            782 RETURN_VALUE
+
+311     >>  784 LOAD_FAST                6 (common)
+            786 LOAD_CONST               3 ('')
+            788 LOAD_METHOD              2 (join)
+            790 BUILD_LIST               0
+            792 LOAD_CONST              56 ('\n        QMainWindow { background: ')
+            794 LIST_APPEND              1
+
+312         796 LOAD_FAST                0 (t)
+            798 LOAD_CONST               5 ('bg')
+            800 BINARY_SUBSCR
+
+311         802 FORMAT_VALUE             0
+            804 LIST_APPEND              1
+            806 LOAD_CONST              57 ('; }\n        QGroupBox {\n            border: 1px solid ')
+            808 LIST_APPEND              1
+
+314         810 LOAD_FAST                0 (t)
+            812 LOAD_CONST              15 ('border')
+            814 BINARY_SUBSCR
+
+311         816 FORMAT_VALUE             0
+            818 LIST_APPEND              1
+            820 LOAD_CONST              58 ('; border-top: 2px solid ')
+            822 LIST_APPEND              1
+
+314         824 LOAD_FAST                0 (t)
+            826 LOAD_CONST              18 ('accent')
+            828 BINARY_SUBSCR
+
+311         830 FORMAT_VALUE             0
+            832 LIST_APPEND              1
+            834 LOAD_CONST              59 (';\n            border-radius: ')
+            836 LIST_APPEND              1
+
+315         838 LOAD_FAST                2 (r)
+
+311         840 FORMAT_VALUE             0
+            842 LIST_APPEND              1
+            844 LOAD_CONST              60 (';\n            margin-top: 14px; padding: 16px 12px 12px 12px;\n            font-weight: bold; font-size: 12px;\n        }\n        QGroupBox[compact="true"] {\n            margin-top: 10px; padding: 12px 12px 6px 12px;\n        }\n        QGroupBox[compact="true"]::title { top: -2px; }\n        QGroupBox::title {\n            subcontrol-origin: margin; left: 16px; top: 2px;\n            padding: 0 6px; color: ')
+            846 LIST_APPEND              1
+
+325         848 LOAD_FAST                0 (t)
+            850 LOAD_CONST               2 ('text2')
+            852 BINARY_SUBSCR
+
+311         854 FORMAT_VALUE             0
+            856 LIST_APPEND              1
+            858 LOAD_CONST              61 (';\n        }\n        QTabWidget::pane { border: 1px solid ')
+            860 LIST_APPEND              1
+
+327         862 LOAD_FAST                0 (t)
+            864 LOAD_CONST              15 ('border')
+            866 BINARY_SUBSCR
+
+311         868 FORMAT_VALUE             0
+            870 LIST_APPEND              1
+            872 LOAD_CONST              62 ('; border-radius: 6px; top: -1px; }\n        QTabBar::tab {\n            padding: 8px 20px; border: 1px solid ')
+            874 LIST_APPEND              1
+
+329         876 LOAD_FAST                0 (t)
+            878 LOAD_CONST              15 ('border')
+            880 BINARY_SUBSCR
+
+311         882 FORMAT_VALUE             0
+            884 LIST_APPEND              1
+            886 LOAD_CONST              63 (';\n            border-bottom: none; border-top-left-radius: 6px;\n            border-top-right-radius: 6px; margin-right: 2px;\n            background: ')
+            888 LIST_APPEND              1
+
+332         890 LOAD_FAST                0 (t)
+            892 LOAD_CONST              25 ('card')
+            894 BINARY_SUBSCR
+
+311         896 FORMAT_VALUE             0
+            898 LIST_APPEND              1
+            900 LOAD_CONST               7 ('; color: ')
+            902 LIST_APPEND              1
+
+332         904 LOAD_FAST                0 (t)
+            906 LOAD_CONST               2 ('text2')
+            908 BINARY_SUBSCR
+
+311         910 FORMAT_VALUE             0
+            912 LIST_APPEND              1
+            914 LOAD_CONST              64 (';\n        }\n        QTabBar::tab:selected { background: ')
+            916 LIST_APPEND              1
+
+334         918 LOAD_FAST                0 (t)
+            920 LOAD_CONST              13 ('card2')
+            922 BINARY_SUBSCR
+
+311         924 FORMAT_VALUE             0
+            926 LIST_APPEND              1
+            928 LOAD_CONST               7 ('; color: ')
+            930 LIST_APPEND              1
+
+334         932 LOAD_FAST                0 (t)
+            934 LOAD_CONST              18 ('accent')
+            936 BINARY_SUBSCR
+
+311         938 FORMAT_VALUE             0
+            940 LIST_APPEND              1
+            942 LOAD_CONST              65 ('; }\n        QTabBar::tab:hover:!selected { color: ')
+            944 LIST_APPEND              1
+
+335         946 LOAD_FAST                0 (t)
+            948 LOAD_CONST              18 ('accent')
+            950 BINARY_SUBSCR
+
+311         952 FORMAT_VALUE             0
+            954 LIST_APPEND              1
+            956 LOAD_CONST              66 ('; }\n        QTableWidget { gridline-color: ')
+            958 LIST_APPEND              1
+
+336         960 LOAD_FAST                0 (t)
+            962 LOAD_CONST              15 ('border')
+            964 BINARY_SUBSCR
+
+311         966 FORMAT_VALUE             0
+            968 LIST_APPEND              1
+            970 LOAD_CONST              67 ('; }\n        QHeaderView::section {\n            background: ')
+            972 LIST_APPEND              1
+
+338         974 LOAD_FAST                0 (t)
+            976 LOAD_CONST              25 ('card')
+            978 BINARY_SUBSCR
+
+311         980 FORMAT_VALUE             0
+            982 LIST_APPEND              1
+            984 LOAD_CONST               7 ('; color: ')
+            986 LIST_APPEND              1
+
+338         988 LOAD_FAST                0 (t)
+            990 LOAD_CONST               2 ('text2')
+            992 BINARY_SUBSCR
+
+311         994 FORMAT_VALUE             0
+            996 LIST_APPEND              1
+            998 LOAD_CONST              14 (';\n            border: 1px solid ')
+           1000 LIST_APPEND              1
+
+339        1002 LOAD_FAST                0 (t)
+           1004 LOAD_CONST              15 ('border')
+           1006 BINARY_SUBSCR
+
+311        1008 FORMAT_VALUE             0
+           1010 LIST_APPEND              1
+           1012 LOAD_CONST              68 ('; padding: 6px 4px; font-weight: bold;\n        }\n        QRadioButton { spacing: 6px; color: ')
+           1014 LIST_APPEND              1
+
+341        1016 LOAD_FAST                0 (t)
+           1018 LOAD_CONST               8 ('text')
+           1020 BINARY_SUBSCR
+
+311        1022 FORMAT_VALUE             0
+           1024 LIST_APPEND              1
+           1026 LOAD_CONST              69 ('; }\n        QRadioButton::indicator { width: 14px; height: 14px;\n            border: 2px solid ')
+           1028 LIST_APPEND              1
+
+343        1030 LOAD_FAST                0 (t)
+           1032 LOAD_CONST              15 ('border')
+           1034 BINARY_SUBSCR
+
+311        1036 FORMAT_VALUE             0
+           1038 LIST_APPEND              1
+           1040 LOAD_CONST              70 ('; border-radius: 8px;\n            background: ')
+           1042 LIST_APPEND              1
+
+344        1044 LOAD_FAST                0 (t)
+           1046 LOAD_CONST              13 ('card2')
+           1048 BINARY_SUBSCR
+
+311        1050 FORMAT_VALUE             0
+           1052 LIST_APPEND              1
+           1054 LOAD_CONST              71 ('; }\n        QRadioButton::indicator:checked { background: ')
+           1056 LIST_APPEND              1
+
+345        1058 LOAD_FAST                0 (t)
+           1060 LOAD_CONST              18 ('accent')
+           1062 BINARY_SUBSCR
+
+311        1064 FORMAT_VALUE             0
+           1066 LIST_APPEND              1
+           1068 LOAD_CONST              72 (';\n            border-color: ')
+           1070 LIST_APPEND              1
+
+346        1072 LOAD_FAST                0 (t)
+           1074 LOAD_CONST              18 ('accent')
+           1076 BINARY_SUBSCR
+
+311        1078 FORMAT_VALUE             0
+           1080 LIST_APPEND              1
+           1082 LOAD_CONST              73 ('; }\n        QPushButton#primaryBtn {\n            background: ')
+           1084 LIST_APPEND              1
+
+348        1086 LOAD_FAST                0 (t)
+           1088 LOAD_CONST              18 ('accent')
+           1090 BINARY_SUBSCR
+
+311        1092 FORMAT_VALUE             0
+           1094 LIST_APPEND              1
+           1096 LOAD_CONST               7 ('; color: ')
+           1098 LIST_APPEND              1
+
+348        1100 LOAD_FAST                0 (t)
+           1102 LOAD_CONST              20 ('accent_text')
+           1104 BINARY_SUBSCR
+
+311        1106 FORMAT_VALUE             0
+           1108 LIST_APPEND              1
+           1110 LOAD_CONST              14 (';\n            border: 1px solid ')
+           1112 LIST_APPEND              1
+
+349        1114 LOAD_FAST                0 (t)
+           1116 LOAD_CONST              18 ('accent')
+           1118 BINARY_SUBSCR
+
+311        1120 FORMAT_VALUE             0
+           1122 LIST_APPEND              1
+           1124 LOAD_CONST              74 (';\n        }\n        QPushButton#primaryBtn:hover { background: ')
+           1126 LIST_APPEND              1
+
+351        1128 LOAD_FAST                0 (t)
+           1130 LOAD_CONST              75 ('accent_hover')
+           1132 BINARY_SUBSCR
+
+311        1134 FORMAT_VALUE             0
+           1136 LIST_APPEND              1
+           1138 LOAD_CONST              72 (';\n            border-color: ')
+           1140 LIST_APPEND              1
+
+352        1142 LOAD_FAST                0 (t)
+           1144 LOAD_CONST              75 ('accent_hover')
+           1146 BINARY_SUBSCR
+
+311        1148 FORMAT_VALUE             0
+           1150 LIST_APPEND              1
+           1152 LOAD_CONST              76 ('; }\n        QPushButton#primaryBtn:pressed { background: ')
+           1154 LIST_APPEND              1
+
+353        1156 LOAD_FAST                0 (t)
+           1158 LOAD_CONST              18 ('accent')
+           1160 BINARY_SUBSCR
+
+311        1162 FORMAT_VALUE             0
+           1164 LIST_APPEND              1
+           1166 LOAD_CONST              77 ('; }\n        QPushButton#ghostBtn {\n            background: transparent; border: none; color: ')
+           1168 LIST_APPEND              1
+
+355        1170 LOAD_FAST                0 (t)
+           1172 LOAD_CONST               2 ('text2')
+           1174 BINARY_SUBSCR
+
+311        1176 FORMAT_VALUE             0
+           1178 LIST_APPEND              1
+           1180 LOAD_CONST              78 (';\n            text-align: left; font-weight: normal; padding: 4px;\n        }\n        QPushButton#ghostBtn:hover { color: ')
+           1182 LIST_APPEND              1
+
+358        1184 LOAD_FAST                0 (t)
+           1186 LOAD_CONST              18 ('accent')
+           1188 BINARY_SUBSCR
+
+311        1190 FORMAT_VALUE             0
+           1192 LIST_APPEND              1
+           1194 LOAD_CONST              79 ('; }\n        QPushButton#advToggle {\n            background: ')
+           1196 LIST_APPEND              1
+
+360        1198 LOAD_FAST                0 (t)
+           1200 LOAD_CONST              13 ('card2')
+           1202 BINARY_SUBSCR
+
+311        1204 FORMAT_VALUE             0
+           1206 LIST_APPEND              1
+           1208 LOAD_CONST               7 ('; color: ')
+           1210 LIST_APPEND              1
+
+360        1212 LOAD_FAST                0 (t)
+           1214 LOAD_CONST               8 ('text')
+           1216 BINARY_SUBSCR
+
+311        1218 FORMAT_VALUE             0
+           1220 LIST_APPEND              1
+           1222 LOAD_CONST              14 (';\n            border: 1px solid ')
+           1224 LIST_APPEND              1
+
+361        1226 LOAD_FAST                0 (t)
+           1228 LOAD_CONST              15 ('border')
+           1230 BINARY_SUBSCR
+
+311        1232 FORMAT_VALUE             0
+           1234 LIST_APPEND              1
+           1236 LOAD_CONST              80 ('; font-size: 12px; padding: 4px;\n        }\n        QPushButton#advToggle:hover { border-color: ')
+           1238 LIST_APPEND              1
+
+363        1240 LOAD_FAST                0 (t)
+           1242 LOAD_CONST              18 ('accent')
+           1244 BINARY_SUBSCR
+
+311        1246 FORMAT_VALUE             0
+           1248 LIST_APPEND              1
+           1250 LOAD_CONST              81 (';\n            color: ')
+           1252 LIST_APPEND              1
+
+364        1254 LOAD_FAST                0 (t)
+           1256 LOAD_CONST              18 ('accent')
+           1258 BINARY_SUBSCR
+
+311        1260 FORMAT_VALUE             0
+           1262 LIST_APPEND              1
+           1264 LOAD_CONST              82 ('; }\n        QPushButton#advToggle:checked { color: ')
+           1266 LIST_APPEND              1
+
+365        1268 LOAD_FAST                0 (t)
+           1270 LOAD_CONST              18 ('accent')
+           1272 BINARY_SUBSCR
+
+311        1274 FORMAT_VALUE             0
+           1276 LIST_APPEND              1
+           1278 LOAD_CONST              72 (';\n            border-color: ')
+           1280 LIST_APPEND              1
+
+366        1282 LOAD_FAST                0 (t)
+           1284 LOAD_CONST              18 ('accent')
+           1286 BINARY_SUBSCR
+
+311        1288 FORMAT_VALUE             0
+           1290 LIST_APPEND              1
+           1292 LOAD_CONST              83 ('; }\n        QFrame#advBox { background: ')
+           1294 LIST_APPEND              1
+
+367        1296 LOAD_FAST                0 (t)
+           1298 LOAD_CONST              13 ('card2')
+           1300 BINARY_SUBSCR
+
+311        1302 FORMAT_VALUE             0
+           1304 LIST_APPEND              1
+           1306 LOAD_CONST              14 (';\n            border: 1px solid ')
+           1308 LIST_APPEND              1
+
+368        1310 LOAD_FAST                0 (t)
+           1312 LOAD_CONST              15 ('border')
+           1314 BINARY_SUBSCR
+
+311        1316 FORMAT_VALUE             0
+           1318 LIST_APPEND              1
+           1320 LOAD_CONST              84 ('; border-radius: 6px; }\n        QLabel#secTitle { font-size: 13px; font-weight: bold; color: ')
+           1322 LIST_APPEND              1
+
+369        1324 LOAD_FAST                0 (t)
+           1326 LOAD_CONST              18 ('accent')
+           1328 BINARY_SUBSCR
+
+311        1330 FORMAT_VALUE             0
+           1332 LIST_APPEND              1
+           1334 LOAD_CONST              85 ('; }\n        QLabel#hintSm { color: ')
+           1336 LIST_APPEND              1
+
+370        1338 LOAD_FAST                0 (t)
+           1340 LOAD_CONST               2 ('text2')
+           1342 BINARY_SUBSCR
+
+311        1344 FORMAT_VALUE             0
+           1346 LIST_APPEND              1
+           1348 LOAD_CONST              86 ('; font-size: 10px; }\n        QLabel#appTitle { font-size: 18px; font-weight: bold; color: ')
+           1350 LIST_APPEND              1
+
+371        1352 LOAD_FAST                0 (t)
+           1354 LOAD_CONST              18 ('accent')
+           1356 BINARY_SUBSCR
+
+311        1358 FORMAT_VALUE             0
+           1360 LIST_APPEND              1
+           1362 LOAD_CONST              87 ('; }\n        QLabel#subNote { font-size: 11px; color: ')
+           1364 LIST_APPEND              1
+
+372        1366 LOAD_FAST                0 (t)
+           1368 LOAD_CONST               2 ('text2')
+           1370 BINARY_SUBSCR
+
+311        1372 FORMAT_VALUE             0
+           1374 LIST_APPEND              1
+           1376 LOAD_CONST              88 ('; }\n        QLabel#footNote { font-size: 13px; color: ')
+           1378 LIST_APPEND              1
+
+373        1380 LOAD_FAST                0 (t)
+           1382 LOAD_CONST               2 ('text2')
+           1384 BINARY_SUBSCR
+
+311        1386 FORMAT_VALUE             0
+           1388 LIST_APPEND              1
+           1390 LOAD_CONST              89 ('; padding: 3px 8px; }\n        QLabel#errText { color: ')
+           1392 LIST_APPEND              1
+
+374        1394 LOAD_FAST                0 (t)
+           1396 LOAD_CONST              42 ('red')
+           1398 BINARY_SUBSCR
+
+311        1400 FORMAT_VALUE             0
+           1402 LIST_APPEND              1
+           1404 LOAD_CONST              43 ('; font-size: 11px; }\n        QLabel#warnText { color: ')
+           1406 LIST_APPEND              1
+
+375        1408 LOAD_FAST                0 (t)
+           1410 LOAD_CONST              44 ('orange')
+           1412 BINARY_SUBSCR
+
+311        1414 FORMAT_VALUE             0
+           1416 LIST_APPEND              1
+           1418 LOAD_CONST              90 ('; font-size: 12px; }\n        QFrame#lineH { color: ')
+           1420 LIST_APPEND              1
+
+376        1422 LOAD_FAST                0 (t)
+           1424 LOAD_CONST              15 ('border')
+           1426 BINARY_SUBSCR
+
+311        1428 FORMAT_VALUE             0
+           1430 LIST_APPEND              1
+           1432 LOAD_CONST              91 ('; max-height: 1px; }\n        QTextEdit#infoBox { font-size: 11px; }\n        QTextEdit#infoBoxBig { font-size: 12px; }\n    ')
+           1434 LIST_APPEND              1
+           1436 CALL_METHOD              1
+           1438 BINARY_ADD
+           1440 RETURN_VALUE
+

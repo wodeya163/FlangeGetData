@@ -1,0 +1,18 @@
+{
+  "failed": [
+    "<module>.HexTab._on_k_changed",
+    "<module>.SocketTab._on_k_changed"
+  ],
+  "unplaced": [
+    "_wrap_scroll"
+  ],
+  "broken": [
+    "<module>.HexTab.__init__",
+    "<module>.HexTab",
+    "<module>.SocketTab.__init__",
+    "<module>.SocketTab",
+    "<module>.FormulaTab._calc_update",
+    "<module>.FormulaTab",
+    "<module>.MainWindow"
+  ]
+}

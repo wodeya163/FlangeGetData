@@ -1,0 +1,15 @@
+{
+  "failed": [
+    "<module>.smart_baseline",
+    "<module>.stats_summary"
+  ],
+  "unplaced": [],
+  "broken": [
+    "<module>.list_records",
+    "<module>.match_records",
+    "<module>.add_material",
+    "<module>.list_materials",
+    "<module>.backup_db",
+    "<module>.validate_record_row"
+  ]
+}

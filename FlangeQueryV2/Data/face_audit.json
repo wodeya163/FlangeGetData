@@ -1,0 +1,540 @@
+{
+ "generated": "2026-10-25 14:06:38",
+ "flange_files": 29,
+ "total_rows": 2684,
+ "rf_missing": 76,
+ "items": [
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "10",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "15",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "20",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "25",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "32",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "40",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "50",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "65",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "80",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "100",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "125",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "150",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "200",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "250",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "300",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "350",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "400",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "450",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "500",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "600",
+   "PN": "2.5",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "10",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "15",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "20",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "25",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "32",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "40",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "50",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "65",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "80",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "100",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "125",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "150",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "200",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "250",
+   "PN": "250",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "10",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "15",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "20",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "25",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "32",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "40",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "50",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "65",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "80",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "100",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "125",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "150",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "200",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "250",
+   "PN": "320",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "10",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "15",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "20",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "25",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "32",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "40",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "50",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "65",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "80",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "100",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "125",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "150",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_1_带颈对焊.csv",
+   "DN": "200",
+   "PN": "400",
+   "Class": "",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_带颈对焊.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "150",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_带颈对焊.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "300",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_带颈对焊.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "600",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_带颈平焊.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "150",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_带颈平焊.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "300",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_带颈平焊.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "600",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_整体.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "150",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_整体.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "300",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_整体.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "600",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_法兰盖.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "150",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_法兰盖.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "300",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_法兰盖.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "600",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_螺纹.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "150",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_螺纹.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "300",
+   "face": "RF"
+  },
+  {
+   "file": "GBT9124_2_螺纹.csv",
+   "DN": "550",
+   "PN": "",
+   "Class": "600",
+   "face": "RF"
+  }
+ ]
+}

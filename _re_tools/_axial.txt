@@ -1,0 +1,302 @@
+### axial_row_info  firstlineno=48 args=('d1', 'd2', 'dir_key', 'user_text') vars=('internal', 'label', 'lim', 'limit', 'sym', 'table_no', 'hint', 'out', 'txt', 'v', 'name', 'head')
+ 58           0 LOAD_FAST                2 (dir_key)
+              2 LOAD_CONST               1 (('internal', 'external'))
+              4 CONTAINS_OP              1
+              6 POP_JUMP_IF_FALSE        6 (to 12)
+
+ 59           8 LOAD_CONST               2 (None)
+             10 RETURN_VALUE
+
+ 60     >>   12 LOAD_FAST                2 (dir_key)
+             14 LOAD_CONST               3 ('internal')
+             16 COMPARE_OP               2 (==)
+             18 STORE_FAST               4 (internal)
+
+ 61          20 LOAD_FAST                4 (internal)
+             22 POP_JUMP_IF_FALSE       14 (to 28)
+             24 LOAD_CONST               4 ('沟槽外径 d7 (mm)：')
+             26 JUMP_FORWARD             1 (to 30)
+        >>   28 LOAD_CONST               5 ('沟槽内径 d8 (mm)：')
+        >>   30 STORE_FAST               5 (label)
+
+ 62          32 LOAD_GLOBAL              0 (axial_diameter_limits)
+             34 LOAD_FAST                0 (d1)
+             36 LOAD_FAST                1 (d2)
+             38 LOAD_FAST                2 (dir_key)
+             40 CALL_FUNCTION            3
+             42 STORE_FAST               6 (lim)
+
+ 63          44 LOAD_FAST                6 (lim)
+             46 LOAD_METHOD              1 (get)
+             48 LOAD_CONST               6 ('undefined')
+             50 CALL_METHOD              1
+             52 POP_JUMP_IF_FALSE       35 (to 70)
+
+ 64          54 LOAD_FAST                5 (label)
+             56 LOAD_CONST               7 ('需要 O 型圈内径 d1 才能给出界限值')
+
+ 65          58 BUILD_LIST               0
+             60 LOAD_CONST               8 (False)
+             62 LOAD_CONST               2 (None)
+
+ 64          64 LOAD_CONST               9 (('label', 'hint', 'gi', 'filled', 'ok'))
+             66 BUILD_CONST_KEY_MAP      5
+             68 RETURN_VALUE
+
+ 66     >>   70 LOAD_FAST                6 (lim)
+             72 LOAD_CONST              10 ('limit')
+             74 BINARY_SUBSCR
+             76 STORE_FAST               7 (limit)
+
+ 67          78 LOAD_FAST                4 (internal)
+             80 POP_JUMP_IF_FALSE       43 (to 86)
+             82 LOAD_CONST              11 ('≤')
+             84 JUMP_FORWARD             1 (to 88)
+        >>   86 LOAD_CONST              12 ('≥')
+        >>   88 STORE_FAST               8 (sym)
+
+ 68          90 LOAD_FAST                4 (internal)
+             92 POP_JUMP_IF_FALSE       49 (to 98)
+             94 LOAD_CONST              13 ('表12')
+             96 JUMP_FORWARD             1 (to 100)
+        >>   98 LOAD_CONST              14 ('表13')
+        >>  100 STORE_FAST               9 (table_no)
+
+ 69         102 LOAD_FAST                8 (sym)
+            104 FORMAT_VALUE             0
+            106 LOAD_FAST                7 (limit)
+            108 LOAD_CONST              15 ('.2f')
+            110 FORMAT_VALUE             4 (with format)
+            112 LOAD_CONST              16 (' mm（')
+            114 LOAD_FAST                6 (lim)
+            116 LOAD_CONST              17 ('formula')
+            118 BINARY_SUBSCR
+            120 FORMAT_VALUE             0
+            122 LOAD_CONST              18 ('，公差 H11）；标准')
+            124 LOAD_FAST                9 (table_no)
+            126 FORMAT_VALUE             0
+            128 LOAD_CONST              19 ('推荐值未收录，可自填')
+            130 BUILD_STRING             7
+            132 STORE_FAST              10 (hint)
+
+ 70         134 LOAD_FAST                5 (label)
+            136 LOAD_FAST               10 (hint)
+            138 BUILD_LIST               0
+            140 LOAD_CONST               8 (False)
+            142 LOAD_CONST               2 (None)
+            144 LOAD_CONST               9 (('label', 'hint', 'gi', 'filled', 'ok'))
+            146 BUILD_CONST_KEY_MAP      5
+            148 STORE_FAST              11 (out)
+
+ 71         150 LOAD_FAST                3 (user_text)
+            152 JUMP_IF_TRUE_OR_POP     78 (to 156)
+            154 LOAD_CONST              20 ('')
+        >>  156 LOAD_METHOD              2 (strip)
+            158 CALL_METHOD              0
+            160 STORE_FAST              12 (txt)
+
+ 72         162 LOAD_FAST               12 (txt)
+            164 POP_JUMP_IF_TRUE       111 (to 222)
+
+ 73         166 LOAD_FAST               11 (out)
+            168 LOAD_CONST              21 ('gi')
+            170 BINARY_SUBSCR
+            172 LOAD_METHOD              3 (append)
+            174 LOAD_FAST                6 (lim)
+            176 LOAD_CONST              22 ('label')
+            178 BINARY_SUBSCR
+            180 FORMAT_VALUE             0
+            182 LOAD_CONST              23 ('：界限 ')
+            184 LOAD_FAST                8 (sym)
+            186 FORMAT_VALUE             0
+            188 LOAD_FAST                7 (limit)
+            190 LOAD_CONST              15 ('.2f')
+            192 FORMAT_VALUE             4 (with format)
+            194 LOAD_CONST              16 (' mm（')
+            196 LOAD_FAST                6 (lim)
+            198 LOAD_CONST              17 ('formula')
+            200 BINARY_SUBSCR
+            202 FORMAT_VALUE             0
+            204 LOAD_CONST              18 ('，公差 H11）；标准')
+
+ 74         206 LOAD_FAST                9 (table_no)
+
+ 73         208 FORMAT_VALUE             0
+            210 LOAD_CONST              24 ('推荐值未收录，未自填')
+            212 BUILD_STRING             9
+            214 CALL_METHOD              1
+            216 POP_TOP
+
+ 75         218 LOAD_FAST               11 (out)
+            220 RETURN_VALUE
+
+ 76     >>  222 SETUP_FINALLY            6 (to 236)
+
+ 77         224 LOAD_GLOBAL              4 (float)
+            226 LOAD_FAST               12 (txt)
+            228 CALL_FUNCTION            1
+            230 STORE_FAST              13 (v)
+            232 POP_BLOCK
+            234 JUMP_FORWARD            26 (to 288)
+
+ 78     >>  236 DUP_TOP
+            238 LOAD_GLOBAL              5 (ValueError)
+            240 JUMP_IF_NOT_EXC_MATCH   143 (to 286)
+            242 POP_TOP
+            244 POP_TOP
+            246 POP_TOP
+
+ 79         248 LOAD_FAST               11 (out)
+            250 LOAD_CONST              21 ('gi')
+            252 BINARY_SUBSCR
+            254 LOAD_METHOD              3 (append)
+            256 LOAD_FAST                6 (lim)
+            258 LOAD_CONST              22 ('label')
+            260 BINARY_SUBSCR
+            262 FORMAT_VALUE             0
+            264 LOAD_CONST              25 ('：自填值「')
+            266 LOAD_FAST               12 (txt)
+            268 FORMAT_VALUE             0
+            270 LOAD_CONST              26 ('」不是数字，未参与计算')
+            272 BUILD_STRING             4
+            274 CALL_METHOD              1
+            276 POP_TOP
+
+ 80         278 LOAD_FAST               11 (out)
+            280 ROT_FOUR
+            282 POP_EXCEPT
+            284 RETURN_VALUE
+
+ 78     >>  286 RERAISE                  0
+
+ 81     >>  288 LOAD_CONST              27 (True)
+            290 LOAD_FAST               11 (out)
+            292 LOAD_CONST              28 ('filled')
+            294 STORE_SUBSCR
+
+ 82         296 LOAD_FAST                6 (lim)
+            298 LOAD_CONST              22 ('label')
+            300 BINARY_SUBSCR
+            302 STORE_FAST              14 (name)
+
+ 83         304 LOAD_FAST                4 (internal)
+            306 POP_JUMP_IF_FALSE      203 (to 406)
+
+ 84         308 LOAD_FAST               13 (v)
+            310 LOAD_FAST                7 (limit)
+            312 COMPARE_OP               1 (<=)
+            314 LOAD_FAST               11 (out)
+            316 LOAD_CONST              29 ('ok')
+            318 STORE_SUBSCR
+
+ 86         320 LOAD_FAST               11 (out)
+            322 LOAD_CONST              29 ('ok')
+            324 BINARY_SUBSCR
+
+ 85         326 POP_JUMP_IF_FALSE      184 (to 368)
+            328 LOAD_FAST               14 (name)
+            330 FORMAT_VALUE             0
+            332 LOAD_CONST              30 ('：自填 ')
+            334 LOAD_FAST               13 (v)
+            336 LOAD_CONST              15 ('.2f')
+            338 FORMAT_VALUE             4 (with format)
+            340 LOAD_CONST              31 (' mm ✓ 在')
+            342 LOAD_FAST                6 (lim)
+            344 LOAD_CONST              17 ('formula')
+            346 BINARY_SUBSCR
+            348 FORMAT_VALUE             0
+            350 LOAD_CONST              32 ('界限（')
+            352 LOAD_FAST                8 (sym)
+            354 FORMAT_VALUE             0
+            356 LOAD_FAST                7 (limit)
+            358 LOAD_CONST              15 ('.2f')
+            360 FORMAT_VALUE             4 (with format)
+            362 LOAD_CONST              33 ('）内，公差 H11')
+            364 BUILD_STRING             9
+            366 JUMP_FORWARD            17 (to 402)
+
+ 87     >>  368 LOAD_FAST               14 (name)
+            370 FORMAT_VALUE             0
+            372 LOAD_CONST              30 ('：自填 ')
+            374 LOAD_FAST               13 (v)
+            376 LOAD_CONST              15 ('.2f')
+            378 FORMAT_VALUE             4 (with format)
+            380 LOAD_CONST              34 (' mm ⚠ 超出')
+            382 LOAD_FAST                6 (lim)
+            384 LOAD_CONST              17 ('formula')
+            386 BINARY_SUBSCR
+            388 FORMAT_VALUE             0
+            390 LOAD_CONST              35 ('上限 ')
+            392 LOAD_FAST                7 (limit)
+            394 LOAD_CONST              15 ('.2f')
+            396 FORMAT_VALUE             4 (with format)
+            398 LOAD_CONST              36 (' mm，公差 H11')
+            400 BUILD_STRING             8
+
+ 85     >>  402 STORE_FAST              15 (head)
+            404 JUMP_FORWARD            48 (to 502)
+
+ 89     >>  406 LOAD_FAST               13 (v)
+            408 LOAD_FAST                7 (limit)
+            410 COMPARE_OP               5 (>=)
+            412 LOAD_FAST               11 (out)
+            414 LOAD_CONST              29 ('ok')
+            416 STORE_SUBSCR
+
+ 91         418 LOAD_FAST               11 (out)
+            420 LOAD_CONST              29 ('ok')
+            422 BINARY_SUBSCR
+
+ 90         424 POP_JUMP_IF_FALSE      233 (to 466)
+            426 LOAD_FAST               14 (name)
+            428 FORMAT_VALUE             0
+            430 LOAD_CONST              30 ('：自填 ')
+            432 LOAD_FAST               13 (v)
+            434 LOAD_CONST              15 ('.2f')
+            436 FORMAT_VALUE             4 (with format)
+            438 LOAD_CONST              31 (' mm ✓ 在')
+            440 LOAD_FAST                6 (lim)
+            442 LOAD_CONST              17 ('formula')
+            444 BINARY_SUBSCR
+            446 FORMAT_VALUE             0
+            448 LOAD_CONST              32 ('界限（')
+            450 LOAD_FAST                8 (sym)
+            452 FORMAT_VALUE             0
+            454 LOAD_FAST                7 (limit)
+            456 LOAD_CONST              15 ('.2f')
+            458 FORMAT_VALUE             4 (with format)
+            460 LOAD_CONST              33 ('）内，公差 H11')
+            462 BUILD_STRING             9
+            464 JUMP_FORWARD            17 (to 500)
+
+ 92     >>  466 LOAD_FAST               14 (name)
+            468 FORMAT_VALUE             0
+            470 LOAD_CONST              30 ('：自填 ')
+            472 LOAD_FAST               13 (v)
+            474 LOAD_CONST              15 ('.2f')
+            476 FORMAT_VALUE             4 (with format)
+            478 LOAD_CONST              37 (' mm ⚠ 低于')
+            480 LOAD_FAST                6 (lim)
+            482 LOAD_CONST              17 ('formula')
+            484 BINARY_SUBSCR
+            486 FORMAT_VALUE             0
+            488 LOAD_CONST              38 ('下限 ')
+            490 LOAD_FAST                7 (limit)
+            492 LOAD_CONST              15 ('.2f')
+            494 FORMAT_VALUE             4 (with format)
+            496 LOAD_CONST              36 (' mm，公差 H11')
+            498 BUILD_STRING             8
+
+ 90     >>  500 STORE_FAST              15 (head)
+
+ 93     >>  502 LOAD_FAST               11 (out)
+            504 LOAD_CONST              21 ('gi')
+            506 BINARY_SUBSCR
+            508 LOAD_METHOD              3 (append)
+            510 LOAD_FAST               15 (head)
+            512 CALL_METHOD              1
+            514 POP_TOP
+
+ 94         516 LOAD_FAST               11 (out)
+            518 RETURN_VALUE
+

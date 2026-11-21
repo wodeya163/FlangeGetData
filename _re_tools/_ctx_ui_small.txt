@@ -1,0 +1,876 @@
+=====    (321 vs 312 insns, first diff 181)
+  O    175   350 STORE_NAME               'WARN'
+  O    176   352 LOAD_CONST               '#9b59b6'
+  O    177   354 STORE_NAME               'PURPLE'
+  O    178   356 LOAD_CONST               '#888899'
+  O    179   358 STORE_NAME               'GRAY'
+  O    180   360 LOAD_CONST               None
+  O >  181   362 DUP_TOP                  None
+  O    182   364 STORE_GLOBAL             'BG_H'
+  O    183   366 STORE_GLOBAL             'CARD_H'
+  O    184   368 LOAD_CONST               None
+  O    185   370 STORE_GLOBAL             'ACCENT_H'
+  O    186   372 LOAD_CONST               <code _bg_lum>
+  O    187   374 LOAD_CONST               '_bg_lum'
+  N    175   350 STORE_NAME               'WARN'
+  N    176   352 LOAD_CONST               '#9b59b6'
+  N    177   354 STORE_NAME               'PURPLE'
+  N    178   356 LOAD_CONST               '#888899'
+  N    179   358 STORE_NAME               'GRAY'
+  N    180   360 LOAD_CONST               None
+  N >  181   362 STORE_GLOBAL             'BG_H'
+  N    182   364 LOAD_CONST               None
+  N    183   366 STORE_GLOBAL             'CARD_H'
+  N    184   368 LOAD_CONST               None
+  N    185   370 STORE_GLOBAL             'ACCENT_H'
+  N    186   372 LOAD_CONST               <code _bg_lum>
+  N    187   374 LOAD_CONST               '_bg_lum'
+  co_consts O=["'\\n密封圈选型工具 — UI 主窗口\\nO型圈选型 + 沟槽计算 + 材料推荐 + 知识库\\nV2.5 — GB/T 3452.1-2005 / GB/T 3452.3-2005 / 机械设计手册(成大先) 表3-3-2、表3-3-3\\nV2.3 新增：主题换色（theme.py 5 套主题，右上「外观」按钮，配置持久化）\\nV2.4 新增：挡圈多因素判定（压力+挤出间隙+硬度+温度）、承压方向（受内/外压、单向/交替）、\\n   ...
+            N=["'\\n密封圈选型工具 — UI 主窗口\\nO型圈选型 + 沟槽计算 + 材料推荐 + 知识库\\nV2.5 — GB/T 3452.1-2005 / GB/T 3452.3-2005 / 机械设计手册(成大先) 表3-3-2、表3-3-3\\nV2.3 新增：主题换色（theme.py 5 套主题，右上「外观」按钮，配置持久化）\\nV2.4 新增：挡圈多因素判定（压力+挤出间隙+硬度+温度）、承压方向（受内/外压、单向/交替）、\\n   ...
+===== part_names   (20 vs 20 insns, first diff 6)
+  O      0     0 LOAD_FAST                'seal_type'
+  O      1     2 LOAD_CONST               'static_axial'
+  O      2     4 COMPARE_OP               '=='
+  O      3     6 POP_JUMP_IF_FALSE        12
+  O      4     8 LOAD_CONST               ('端盖／压盖（配合面）', '法兰（沟槽侧）')
+  O      5    10 RETURN_VALUE             None
+  O >    6    12 LOAD_FAST                'seal_type'
+  O      7    14 LOAD_CONST               ('hydraulic_dynamic', 'dynamic_recip', 'pneumatic_dynamic')
+  O      8    16 CONTAINS_OP              0
+  O      9    18 POP_JUMP_IF_FALSE        24
+  O     10    20 LOAD_CONST               ('缸筒（缸孔面）', '活塞（沟槽侧）')
+  O     11    22 RETURN_VALUE             None
+  O     12    24 LOAD_FAST                'seal_type'
+  N      0     0 LOAD_FAST                'seal_type'
+  N      1     2 LOAD_CONST               'static_axial'
+  N      2     4 COMPARE_OP               '=='
+  N      3     6 POP_JUMP_IF_FALSE        12
+  N      4     8 LOAD_CONST               ('端盖／压盖（配合面）', '法兰（沟槽侧）')
+  N      5    10 RETURN_VALUE             None
+  N >    6    12 LOAD_CONST               None
+  N      7    14 LOAD_CONST               ('hydraulic_dynamic', 'dynamic_recip', 'pneumatic_dynamic')
+  N      8    16 CONTAINS_OP              0
+  N      9    18 POP_JUMP_IF_FALSE        24
+  N     10    20 LOAD_CONST               ('缸筒（缸孔面）', '活塞（沟槽侧）')
+  N     11    22 RETURN_VALUE             None
+  N     12    24 LOAD_CONST               None
+  co_consts O=["'按工况返回截面图两个零件的真实名称 (top_name, bot_name)（V2.5 装配化）'", "'static_axial'", "('端盖／压盖（配合面）', '法兰（沟槽侧）')", "('hydraulic_dynamic', 'dynamic_recip', 'pneumatic_dynamic')", "('缸筒（缸孔面）', '活塞（沟槽侧）')", "'dynamic_rotate'", "('孔（衬套面）', '轴（ ...
+            N=["'按工况返回截面图两个零件的真实名称 (top_name, bot_name)（V2.5 装配化）'", "'static_axial'", "('端盖／压盖（配合面）', '法兰（沟槽侧）')", 'None', "('hydraulic_dynamic', 'dynamic_recip', 'pneumatic_dynamic')", "('缸筒（缸孔面）', '活塞（沟槽侧）')", "'dynamic_rotate'", "('孔（衬套 ...
+===== axial_row_info   (260 vs 262 insns, first diff 153)
+  O    147   294 STORE_SUBSCR             None
+  O    148   296 LOAD_FAST                'lim'
+  O    149   298 LOAD_CONST               'label'
+  O    150   300 BINARY_SUBSCR            None
+  O    151   302 STORE_FAST               'name'
+  O    152   304 LOAD_FAST                'internal'
+  O >  153   306 POP_JUMP_IF_FALSE        406
+  O    154   308 LOAD_FAST                'v'
+  O    155   310 LOAD_FAST                'limit'
+  O    156   312 COMPARE_OP               '<='
+  O    157   314 LOAD_FAST                'out'
+  O    158   316 LOAD_CONST               'ok'
+  O    159   318 STORE_SUBSCR             None
+  N    147   294 STORE_SUBSCR             None
+  N    148   296 LOAD_FAST                'lim'
+  N    149   298 LOAD_CONST               'label'
+  N    150   300 BINARY_SUBSCR            None
+  N    151   302 STORE_FAST               'name'
+  N    152   304 LOAD_FAST                'internal'
+  N >  153   306 POP_JUMP_IF_FALSE        408
+  N    154   308 LOAD_FAST                'v'
+  N    155   310 LOAD_FAST                'limit'
+  N    156   312 COMPARE_OP               '<='
+  N    157   314 LOAD_FAST                'out'
+  N    158   316 LOAD_CONST               'ok'
+  N    159   318 STORE_SUBSCR             None
+  co_consts O=["'轴向密封沟槽直径 d7/d8 的展示信息（GB/T 3452.3-2005 式(3)/(4)，公差表3 H11）。\\n    标准表12/表13 推荐值本工具未收录（2026-10-22 定）：界面留「—」并支持用户自填实际值。\\n    返回 dict(label, hint, gi, filled, ok) 或 None（非轴向）：\\n      label  — 输入框标签（沟槽外径 d7 / 沟槽内径 d8）\\n      h ...
+            N=["'轴向密封沟槽直径 d7/d8 的展示信息（GB/T 3452.3-2005 式(3)/(4)，公差表3 H11）。\\n\\n    标准表12/表13 推荐值本工具未收录（2026-10-22 定）：界面留「—」并支持用户自填实际值。\\n    返回 dict(label, hint, gi, filled, ok) 或 None（非轴向）：\\n      label  — 输入框标签（沟槽外径 d7 / 沟槽内径 d8）\\n     ...
+===== sync_colors   (129 vs 130 insns, first diff 1)
+  O      0     0 LOAD_FAST                't'
+  O >    1     2 JUMP_IF_TRUE_OR_POP      10
+  O      2     4 LOAD_GLOBAL              'theme'
+  O      3     6 LOAD_METHOD              'current'
+  O      4     8 CALL_METHOD              0
+  O      5    10 STORE_FAST               't'
+  O      6    12 LOAD_FAST                't'
+  O      7    14 LOAD_CONST               'bg'
+  N      0     0 LOAD_FAST                't'
+  N >    1     2 POP_JUMP_IF_TRUE         6
+  N      2     4 NOP                      None
+  N      3     6 LOAD_GLOBAL              'theme'
+  N      4     8 LOAD_METHOD              'current'
+  N      5    10 CALL_METHOD              0
+  N      6    12 STORE_FAST               't'
+  N      7    14 LOAD_FAST                't'
+===== OringTab   (50 vs 52 insns, first diff 46)
+  O     40    80 MAKE_FUNCTION            0
+  O     41    82 STORE_NAME               '_on_row_clicked'
+  O     42    84 LOAD_CONST               <code _show_groove_for>
+  O     43    86 LOAD_CONST               'OringTab._show_groove_for'
+  O     44    88 MAKE_FUNCTION            0
+  O     45    90 STORE_NAME               '_show_groove_for'
+  O >   46    92 LOAD_CLOSURE             '__class__'
+  O     47    94 DUP_TOP                  None
+  O     48    96 STORE_NAME               '__classcell__'
+  O     49    98 RETURN_VALUE             None
+  N     40    80 MAKE_FUNCTION            0
+  N     41    82 STORE_NAME               '_on_row_clicked'
+  N     42    84 LOAD_CONST               <code _show_groove_for>
+  N     43    86 LOAD_CONST               'OringTab._show_groove_for'
+  N     44    88 MAKE_FUNCTION            0
+  N     45    90 STORE_NAME               '_show_groove_for'
+  N >   46    92 LOAD_CONST               None
+  N     47    94 STORE_NAME               '__classcell__'
+  N     48    96 LOAD_CLOSURE             '__class__'
+  N     49    98 DUP_TOP                  None
+  N     50   100 STORE_NAME               '__classcell__'
+  N     51   102 RETURN_VALUE             None
+  co_consts O=["'OringTab'", '<code __init__>', "'OringTab.__init__'", '<code rerender>', "'OringTab.rerender'", '<code _toggle_adv>', "'OringTab._toggle_adv'", '<code _update_adv_summary>', "'OringTab._update_adv_summary'", '<code _sync_di ...
+            N=["'OringTab'", '<code __init__>', "'OringTab.__init__'", '<code rerender>', "'OringTab.rerender'", '<code _toggle_adv>', "'OringTab._toggle_adv'", '<code _update_adv_summary>', "'OringTab._update_adv_summary'", '<code _sync_di ...
+===== OringTab.__init__   (1101 vs 1098 insns, first diff 151)
+  O    145   290 LOAD_CONST               0.5
+  O    146   292 CALL_METHOD              1
+  O    147   294 POP_TOP                  None
+  O    148   296 LOAD_DEREF               'self'
+  O    149   298 LOAD_ATTR                'd_input'
+  O    150   300 LOAD_METHOD              'setValue'
+  O >  151   302 LOAD_CONST               20.0
+  O    152   304 CALL_METHOD              1
+  O    153   306 POP_TOP                  None
+  O    154   308 LOAD_DEREF               'self'
+  O    155   310 LOAD_ATTR                'd_input'
+  O    156   312 LOAD_METHOD              'setFixedWidth'
+  O    157   314 LOAD_CONST               86
+  N    145   290 LOAD_CONST               0.5
+  N    146   292 CALL_METHOD              1
+  N    147   294 POP_TOP                  None
+  N    148   296 LOAD_DEREF               'self'
+  N    149   298 LOAD_ATTR                'd_input'
+  N    150   300 LOAD_METHOD              'setValue'
+  N >  151   302 LOAD_CONST               20
+  N    152   304 CALL_METHOD              1
+  N    153   306 POP_TOP                  None
+  N    154   308 LOAD_DEREF               'self'
+  N    155   310 LOAD_ATTR                'd_input'
+  N    156   312 LOAD_METHOD              'setFixedWidth'
+  N    157   314 LOAD_CONST               86
+  co_consts O=['None', '6', "'输入参数'", "'compact'", 'True', '8', '10', '12', '4', "'密封类型：'", '0', "('径向静密封', '轴向静密封（法兰面）', '往复运动密封', '旋转运动密封', '低摩擦密封')", '1', "'工作压力 (MPa)：'", '2', '100', '0.5', '86', '3', "'配合面直径 (mm)：'", '1.8', '700', '20. ...
+            N=['None', '6', "'输入参数'", "'compact'", 'True', '8', '10', '12', '4', "'密封类型：'", '0', "('径向静密封', '轴向静密封（法兰面）', '往复运动密封', '旋转运动密封', '低摩擦密封')", '1', "'工作压力 (MPa)：'", '2', '100', '0.5', '86', '3', "'配合面直径 (mm)：'", '1.8', '700', '20' ...
+  co_names O=["'super'", "'__init__'", "'QVBoxLayout'", "'setSpacing'", "'QGroupBox'", "'setProperty'", "'QGridLayout'", "'setContentsMargins'", "'addWidget'", "'_lbl'", "'QComboBox'", "'seal_combo'", "'addItems'", "'QDoubleSpinBox'", "'p_i ...
+           N=["'super'", "'__init__'", "'QVBoxLayout'", "'setSpacing'", "'QGroupBox'", "'setProperty'", "'QGridLayout'", "'setContentsMargins'", "'addWidget'", "'_lbl'", "'QComboBox'", "'seal_combo'", "'addItems'", "'QDoubleSpinBox'", "'p_i ...
+===== OringTab.rerender   (16 vs 16 insns, first diff 9)
+  O      3     6 LOAD_FAST                'self'
+  O      4     8 LOAD_METHOD              '_do_calc'
+  O      5    10 CALL_METHOD              0
+  O      6    12 POP_TOP                  None
+  O      7    14 LOAD_CONST               None
+  O      8    16 RETURN_VALUE             None
+  O >    9    18 LOAD_FAST                'self'
+  O     10    20 LOAD_ATTR                'groove_widget'
+  O     11    22 LOAD_METHOD              'sync_from_theme'
+  O     12    24 CALL_METHOD              0
+  O     13    26 POP_TOP                  None
+  O     14    28 LOAD_CONST               None
+  O     15    30 RETURN_VALUE             None
+  N      3     6 LOAD_FAST                'self'
+  N      4     8 LOAD_METHOD              '_do_calc'
+  N      5    10 CALL_METHOD              0
+  N      6    12 POP_TOP                  None
+  N      7    14 LOAD_CONST               None
+  N      8    16 RETURN_VALUE             None
+  N >    9    18 LOAD_CONST               None
+  N     10    20 LOAD_ATTR                'groove_widget'
+  N     11    22 LOAD_METHOD              'sync_from_theme'
+  N     12    24 CALL_METHOD              0
+  N     13    26 POP_TOP                  None
+  N     14    28 LOAD_CONST               None
+  N     15    30 RETURN_VALUE             None
+===== OringTab._toggle_adv   (21 vs 24 insns, first diff 6)
+  O      0     0 LOAD_FAST                'self'
+  O      1     2 LOAD_ATTR                'adv_box'
+  O      2     4 LOAD_METHOD              'setVisible'
+  O      3     6 LOAD_FAST                'checked'
+  O      4     8 CALL_METHOD              1
+  O      5    10 POP_TOP                  None
+  O >    6    12 LOAD_FAST                'self'
+  O      7    14 LOAD_ATTR                'btn_adv'
+  O      8    16 LOAD_METHOD              'setText'
+  O      9    18 LOAD_FAST                'checked'
+  O     10    20 POP_JUMP_IF_FALSE        32
+  O     11    22 LOAD_CONST               '更多参数 ▾'
+  O     12    24 CALL_METHOD              1
+  N      0     0 LOAD_FAST                'self'
+  N      1     2 LOAD_ATTR                'adv_box'
+  N      2     4 LOAD_METHOD              'setVisible'
+  N      3     6 LOAD_FAST                'checked'
+  N      4     8 CALL_METHOD              1
+  N      5    10 POP_TOP                  None
+  N >    6    12 LOAD_FAST                'checked'
+  N      7    14 POP_JUMP_IF_FALSE        32
+  N      8    16 LOAD_FAST                'self'
+  N      9    18 LOAD_ATTR                'btn_adv'
+  N     10    20 LOAD_METHOD              'setText'
+  N     11    22 LOAD_CONST               '更多参数 ▾'
+  N     12    24 CALL_METHOD              1
+  co_consts O=["'更多参数折叠面板开关（V2.5.6 一页化）'", "'更多参数 ▾'", "'更多参数 ▸'", 'None']
+            N=["'更多参数折叠面板开关（V2.5.6 一页化）'", "'更多参数 ▾'", 'None']
+===== OringTab._update_adv_summary   (156 vs 160 insns, first diff 7)
+  O      1     2 LOAD_FAST                'self'
+  O      2     4 LOAD_CONST               'gap_input'
+  O      3     6 CALL_FUNCTION            2
+  O      4     8 POP_JUMP_IF_TRUE         14
+  O      5    10 LOAD_CONST               None
+  O      6    12 RETURN_VALUE             None
+  O >    7    14 LOAD_FAST                'self'
+  O      8    16 LOAD_ATTR                't_min'
+  O      9    18 LOAD_METHOD              'value'
+  O     10    20 CALL_METHOD              0
+  O     11    22 LOAD_FAST                'self'
+  O     12    24 LOAD_ATTR                't_max'
+  O     13    26 LOAD_METHOD              'value'
+  N      1     2 LOAD_FAST                'self'
+  N      2     4 LOAD_CONST               'gap_input'
+  N      3     6 CALL_FUNCTION            2
+  N      4     8 POP_JUMP_IF_TRUE         14
+  N      5    10 LOAD_CONST               None
+  N      6    12 RETURN_VALUE             None
+  N >    7    14 LOAD_CONST               None
+  N      8    16 LOAD_ATTR                't_min'
+  N      9    18 LOAD_METHOD              'value'
+  N     10    20 CALL_METHOD              0
+  N     11    22 STORE_FAST               't_min'
+  N     12    24 LOAD_FAST                'self'
+  N     13    26 LOAD_ATTR                't_max'
+===== OringTab._sync_dir_combo   (81 vs 81 insns, first diff 9)
+  O      3     6 CALL_FUNCTION            2
+  O      4     8 POP_JUMP_IF_FALSE        20
+  O      5    10 LOAD_GLOBAL              'hasattr'
+  O      6    12 LOAD_FAST                'self'
+  O      7    14 LOAD_CONST               'dir_combo'
+  O      8    16 CALL_FUNCTION            2
+  O >    9    18 POP_JUMP_IF_TRUE         24
+  O     10    20 LOAD_CONST               None
+  O     11    22 RETURN_VALUE             None
+  O     12    24 LOAD_CONST               '轴向'
+  O     13    26 LOAD_FAST                'self'
+  O     14    28 LOAD_ATTR                'seal_combo'
+  O     15    30 LOAD_METHOD              'currentText'
+  N      3     6 CALL_FUNCTION            2
+  N      4     8 POP_JUMP_IF_FALSE        20
+  N      5    10 LOAD_GLOBAL              'hasattr'
+  N      6    12 LOAD_FAST                'self'
+  N      7    14 LOAD_CONST               'dir_combo'
+  N      8    16 CALL_FUNCTION            2
+  N >    9    18 POP_JUMP_IF_FALSE        24
+  N     10    20 LOAD_CONST               None
+  N     11    22 RETURN_VALUE             None
+  N     12    24 LOAD_CONST               None
+  N     13    26 LOAD_FAST                'self'
+  N     14    28 LOAD_ATTR                'seal_combo'
+  N     15    30 LOAD_METHOD              'currentText'
+  co_consts O=["'承压方向选项随密封类型联动：\\n        径向 → 单向压力/交替压力（挡圈布置 图3）；轴向 → 受内压/受外压（型式 图4/图5）'", "'seal_combo'", "'dir_combo'", 'None', "'轴向'", "'受内部压力'", "'受外部压力'", "'单向压力'", "'交替（双向）压力'", 'True', 'False', "'adv_summary'"]
+            N=["'承压方向选项随密封类型联动：\\n            径向 → 单向压力/交替压力（挡圈布置 图3）；轴向 → 受内压/受外压（型式 图4/图5）'", "'seal_combo'", "'dir_combo'", 'None', "'受内部压力'", "'受外部压力'", "'单向压力'", "'交替（双向）压力'", 'True', 'False', "'adv_summary'"]
+===== OringTab._update_axial_row   (86 vs 86 insns, first diff 7)
+  O      1     2 LOAD_FAST                'self'
+  O      2     4 LOAD_CONST               '_axial_widgets'
+  O      3     6 CALL_FUNCTION            2
+  O      4     8 POP_JUMP_IF_TRUE         14
+  O      5    10 LOAD_CONST               None
+  O      6    12 RETURN_VALUE             None
+  O >    7    14 LOAD_CONST               '轴向'
+  O      8    16 LOAD_FAST                'self'
+  O      9    18 LOAD_ATTR                'seal_combo'
+  O     10    20 LOAD_METHOD              'currentText'
+  O     11    22 CALL_METHOD              0
+  O     12    24 CONTAINS_OP              0
+  O     13    26 STORE_FAST               'axial'
+  N      1     2 LOAD_FAST                'self'
+  N      2     4 LOAD_CONST               '_axial_widgets'
+  N      3     6 CALL_FUNCTION            2
+  N      4     8 POP_JUMP_IF_TRUE         14
+  N      5    10 LOAD_CONST               None
+  N      6    12 RETURN_VALUE             None
+  N >    7    14 LOAD_CONST               None
+  N      8    16 LOAD_FAST                'self'
+  N      9    18 LOAD_ATTR                'seal_combo'
+  N     10    20 LOAD_METHOD              'currentText'
+  N     11    22 CALL_METHOD              0
+  N     12    24 CONTAINS_OP              0
+  N     13    26 STORE_FAST               'axial'
+  co_consts O=["'轴向密封沟槽直径 d7/d8 输入行：仅轴向工况显示；装配方式仅径向有意义'", "'_axial_widgets'", 'None', "'轴向'", 'True', "''", "'label'", "'hint'"]
+            N=["'轴向密封沟槽直径 d7/d8 输入行：仅轴向工况显示；装配方式仅径向有意义'", "'_axial_widgets'", 'None', 'True', "''", "'label'", "'hint'"]
+  co_names O=["'hasattr'", "'seal_combo'", "'currentText'", "'_axial_widgets'", "'setVisible'", "'adv_box'", "'isVisible'", "'btn_adv'", "'setChecked'", "'fit_combo'", "'setEnabled'", "'d7d8_hint'", "'setText'", "'axial_row_info'", "'_curre ...
+           N=["'hasattr'", "'seal_combo'", "'currentText'", "'_axial_widgets'", "'setVisible'", "'adv_box'", "'isVisible'", "'btn_adv'", "'setChecked'", "'fit_combo'", "'setEnabled'", "'d7d8_hint'", "'setText'", "'_current_dir_key'", "'axia ...
+===== OringTab._do_calc   (1140 vs 733 insns, first diff 54)
+  O     48    96 STORE_FAST               'rod_mode'
+  O     49    98 LOAD_GLOBAL              'recommend_oring'
+  O     50   100 LOAD_FAST                'd'
+  O     51   102 LOAD_FAST                'seal_type'
+  O     52   104 LOAD_FAST                'medium'
+  O     53   106 LOAD_FAST                'rod_mode'
+  O >   54   108 LOAD_CONST               ('rod_mode',)
+  O     55   110 CALL_FUNCTION_KW         4
+  O     56   112 STORE_FAST               'candidates'
+  O     57   114 LOAD_FAST                'self'
+  O     58   116 LOAD_ATTR                'result_table'
+  O     59   118 LOAD_METHOD              'setHorizontalHeaderLabels'
+  O     60   120 LOAD_CONST               '内径 d₁ (mm)'
+  N     48    96 STORE_FAST               'rod_mode'
+  N     49    98 LOAD_GLOBAL              'recommend_oring'
+  N     50   100 LOAD_FAST                'd'
+  N     51   102 LOAD_FAST                'seal_type'
+  N     52   104 LOAD_FAST                'medium'
+  N     53   106 LOAD_FAST                'rod_mode'
+  N >   54   108 BUILD_TUPLE              4
+  N     55   110 BUILD_MAP                0
+  N     56   112 LOAD_CONST               ('rod_mode',)
+  N     57   114 DICT_MERGE               1
+  N     58   116 CALL_FUNCTION_EX         1
+  N     59   118 STORE_FAST               'candidates'
+  N     60   120 LOAD_FAST                'self'
+  co_consts O=['None', "'static_radial'", "'static_axial'", "'dynamic_recip'", "'dynamic_rotate'", "'low_friction'", "('径向静密封', '轴向静密封（法兰面）', '往复运动密封', '旋转运动密封', '低摩擦密封')", "'孔内'", "('rod_mode',)", "'内径 d₁ (mm)'", "'线径 d₂ (mm)'", "'预压缩率'",  ...
+            N=['None', "'static_radial'", "'static_axial'", "'dynamic_recip'", "'dynamic_rotate'", "'low_friction'", "('径向静密封', '轴向静密封（法兰面）', '往复运动密封', '旋转运动密封', '低摩擦密封')", "'孔内'", "('rod_mode',)", "'内径 d₁ (mm)'", "'线径 d₂ (mm)'", "'预压缩率'",  ...
+  co_names O=["'seal_combo'", "'currentText'", "'d_input'", "'value'", "'p_input'", "'medium_combo'", "'strip'", "'t_min'", "'t_max'", "'fit_combo'", "'recommend_oring'", "'result_table'", "'setHorizontalHeaderLabels'", "'setRowCount'", "'m ...
+           N=["'seal_combo'", "'currentText'", "'d_input'", "'value'", "'p_input'", "'medium_combo'", "'strip'", "'t_min'", "'t_max'", "'fit_combo'", "'recommend_oring'", "'result_table'", "'setHorizontalHeaderLabels'", "'setRowCount'", "'m ...
+  co_varnames O=["'self'", "'seal_type_map'", "'seal_type'", "'d'", "'p'", "'medium'", "'t_min'", "'t_max'", "'rod_mode'", "'candidates'", "'hint'", "'v'", "'i'", "'d1'", "'d2'", "'pri'", "'stretch'", "'kmax'", "'stretch_item'", "'ymax'", " ...
+              N=["'self'", "'seal_type_map'", "'seal_type'", "'d'", "'p'", "'medium'", "'t_min'", "'t_max'", "'rod_mode'", "'candidates'", "'hint'", "'v'", "'d1'", "'d2'", "'pri'", "'stretch'", "'stars'", "'best'", "'b_d1'", "'b_d2'", "'b_s ...
+===== OringTab._on_row_clicked   (30 vs 28 insns, first diff 4)
+  O      0     0 LOAD_GLOBAL              'hasattr'
+  O      1     2 LOAD_FAST                'self'
+  O      2     4 LOAD_CONST               '_candidates'
+  O      3     6 CALL_FUNCTION            2
+  O >    4     8 POP_JUMP_IF_FALSE        52
+  O      5    10 LOAD_FAST                'row'
+  O      6    12 LOAD_GLOBAL              'len'
+  O      7    14 LOAD_FAST                'self'
+  O      8    16 LOAD_ATTR                '_candidates'
+  O      9    18 CALL_FUNCTION            1
+  O     10    20 COMPARE_OP               '<'
+  N      0     0 LOAD_GLOBAL              'hasattr'
+  N      1     2 LOAD_FAST                'self'
+  N      2     4 LOAD_CONST               '_candidates'
+  N      3     6 CALL_FUNCTION            2
+  N >    4     8 POP_JUMP_IF_TRUE         24
+  N      5    10 LOAD_FAST                'row'
+  N      6    12 LOAD_GLOBAL              'len'
+  N      7    14 LOAD_FAST                'self'
+  N      8    16 LOAD_ATTR                '_candidates'
+  N      9    18 CALL_FUNCTION            1
+  N     10    20 COMPARE_OP               '<'
+===== OringTab._show_groove_for   (493 vs 496 insns, first diff 8)
+  O      2     4 LOAD_METHOD              'value'
+  O      3     6 CALL_METHOD              0
+  O      4     8 STORE_FAST               'd'
+  O      5    10 LOAD_FAST                'candidate'
+  O      6    12 LOAD_CONST               0
+  O      7    14 BINARY_SUBSCR            None
+  O >    8    16 LOAD_FAST                'candidate'
+  O      9    18 LOAD_CONST               1
+  O     10    20 BINARY_SUBSCR            None
+  O     11    22 ROT_TWO                  None
+  O     12    24 STORE_FAST               'd1'
+  O     13    26 STORE_FAST               'd2'
+  O     14    28 LOAD_FAST                'd'
+  N      2     4 LOAD_METHOD              'value'
+  N      3     6 CALL_METHOD              0
+  N      4     8 STORE_FAST               'd'
+  N      5    10 LOAD_FAST                'candidate'
+  N      6    12 LOAD_CONST               0
+  N      7    14 BINARY_SUBSCR            None
+  N >    8    16 STORE_FAST               'd1'
+  N      9    18 LOAD_FAST                'candidate'
+  N     10    20 LOAD_CONST               1
+  N     11    22 BINARY_SUBSCR            None
+  N     12    24 STORE_FAST               'd2'
+  N     13    26 LOAD_FAST                'd'
+  N     14    28 LOAD_FAST                'd1'
+===== GrooveTab   (34 vs 36 insns, first diff 30)
+  O     24    48 MAKE_FUNCTION            0
+  O     25    50 STORE_NAME               '_dir_key'
+  O     26    52 LOAD_CONST               <code _do_query>
+  O     27    54 LOAD_CONST               'GrooveTab._do_query'
+  O     28    56 MAKE_FUNCTION            0
+  O     29    58 STORE_NAME               '_do_query'
+  O >   30    60 LOAD_CLOSURE             '__class__'
+  O     31    62 DUP_TOP                  None
+  O     32    64 STORE_NAME               '__classcell__'
+  O     33    66 RETURN_VALUE             None
+  N     24    48 MAKE_FUNCTION            0
+  N     25    50 STORE_NAME               '_dir_key'
+  N     26    52 LOAD_CONST               <code _do_query>
+  N     27    54 LOAD_CONST               'GrooveTab._do_query'
+  N     28    56 MAKE_FUNCTION            0
+  N     29    58 STORE_NAME               '_do_query'
+  N >   30    60 LOAD_CONST               None
+  N     31    62 STORE_NAME               '__classcell__'
+  N     32    64 LOAD_CLOSURE             '__class__'
+  N     33    66 DUP_TOP                  None
+  N     34    68 STORE_NAME               '__classcell__'
+  N     35    70 RETURN_VALUE             None
+  co_consts O=["'GrooveTab'", '<code __init__>', "'GrooveTab.__init__'", '<code rerender>', "'GrooveTab.rerender'", '<code _sync_dir_combo>', "'GrooveTab._sync_dir_combo'", '<code _update_axial_row>', "'GrooveTab._update_axial_row'", '<code ...
+            N=["'GrooveTab'", '<code __init__>', "'GrooveTab.__init__'", '<code rerender>', "'GrooveTab.rerender'", '<code _sync_dir_combo>', "'GrooveTab._sync_dir_combo'", '<code _update_axial_row>', "'GrooveTab._update_axial_row'", '<code ...
+===== GrooveTab.__init__   (414 vs 411 insns, first diff 129)
+  O    123   246 LOAD_DEREF               'self'
+  O    124   248 LOAD_ATTR                'dir_combo'
+  O    125   250 LOAD_CONST               3
+  O    126   252 LOAD_CONST               1
+  O    127   254 CALL_METHOD              3
+  O    128   256 POP_TOP                  None
+  O >  129   258 LOAD_DEREF               'self'
+  O    130   260 LOAD_ATTR                'type_combo'
+  O    131   262 LOAD_ATTR                'currentTextChanged'
+  O    132   264 LOAD_METHOD              'connect'
+  O    133   266 LOAD_CLOSURE             'self'
+  O    134   268 BUILD_TUPLE              1
+  O    135   270 LOAD_CONST               <code <lambda>>
+  N    123   246 LOAD_DEREF               'self'
+  N    124   248 LOAD_ATTR                'dir_combo'
+  N    125   250 LOAD_CONST               3
+  N    126   252 LOAD_CONST               1
+  N    127   254 CALL_METHOD              3
+  N    128   256 POP_TOP                  None
+  N >  129   258 LOAD_CONST               None
+  N    130   260 LOAD_CLOSURE             'self'
+  N    131   262 BUILD_TUPLE              1
+  N    132   264 LOAD_CONST               <code <lambda>>
+  N    133   266 LOAD_CONST               'GrooveTab.__init__.<locals>.<lambda>'
+  N    134   268 MAKE_FUNCTION            8
+  N    135   270 CALL_FUNCTION            1
+  co_names O=["'super'", "'__init__'", "'QVBoxLayout'", "'QGroupBox'", "'QGridLayout'", "'addWidget'", "'_lbl'", "'QComboBox'", "'d2_combo'", "'addItems'", "'type_combo'", "'backup_check'", "'dir_combo'", "'_sync_dir_combo'", "'currentTextC ...
+           N=["'super'", "'__init__'", "'QVBoxLayout'", "'QGroupBox'", "'QGridLayout'", "'addWidget'", "'_lbl'", "'QComboBox'", "'d2_combo'", "'addItems'", "'type_combo'", "'backup_check'", "'dir_combo'", "'_sync_dir_combo'", "'d1_lbl'", "' ...
+===== GrooveTab._update_axial_row   (27 vs 27 insns, first diff 7)
+  O      1     2 LOAD_FAST                'self'
+  O      2     4 LOAD_CONST               '_axial_widgets'
+  O      3     6 CALL_FUNCTION            2
+  O      4     8 POP_JUMP_IF_TRUE         14
+  O      5    10 LOAD_CONST               None
+  O      6    12 RETURN_VALUE             None
+  O >    7    14 LOAD_CONST               '轴向'
+  O      8    16 LOAD_FAST                'self'
+  O      9    18 LOAD_ATTR                'type_combo'
+  O     10    20 LOAD_METHOD              'currentText'
+  O     11    22 CALL_METHOD              0
+  O     12    24 CONTAINS_OP              0
+  O     13    26 STORE_FAST               'axial'
+  N      1     2 LOAD_FAST                'self'
+  N      2     4 LOAD_CONST               '_axial_widgets'
+  N      3     6 CALL_FUNCTION            2
+  N      4     8 POP_JUMP_IF_TRUE         14
+  N      5    10 LOAD_CONST               None
+  N      6    12 RETURN_VALUE             None
+  N >    7    14 LOAD_CONST               None
+  N      8    16 LOAD_FAST                'self'
+  N      9    18 LOAD_ATTR                'type_combo'
+  N     10    20 LOAD_METHOD              'currentText'
+  N     11    22 CALL_METHOD              0
+  N     12    24 CONTAINS_OP              0
+  N     13    26 STORE_FAST               'axial'
+  co_consts O=["'轴向专用输入行（d1 + d7/d8 自填）仅轴向显示'", "'_axial_widgets'", 'None', "'轴向'"]
+            N=["'轴向专用输入行（d1 + d7/d8 自填）仅轴向显示'", "'_axial_widgets'", 'None']
+===== GrooveTab._do_query   (435 vs 333 insns, first diff 40)
+  O     34    68 LOAD_FAST                'backup_idx'
+  O     35    70 LOAD_CONST               2
+  O     36    72 COMPARE_OP               '=='
+  O     37    74 LOAD_FAST                'self'
+  O     38    76 LOAD_METHOD              '_dir_key'
+  O     39    78 CALL_METHOD              0
+  O >   40    80 LOAD_CONST               ('seal_type', 'with_backup', 'double_backup', 'pressure_dir')
+  O     41    82 CALL_FUNCTION_KW         5
+  O     42    84 STORE_FAST               'groove'
+  O     43    86 LOAD_FAST                'groove'
+  O     44    88 POP_JUMP_IF_TRUE         94
+  O     45    90 LOAD_CONST               None
+  O     46    92 RETURN_VALUE             None
+  N     34    68 LOAD_FAST                'backup_idx'
+  N     35    70 LOAD_CONST               2
+  N     36    72 COMPARE_OP               '=='
+  N     37    74 LOAD_FAST                'self'
+  N     38    76 LOAD_METHOD              '_dir_key'
+  N     39    78 CALL_METHOD              0
+  N >   40    80 BUILD_TUPLE              5
+  N     41    82 BUILD_MAP                0
+  N     42    84 LOAD_CONST               ('seal_type', 'with_backup', 'double_backup', 'pressure_dir')
+  N     43    86 DICT_MERGE               1
+  N     44    88 CALL_FUNCTION_EX         1
+  N     45    90 STORE_FAST               'groove'
+  N     46    92 LOAD_FAST                'groove'
+  co_consts O=['None', "'static_radial'", "'hydraulic_dynamic'", "'pneumatic_dynamic'", "'static_axial'", '(0, 1, 2, 3)', '1', '2', "('seal_type', 'with_backup', 'double_backup', 'pressure_dir')", "'h'", '100', "'（本工况无标准推荐带）'", '0', "'⚠ 低于推 ...
+            N=['None', "'static_radial'", "'hydraulic_dynamic'", "'pneumatic_dynamic'", "'static_axial'", '(0, 1, 2, 3)', '1', '2', "('seal_type', 'with_backup', 'double_backup', 'pressure_dir')", "'h'", '100', "'（本工况无标准推荐带）'", '0', "'⚠ 低于推 ...
+  co_names O=["'float'", "'d2_combo'", "'currentText'", "'backup_check'", "'currentIndex'", "'type_combo'", "'calc_groove'", "'_dir_key'", "'compression_range'", "'result_table'", "'setRowCount'", "'setHorizontalHeaderLabels'", "'tuple'", " ...
+           N=["'float'", "'d2_combo'", "'currentText'", "'backup_check'", "'currentIndex'", "'type_combo'", "'calc_groove'", "'_dir_key'", "'compression_range'", "'result_table'", "'setRowCount'", "'setHorizontalHeaderLabels'", "'tuple'", " ...
+  co_varnames O=["'self'", "'d2'", "'backup_idx'", "'type_idx'", "'type_map'", "'seal_type'", "'groove'", "'actual_w'", "'rng'", "'w_status'", "'r1_txt'", "'items'", "'i'", "'txt'", "'z_min'", "'lines'", "'dir_key'", "'d1_txt'", "'d1_val'", ...
+              N=["'self'", "'d2'", "'backup_idx'", "'type_idx'", "'type_map'", "'seal_type'", "'groove'", "'actual_w'", "'rng'", "'w_status'", "'r1_txt'", "'items'", "'i'", "'txt'", "'z_min'", "'lines'", "'dir_key'"]
+===== MaterialTab   (30 vs 32 insns, first diff 26)
+  O     20    40 MAKE_FUNCTION            0
+  O     21    42 STORE_NAME               '_show_all'
+  O     22    44 LOAD_CONST               <code _do_recommend>
+  O     23    46 LOAD_CONST               'MaterialTab._do_recommend'
+  O     24    48 MAKE_FUNCTION            0
+  O     25    50 STORE_NAME               '_do_recommend'
+  O >   26    52 LOAD_CLOSURE             '__class__'
+  O     27    54 DUP_TOP                  None
+  O     28    56 STORE_NAME               '__classcell__'
+  O     29    58 RETURN_VALUE             None
+  N     20    40 MAKE_FUNCTION            0
+  N     21    42 STORE_NAME               '_show_all'
+  N     22    44 LOAD_CONST               <code _do_recommend>
+  N     23    46 LOAD_CONST               'MaterialTab._do_recommend'
+  N     24    48 MAKE_FUNCTION            0
+  N     25    50 STORE_NAME               '_do_recommend'
+  N >   26    52 LOAD_CONST               None
+  N     27    54 STORE_NAME               '__classcell__'
+  N     28    56 LOAD_CLOSURE             '__class__'
+  N     29    58 DUP_TOP                  None
+  N     30    60 STORE_NAME               '__classcell__'
+  N     31    62 RETURN_VALUE             None
+  co_consts O=["'MaterialTab'", '<code __init__>', "'MaterialTab.__init__'", '<code rerender>', "'MaterialTab.rerender'", '<code _toggle_all>', "'MaterialTab._toggle_all'", '<code _show_all>', "'MaterialTab._show_all'", '<code _do_recommend ...
+            N=["'MaterialTab'", '<code __init__>', "'MaterialTab.__init__'", '<code rerender>', "'MaterialTab.rerender'", '<code _toggle_all>', "'MaterialTab._toggle_all'", '<code _show_all>', "'MaterialTab._show_all'", '<code _do_recommend ...
+===== MaterialTab._toggle_all   (26 vs 27 insns, first diff 15)
+  O      9    18 LOAD_FAST                'vis'
+  O     10    20 CALL_METHOD              1
+  O     11    22 POP_TOP                  None
+  O     12    24 LOAD_FAST                'self'
+  O     13    26 LOAD_ATTR                'all_btn'
+  O     14    28 LOAD_METHOD              'setText'
+  O >   15    30 LOAD_CONST               '📋 全部材料速览（8种） '
+  O     16    32 LOAD_FAST                'vis'
+  O     17    34 POP_JUMP_IF_FALSE        40
+  O     18    36 LOAD_CONST               '▾'
+  O     19    38 JUMP_FORWARD             42
+  O     20    40 LOAD_CONST               '▸'
+  O     21    42 BINARY_ADD               None
+  N      9    18 LOAD_FAST                'vis'
+  N     10    20 CALL_METHOD              1
+  N     11    22 POP_TOP                  None
+  N     12    24 LOAD_FAST                'self'
+  N     13    26 LOAD_ATTR                'all_btn'
+  N     14    28 LOAD_METHOD              'setText'
+  N >   15    30 LOAD_FAST                'vis'
+  N     16    32 POP_JUMP_IF_FALSE        44
+  N     17    34 LOAD_CONST               '📋 全部材料速览（8种） ▾'
+  N     18    36 CALL_METHOD              1
+  N     19    38 POP_TOP                  None
+  N     20    40 LOAD_CONST               None
+  N     21    42 RETURN_VALUE             None
+  co_consts O=['None', "'📋 全部材料速览（8种） '", "'▾'", "'▸'"]
+            N=['None', "'📋 全部材料速览（8种） ▾'", "'▸'"]
+===== MaterialTab._show_all   (76 vs 74 insns, first diff 18)
+  O     12    24 CALL_METHOD              1
+  O     13    26 POP_TOP                  None
+  O     14    28 LOAD_GLOBAL              'enumerate'
+  O     15    30 LOAD_FAST                'mats'
+  O     16    32 CALL_FUNCTION            1
+  O     17    34 GET_ITER                 None
+  O >   18    36 FOR_ITER                 148
+  O     19    38 UNPACK_SEQUENCE          2
+  O     20    40 STORE_FAST               'i'
+  O     21    42 UNPACK_SEQUENCE          2
+  O     22    44 STORE_FAST               'code'
+  O     23    46 STORE_FAST               'm'
+  O     24    48 LOAD_FAST                'm'
+  N     12    24 CALL_METHOD              1
+  N     13    26 POP_TOP                  None
+  N     14    28 LOAD_GLOBAL              'enumerate'
+  N     15    30 LOAD_FAST                'mats'
+  N     16    32 CALL_FUNCTION            1
+  N     17    34 GET_ITER                 None
+  N >   18    36 FOR_ITER                 144
+  N     19    38 UNPACK_SEQUENCE          2
+  N     20    40 STORE_FAST               'code'
+  N     21    42 STORE_FAST               'm'
+  N     22    44 LOAD_FAST                'm'
+  N     23    46 LOAD_CONST               'temp'
+  N     24    48 BINARY_SUBSCR            None
+  co_names O=["'list'", "'MATERIALS'", "'items'", "'all_table'", "'setRowCount'", "'len'", "'enumerate'", "'setItem'", "'QTableWidgetItem'"]
+           N=["'list'", "'MATERIALS'", "'items'", "'all_table'", "'setRowCount'", "'len'", "'enumerate'", "'setItem'", "'i'", "'QTableWidgetItem'"]
+  co_varnames O=["'self'", "'mats'", "'i'", "'code'", "'m'", "'lo'", "'hi'", "'vals'", "'j'", "'v'"]
+              N=["'self'", "'mats'", "'code'", "'m'", "'lo'", "'hi'", "'vals'", "'j'", "'v'"]
+===== MaterialTab._do_recommend   (164 vs 162 insns, first diff 75)
+  O     69   138 JUMP_ABSOLUTE            110
+  O     70   140 LOAD_CONST               True
+  O     71   142 LOAD_FAST                'self'
+  O     72   144 STORE_ATTR               '_has_result'
+  O     73   146 LOAD_CONST               None
+  O     74   148 RETURN_VALUE             None
+  O >   75   150 LOAD_FAST                'self'
+  O     76   152 LOAD_ATTR                'result_table'
+  O     77   154 LOAD_METHOD              'setRowCount'
+  O     78   156 LOAD_GLOBAL              'len'
+  O     79   158 LOAD_FAST                'results'
+  O     80   160 CALL_FUNCTION            1
+  O     81   162 CALL_METHOD              1
+  N     69   138 JUMP_ABSOLUTE            110
+  N     70   140 LOAD_CONST               True
+  N     71   142 LOAD_FAST                'self'
+  N     72   144 STORE_ATTR               '_has_result'
+  N     73   146 LOAD_CONST               None
+  N     74   148 RETURN_VALUE             None
+  N >   75   150 LOAD_CONST               None
+  N     76   152 LOAD_ATTR                'result_table'
+  N     77   154 LOAD_METHOD              'setRowCount'
+  N     78   156 LOAD_GLOBAL              'len'
+  N     79   158 LOAD_FAST                'results'
+  N     80   160 CALL_FUNCTION            1
+  N     81   162 CALL_METHOD              1
+  co_names O=["'medium_combo'", "'currentText'", "'strip'", "'t_min'", "'value'", "'t_max'", "'recommend_material'", "'result_table'", "'setRowCount'", "'enumerate'", "'setItem'", "'QTableWidgetItem'", "'_has_result'", "'len'", "'MATERIALS' ...
+           N=["'medium_combo'", "'currentText'", "'strip'", "'t_min'", "'value'", "'t_max'", "'recommend_material'", "'result_table'", "'setRowCount'", "'enumerate'", "'setItem'", "'QTableWidgetItem'", "'_has_result'", "'len'", "'MATERIALS' ...
+  co_varnames O=["'self'", "'medium'", "'t_min'", "'t_max'", "'results'", "'vals'", "'j'", "'v'", "'i'", "'code'", "'reason'", "'m'", "'lo'", "'hi'"]
+              N=["'self'", "'medium'", "'t_min'", "'t_max'", "'results'", "'vals'", "'j'", "'v'", "'code'", "'reason'", "'m'", "'lo'", "'hi'"]
+===== KnowledgeTab   (22 vs 24 insns, first diff 18)
+  O     12    24 MAKE_FUNCTION            0
+  O     13    26 STORE_NAME               'rerender'
+  O     14    28 LOAD_CONST               <code _show>
+  O     15    30 LOAD_CONST               'KnowledgeTab._show'
+  O     16    32 MAKE_FUNCTION            0
+  O     17    34 STORE_NAME               '_show'
+  O >   18    36 LOAD_CLOSURE             '__class__'
+  O     19    38 DUP_TOP                  None
+  O     20    40 STORE_NAME               '__classcell__'
+  O     21    42 RETURN_VALUE             None
+  N     12    24 MAKE_FUNCTION            0
+  N     13    26 STORE_NAME               'rerender'
+  N     14    28 LOAD_CONST               <code _show>
+  N     15    30 LOAD_CONST               'KnowledgeTab._show'
+  N     16    32 MAKE_FUNCTION            0
+  N     17    34 STORE_NAME               '_show'
+  N >   18    36 LOAD_CONST               None
+  N     19    38 STORE_NAME               '__classcell__'
+  N     20    40 LOAD_CLOSURE             '__class__'
+  N     21    42 DUP_TOP                  None
+  N     22    44 STORE_NAME               '__classcell__'
+  N     23    46 RETURN_VALUE             None
+  co_consts O=["'KnowledgeTab'", '<code __init__>', "'KnowledgeTab.__init__'", '<code rerender>', "'KnowledgeTab.rerender'", '<code _show>', "'KnowledgeTab._show'"]
+            N=["'KnowledgeTab'", '<code __init__>', "'KnowledgeTab.__init__'", '<code rerender>', "'KnowledgeTab.rerender'", '<code _show>', "'KnowledgeTab._show'", 'None']
+===== MainWindow   (22 vs 24 insns, first diff 18)
+  O     12    24 MAKE_FUNCTION            0
+  O     13    26 STORE_NAME               '_open_theme_dialog'
+  O     14    28 LOAD_CONST               <code apply_theme>
+  O     15    30 LOAD_CONST               'MainWindow.apply_theme'
+  O     16    32 MAKE_FUNCTION            0
+  O     17    34 STORE_NAME               'apply_theme'
+  O >   18    36 LOAD_CLOSURE             '__class__'
+  O     19    38 DUP_TOP                  None
+  O     20    40 STORE_NAME               '__classcell__'
+  O     21    42 RETURN_VALUE             None
+  N     12    24 MAKE_FUNCTION            0
+  N     13    26 STORE_NAME               '_open_theme_dialog'
+  N     14    28 LOAD_CONST               <code apply_theme>
+  N     15    30 LOAD_CONST               'MainWindow.apply_theme'
+  N     16    32 MAKE_FUNCTION            0
+  N     17    34 STORE_NAME               'apply_theme'
+  N >   18    36 LOAD_CONST               None
+  N     19    38 STORE_NAME               '__classcell__'
+  N     20    40 LOAD_CLOSURE             '__class__'
+  N     21    42 DUP_TOP                  None
+  N     22    44 STORE_NAME               '__classcell__'
+  N     23    46 RETURN_VALUE             None
+  co_consts O=["'MainWindow'", '<code __init__>', "'MainWindow.__init__'", '<code _open_theme_dialog>', "'MainWindow._open_theme_dialog'", '<code apply_theme>', "'MainWindow.apply_theme'"]
+            N=["'MainWindow'", '<code __init__>', "'MainWindow.__init__'", '<code _open_theme_dialog>', "'MainWindow._open_theme_dialog'", '<code apply_theme>', "'MainWindow.apply_theme'", 'None']
+===== MainWindow.apply_theme   (56 vs 56 insns, first diff 7)
+  O      1     2 LOAD_METHOD              'is_valid'
+  O      2     4 LOAD_FAST                'name'
+  O      3     6 CALL_METHOD              1
+  O      4     8 POP_JUMP_IF_TRUE         14
+  O      5    10 LOAD_CONST               None
+  O      6    12 RETURN_VALUE             None
+  O >    7    14 LOAD_GLOBAL              'sync_colors'
+  O      8    16 LOAD_GLOBAL              'theme'
+  O      9    18 LOAD_METHOD              'current'
+  O     10    20 CALL_METHOD              0
+  O     11    22 CALL_FUNCTION            1
+  O     12    24 POP_TOP                  None
+  O     13    26 LOAD_GLOBAL              'QApplication'
+  N      1     2 LOAD_METHOD              'is_valid'
+  N      2     4 LOAD_FAST                'name'
+  N      3     6 CALL_METHOD              1
+  N      4     8 POP_JUMP_IF_TRUE         14
+  N      5    10 LOAD_CONST               None
+  N      6    12 RETURN_VALUE             None
+  N >    7    14 LOAD_CONST               None
+  N      8    16 LOAD_GLOBAL              'theme'
+  N      9    18 LOAD_METHOD              'current'
+  N     10    20 CALL_METHOD              0
+  N     11    22 CALL_FUNCTION            1
+  N     12    24 POP_TOP                  None
+  N     13    26 LOAD_GLOBAL              'QApplication'
+  co_names O=["'theme'", "'is_valid'", "'sync_colors'", "'current'", "'QApplication'", "'instance'", "'setPalette'", "'_palette'", "'setStyleSheet'", "'qss'", "'tab_oring'", "'tab_groove'", "'tab_material'", "'tab_knowledge'", "'rerender'"]
+           N=["'theme'", "'is_valid'", "'current'", "'QApplication'", "'instance'", "'setPalette'", "'_palette'", "'setStyleSheet'", "'qss'", "'tab_oring'", "'tab_groove'", "'tab_material'", "'tab_knowledge'", "'rerender'"]
+===== GrooveWidget   (36 vs 38 insns, first diff 32)
+  O     26    52 MAKE_FUNCTION            0
+  O     27    54 STORE_NAME               'sync_from_theme'
+  O     28    56 LOAD_CONST               <code paintEvent>
+  O     29    58 LOAD_CONST               'GrooveWidget.paintEvent'
+  O     30    60 MAKE_FUNCTION            0
+  O     31    62 STORE_NAME               'paintEvent'
+  O >   32    64 LOAD_CLOSURE             '__class__'
+  O     33    66 DUP_TOP                  None
+  O     34    68 STORE_NAME               '__classcell__'
+  O     35    70 RETURN_VALUE             None
+  N     26    52 MAKE_FUNCTION            0
+  N     27    54 STORE_NAME               'sync_from_theme'
+  N     28    56 LOAD_CONST               <code paintEvent>
+  N     29    58 LOAD_CONST               'GrooveWidget.paintEvent'
+  N     30    60 MAKE_FUNCTION            0
+  N     31    62 STORE_NAME               'paintEvent'
+  N >   32    64 LOAD_CONST               None
+  N     33    66 STORE_NAME               '__classcell__'
+  N     34    68 LOAD_CLOSURE             '__class__'
+  N     35    70 DUP_TOP                  None
+  N     36    72 STORE_NAME               '__classcell__'
+  N     37    74 RETURN_VALUE             None
+  co_consts O=["'GrooveWidget'", "'沟槽截面示意图（V2.5 按工况画真实装配）：\\n    密封区（d₂/槽深h/槽宽b/间隙g）严格按同一比例尺；零件外形为装配示意。\\n    圈画法口径（2026-10-25 定稿）：高=h+面积守恒为硬约束（均有权威出处），\\n    形状为超椭圆 n=3（真实截面介于椭圆与矩形之间，最大宽随 n 只在 1.00~1.27 倍\\n    均宽内动）；图册近圆画法面积少画约18%且留有装配后不存 ...
+            N=["'GrooveWidget'", "'沟槽截面示意图（V2.5 按工况画真实装配）：\\n    密封区（d₂/槽深h/槽宽b/间隙g）严格按同一比例尺；零件外形为装配示意。\\n    圈画法口径（2026-10-25 定稿）：高=h+面积守恒为硬约束（均有权威出处），\\n    形状为超椭圆 n=3（真实截面介于椭圆与矩形之间，最大宽随 n 只在 1.00~1.27 倍\\n    均宽内动）；图册近圆画法面积少画约18%且留有装配后不存 ...
+===== GrooveWidget.__init__   (68 vs 68 insns, first diff 32)
+  O     26    52 LOAD_FAST                'p'
+  O     27    54 CALL_METHOD              1
+  O     28    56 POP_TOP                  None
+  O     29    58 LOAD_CONST               None
+  O     30    60 LOAD_FAST                'self'
+  O     31    62 STORE_ATTR               'groove'
+  O >   32    64 LOAD_CONST               0.0
+  O     33    66 LOAD_FAST                'self'
+  O     34    68 STORE_ATTR               'gap'
+  O     35    70 LOAD_CONST               ''
+  O     36    72 LOAD_FAST                'self'
+  O     37    74 STORE_ATTR               'axial_info'
+  O     38    76 BUILD_LIST               0
+  N     26    52 LOAD_FAST                'p'
+  N     27    54 CALL_METHOD              1
+  N     28    56 POP_TOP                  None
+  N     29    58 LOAD_CONST               None
+  N     30    60 LOAD_FAST                'self'
+  N     31    62 STORE_ATTR               'groove'
+  N >   32    64 LOAD_CONST               0
+  N     33    66 LOAD_FAST                'self'
+  N     34    68 STORE_ATTR               'gap'
+  N     35    70 LOAD_CONST               ''
+  N     36    72 LOAD_FAST                'self'
+  N     37    74 STORE_ATTR               'axial_info'
+  N     38    76 BUILD_LIST               0
+  co_consts O=['None', 'True', '0.0', "''", '240', '300']
+            N=['None', 'True', '0', "''", '240', '300']
+===== GrooveWidget.set_gap   (11 vs 12 insns, first diff 1)
+  O      0     0 LOAD_FAST                'gap_mm'
+  O >    1     2 JUMP_IF_TRUE_OR_POP      6
+  O      2     4 LOAD_CONST               0.0
+  O      3     6 LOAD_FAST                'self'
+  O      4     8 STORE_ATTR               'gap'
+  O      5    10 LOAD_FAST                'self'
+  O      6    12 LOAD_METHOD              'update'
+  O      7    14 CALL_METHOD              0
+  N      0     0 LOAD_FAST                'gap_mm'
+  N >    1     2 POP_JUMP_IF_TRUE         6
+  N      2     4 NOP                      None
+  N      3     6 LOAD_CONST               0
+  N      4     8 LOAD_FAST                'self'
+  N      5    10 STORE_ATTR               'gap'
+  N      6    12 LOAD_FAST                'self'
+  N      7    14 LOAD_METHOD              'update'
+  co_consts O=['None', '0.0']
+            N=['None', '0']
+===== GrooveWidget.set_axial_info   (11 vs 12 insns, first diff 1)
+  O      0     0 LOAD_FAST                'text'
+  O >    1     2 JUMP_IF_TRUE_OR_POP      6
+  O      2     4 LOAD_CONST               ''
+  O      3     6 LOAD_FAST                'self'
+  O      4     8 STORE_ATTR               'axial_info'
+  O      5    10 LOAD_FAST                'self'
+  O      6    12 LOAD_METHOD              'update'
+  O      7    14 CALL_METHOD              0
+  N      0     0 LOAD_FAST                'text'
+  N >    1     2 POP_JUMP_IF_TRUE         6
+  N      2     4 NOP                      None
+  N      3     6 LOAD_CONST               ''
+  N      4     8 LOAD_FAST                'self'
+  N      5    10 STORE_ATTR               'axial_info'
+  N      6    12 LOAD_FAST                'self'
+  N      7    14 LOAD_METHOD              'update'
+===== GrooveWidget.paintEvent   (2183 vs 1571 insns, first diff 14)
+  O      8    16 LOAD_ATTR                'Antialiasing'
+  O      9    18 CALL_METHOD              1
+  O     10    20 POP_TOP                  None
+  O     11    22 LOAD_DEREF               'self'
+  O     12    24 LOAD_METHOD              'width'
+  O     13    26 CALL_METHOD              0
+  O >   14    28 LOAD_DEREF               'self'
+  O     15    30 LOAD_METHOD              'height'
+  O     16    32 CALL_METHOD              0
+  O     17    34 ROT_TWO                  None
+  O     18    36 STORE_FAST               'w'
+  O     19    38 STORE_FAST               'h'
+  O     20    40 LOAD_DEREF               'p'
+  N      8    16 LOAD_ATTR                'Antialiasing'
+  N      9    18 CALL_METHOD              1
+  N     10    20 POP_TOP                  None
+  N     11    22 LOAD_DEREF               'self'
+  N     12    24 LOAD_METHOD              'width'
+  N     13    26 CALL_METHOD              0
+  N >   14    28 STORE_FAST               'w'
+  N     15    30 LOAD_DEREF               'self'
+  N     16    32 LOAD_METHOD              'height'
+  N     17    34 CALL_METHOD              0
+  N     18    36 STORE_FAST               'h'
+  N     19    38 LOAD_DEREF               'p'
+  N     20    40 LOAD_METHOD              'fillRect'
+  co_consts O=['None', '0', "'请先进行计算'", "'d2'", "'h'", "'b'", "'seal_type'", "'static_radial'", "'pressure_dir'", "'with_backup'", 'False', "'double_backup'", "'pressure_mpa'", '0.1', '0.14', '0.3', '1.3333333333333333', '2', '1.66666666666 ...
+            N=['None', '0', "'请先进行计算'", "'d2'", "'h'", "'b'", "'seal_type'", "'static_radial'", "'pressure_dir'", "'with_backup'", 'False', "'double_backup'", "'pressure_mpa'", '0.1', '0.14', '0.3', '1.33333', '2', '1.66667', '4', '0.84', ' ...
+  co_names O=["'QPainter'", "'setRenderHint'", "'RenderHint'", "'Antialiasing'", "'width'", "'height'", "'fillRect'", "'QColor'", "'BG'", "'groove'", "'setPen'", "'TEXT'", "'drawText'", "'rect'", "'Qt'", "'AlignmentFlag'", "'AlignCenter'",  ...
+           N=["'QPainter'", "'setRenderHint'", "'RenderHint'", "'Antialiasing'", "'width'", "'height'", "'fillRect'", "'QColor'", "'BG'", "'groove'", "'setPen'", "'TEXT'", "'drawText'", "'rect'", "'Qt'", "'AlignmentFlag'", "'AlignCenter'",  ...
+  co_varnames O=["'self'", "'event'", "'w'", "'h'", "'g'", "'d2'", "'h_mm'", "'b_mm'", "'seal_type'", "'pdir'", "'with_bk'", "'double_bk'", "'gap_mm'", "'p_mpa'", "'pressurized'", "'ML'", "'MR'", "'_K3'", "'ring_w_mm'", "'span_mm'", "'scale ...
+              N=["'self'", "'event'", "'w'", "'h'", "'g'", "'d2'", "'h_mm'", "'b_mm'", "'seal_type'", "'pdir'", "'with_bk'", "'double_bk'", "'gap_mm'", "'p_mpa'", "'pressurized'", "'ML'", "'MR'", "'_K3'", "'ring_w_mm'", "'span_mm'", "'scale ...
+===== GrooveWidget.paintEvent._ring_poly   (69 vs 68 insns, first diff 6)
+  O      0     0 BUILD_LIST               0
+  O      1     2 STORE_FAST               'pts'
+  O      2     4 LOAD_GLOBAL              'range'
+  O      3     6 LOAD_CONST               72
+  O      4     8 CALL_FUNCTION            1
+  O      5    10 GET_ITER                 None
+  O >    6    12 FOR_ITER                 130
+  O      7    14 STORE_FAST               '_i'
+  O      8    16 LOAD_CONST               2
+  O      9    18 LOAD_GLOBAL              'math'
+  O     10    20 LOAD_ATTR                'pi'
+  O     11    22 BINARY_MULTIPLY          None
+  O     12    24 LOAD_FAST                '_i'
+  N      0     0 BUILD_LIST               0
+  N      1     2 STORE_FAST               'pts'
+  N      2     4 LOAD_GLOBAL              'range'
+  N      3     6 LOAD_CONST               72
+  N      4     8 CALL_FUNCTION            1
+  N      5    10 GET_ITER                 None
+  N >    6    12 FOR_ITER                 128
+  N      7    14 STORE_FAST               '_i'
+  N      8    16 LOAD_CONST               2
+  N      9    18 LOAD_GLOBAL              'math'
+  N     10    20 LOAD_ATTR                'pi'
+  N     11    22 BINARY_MULTIPLY          None
+  N     12    24 LOAD_FAST                '_i'
+  co_consts O=['None', '72', '2', '0.6666666666666666']
+            N=['None', '72', '2', '0.666667']
+===== GrooveWidget.paintEvent.draw_backup   (170 vs 170 insns, first diff 140)
+  O    134   268 BINARY_OR                None
+  O    135   270 LOAD_CONST               '挡'
+  O    136   272 CALL_METHOD              6
+  O    137   274 POP_TOP                  None
+  O    138   276 LOAD_CONST               None
+  O    139   278 RETURN_VALUE             None
+  O >  140   280 LOAD_DEREF               'p'
+  O    141   282 LOAD_METHOD              'drawText'
+  O    142   284 LOAD_GLOBAL              'int'
+  O    143   286 LOAD_FAST                'bx1'
+  O    144   288 LOAD_CONST               43
+  O    145   290 BINARY_SUBTRACT          None
+  O    146   292 CALL_FUNCTION            1
+  N    134   268 BINARY_OR                None
+  N    135   270 LOAD_CONST               '挡'
+  N    136   272 CALL_METHOD              6
+  N    137   274 POP_TOP                  None
+  N    138   276 LOAD_CONST               None
+  N    139   278 RETURN_VALUE             None
+  N >  140   280 LOAD_CONST               None
+  N    141   282 LOAD_METHOD              'drawText'
+  N    142   284 LOAD_GLOBAL              'int'
+  N    143   286 LOAD_FAST                'bx1'
+  N    144   288 LOAD_CONST               43
+  N    145   290 BINARY_SUBTRACT          None
+  N    146   292 CALL_FUNCTION            1

@@ -1,0 +1,9 @@
+{
+  "failed": [],
+  "unplaced": [],
+  "broken": [
+    "<module>.load_theme_name",
+    "<module>.save_theme_name",
+    "<module>.unpack"
+  ]
+}
