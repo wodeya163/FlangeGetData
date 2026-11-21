@@ -20,7 +20,9 @@ import urllib.error
 OWNER = 'wodeya163'
 REPO = 'FlangeGetData'
 BRANCH = 'main'
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = subprocess.run(['git', 'rev-parse', '--show-toplevel'],
+                      cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                      capture_output=True, text=True).stdout.strip()
 API = 'https://api.github.com'
 UA = {'User-Agent': 'FlangeQuery-SourcePush/1.1',
       'Accept': 'application/vnd.github+json'}
