@@ -37,6 +37,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.parse
 import urllib.request
 import urllib.error
@@ -92,68 +93,98 @@ def build():
 
 
 # --------------------------- GitHub Releases 发布 ---------------------------
-def _github_api_post(url, data, tok, method='POST'):
-    req = urllib.request.Request(
-        url, data=data, method=method,
-        headers={'Authorization': 'Bearer ' + tok,
-                 'User-Agent': USER_AGENT,
-                 'Accept': 'application/vnd.github+json'})
-    with urllib.request.urlopen(req, timeout=120) as resp:
-        return json.loads(resp.read().decode('utf-8'))
+def _github_token():
+    """优先环境变量；否则读 git credential manager（不落盘、不回显）。"""
+    tok = os.environ.get('FLANGE_GITHUB_TOKEN')
+    if tok:
+        return tok
+    try:
+        p = subprocess.run(['git', 'credential', 'fill'],
+                           input='protocol=https\nhost=github.com\n\n',
+                           capture_output=True, text=True, timeout=30)
+        kv = dict(l.split('=', 1) for l in p.stdout.strip().splitlines() if '=' in l)
+        return kv.get('password')
+    except Exception:
+        return None
+
+
+def _github_api(url, data=None, tok=None, method=None,
+                content_type='application/json', timeout=120):
+    body = data if isinstance(data, bytes) else (
+        json.dumps(data).encode('utf-8') if data is not None else None)
+    headers = {'Authorization': 'Bearer ' + tok,
+               'User-Agent': USER_AGENT,
+               'Accept': 'application/vnd.github+json'}
+    if body is not None:
+        headers['Content-Type'] = content_type
+    req = urllib.request.Request(url, data=body, headers=headers,
+                                 method=method or ('POST' if body is not None else 'GET'))
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        txt = resp.read().decode('utf-8')
+        return json.loads(txt) if txt else {}
 
 
 def _upload_asset(upload_url, fp, tok):
+    name = os.path.basename(fp)
     ct = mimetypes.guess_type(fp)[0] or 'application/octet-stream'
     with open(fp, 'rb') as fh:
         body = fh.read()
-    url = upload_url + '?name=' + urllib.parse.quote(os.path.basename(fp))
-    _github_api_post(url, body, tok)
-    print('   已上传资产：%s（%d KB）' % (os.path.basename(fp), len(body) // 1024))
+    url = upload_url.split('{')[0] + '?name=' + urllib.parse.quote(name)
+    last = None
+    for attempt in range(4):
+        try:
+            _github_api(url, body, tok=tok, content_type=ct, timeout=600)
+            print('   已上传资产：%s（%d KB）' % (name, len(body) // 1024))
+            return
+        except Exception as e:
+            last = e
+            if attempt < 3:
+                print('   上传重试 %d/3：%s' % (attempt + 1, str(e)[:120]))
+                time.sleep(2 ** attempt)
+    raise last
 
 
 def publish_github(repo, version, zip_path, version_json_path, notes):
-    """创建 latest release 并上传 version.json + folder zip。
-
-    优先用 gh CLI；找不到 gh 但有 FLANGE_GITHUB_TOKEN 时改用 GitHub API。
-    两者都不可用则只生成本地产物并打印手动上传指引，不阻塞。
-    """
+    """创建/复用 latest release，上传 version.json + folder zip（覆盖同名旧资产）。"""
     tag = 'v' + version
-    nf = os.path.join(tempfile.gettempdir(), 'flange_release_notes.txt')
-    with open(nf, 'w', encoding='utf-8') as fh:
-        fh.write(notes)
+    tok = _github_token()
+    if not tok:
+        print('⚠️ 未检测到 GitHub 凭据（gh CLI / FLANGE_GITHUB_TOKEN / git credential）。')
+        _manual_upload_tip(version, zip_path, version_json_path, repo, 'github')
+        return False
 
-    have_gh = shutil.which('gh')
-    if have_gh:
-        print('用 gh 创建 release %s …' % tag)
-        subprocess.check_call(
-            ['gh', 'release', 'create', tag, '-R', repo,
-             '-F', nf, '--title', '管路智选 V%s' % version,
-             zip_path, version_json_path])
-        print('✅ 已发布：https://github.com/%s/releases/tag/%s' % (repo, tag))
-        return True
-
-    tok = os.environ.get('FLANGE_GITHUB_TOKEN')
-    if tok:
-        print('gh 未安装，改用 GitHub API + token 创建 release %s …' % tag)
-        rel = _github_api_post(
+    try:
+        rel = _github_api('%s/repos/%s/releases/tags/%s' % (GITHUB_API, repo, tag),
+                          tok=tok)
+    except urllib.error.HTTPError as e:
+        if e.code != 404:
+            raise
+        rel = None
+    if rel and rel.get('id'):
+        print('ℹ️ release %s 已存在 (id=%s)，复用' % (tag, rel['id']))
+    else:
+        rel = _github_api(
             '%s/repos/%s/releases' % (GITHUB_API, repo),
-            json.dumps({'tag_name': tag,
-                        'name': '管路智选 V%s' % version,
-                        'body': notes,
-                        'draft': False, 'prerelease': False}).encode('utf-8'),
-            tok)
-        upload_url = rel['upload_url'].split('{')[0]
-        for fp in (version_json_path, zip_path):
-            _upload_asset(upload_url, fp, tok)
-        print('✅ 已发布：https://github.com/%s/releases/tag/%s' % (repo, tag))
-        return True
+            {'tag_name': tag, 'name': '管路智选 V%s' % version,
+             'body': notes, 'draft': False, 'prerelease': False}, tok=tok)
+        print('✅ 已创建 GitHub release %s (id=%s)' % (tag, rel.get('id')))
 
-    print('⚠️ 未检测到 gh CLI，也未设置 FLANGE_GITHUB_TOKEN。本地产物已生成，请任选其一上传：')
-    print('   1) 安装 gh 并 `gh auth login`，重跑本脚本（自动上传）；')
-    print('   2) GitHub 网页手动新建 release %s，拖入：' % tag)
-    print('        %s' % version_json_path)
-    print('        %s' % zip_path)
-    return False
+    upload_url = rel.get('upload_url', '')
+    if not upload_url:
+        print('⚠️ release 缺少 upload_url，无法上传资产')
+        return False
+    existing = {a.get('name'): a.get('id') for a in (rel.get('assets') or [])}
+    for fp in (version_json_path, zip_path):
+        name = os.path.basename(fp)
+        if name in existing:
+            _github_api('%s/repos/%s/releases/assets/%s'
+                        % (GITHUB_API, repo, existing[name]),
+                        tok=tok, method='DELETE')
+            print('   删除旧资产：%s' % name)
+        _upload_asset(upload_url, fp, tok)
+
+    print('✅ 已发布：https://github.com/%s/releases/tag/%s' % (repo, tag))
+    return True
 
 
 # --------------------------- Gitee 码云 Releases 发布 ---------------------------

@@ -23,12 +23,33 @@ class ProvenanceTest(unittest.TestCase):
         for key in main.PROVENANCE:
             self.assertIn(key, groups)
 
-    def test_gb_pages_point_to_hg_source(self):
+    def test_gb_pages_source_notes(self):
         note1 = main.source_note('GB/T 9124.1-2019（PN 系列·欧洲体系）')
         note2 = main.source_note('GB/T 9124.2-2019（Class 系列·美洲体系）')
-        self.assertIn('HG/T 20592', note1)
-        self.assertIn('HG/T 20615', note2)
-        self.assertIn('待逐条复核', note1)
+        # 2026-11-22：9124.1 PN 系列 9 类全部按 PDF 真值复核；
+        # 9124.2 为扫描件，Class150 代表表目视抽样复核，其余 Class 未逐条核对。
+        self.assertIn('GB/T 9124.1-2019', note1)
+        self.assertIn('209 行逐项复核', note1)
+        self.assertIn('其余 8 类', note1)
+        self.assertIn('GB/T 9124.2-2019', note2)
+        self.assertIn('目视抽样复核', note2)
+        self.assertIn('未逐条核对', note2)
+
+    def test_gb9124_1_family_source_and_status(self):
+        note = main.source_note('GB/T 9124.1-2019（PN 系列·欧洲体系）',
+                                'GBT9124_1_法兰盖.csv')
+        self.assertIn('表8–91', note)
+        self.assertIn('公共尺寸按 PDF 重建', note)
+        self.assertEqual(main.review_for(
+            'GBT9124_1_法兰盖.csv',
+            'GB/T 9124.1-2019（PN 系列·欧洲体系）')['status'], 'verified')
+
+    def test_gb9124_2_still_partial(self):
+        info = main.review_for(
+            'GBT9124_2_带颈对焊.csv',
+            'GB/T 9124.2-2019（Class 系列·美洲体系）')
+        self.assertEqual(info['status'], 'partial')
+        self.assertIn('抽样复核', info['source'])
 
     def test_hg_pages_have_no_extra_note(self):
         self.assertEqual(main.source_note('HG/T 20592-2009（欧洲体系）'), '')

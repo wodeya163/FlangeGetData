@@ -99,9 +99,9 @@ def fill_table(win):
             head_extra.append(('PN', 'PN'))
         cols = head_extra + [(c, t) for c, t in cols
                              if c not in ('PN', 'Class')]
-    if not any(c == '复核状态' for c, _ in cols) and \
-            any(r.get('复核状态') for r in rows):
-        cols.insert(0, ('复核状态', '复核状态'))
+    # 复核状态为辅助说明列：数据复核完成后隐藏，不再占据表格列。
+    # 复核状态与来源信息仍在顶部说明栏（win.cap）展示，不丢失可追溯性。
+    cols = [(c, t) for c, t in cols if c != '复核状态']
     win.current_cols = [c for c, _ in cols]
     cap = '查询结果：<b>%s · %s</b>' % (name, std)
     note = source_note(std, csvf)
@@ -152,10 +152,6 @@ def fill_table(win):
         for i in range(len(cols)):
             win.table.setColumnWidth(i, 90)
     win._restore_header_state(csvf)
-    status_col = next((j for j, (c, _) in enumerate(cols)
-                       if c == '复核状态'), None)
-    if status_col is not None:
-        win.table.setColumnWidth(status_col, 90)
 
 
 def on_row(win):

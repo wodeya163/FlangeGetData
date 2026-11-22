@@ -24,7 +24,10 @@ class DataBuildTest(unittest.TestCase):
             db = os.path.join(tmp, 'data.db')
             manifest_path = os.path.join(tmp, 'manifest.json')
             manifest = build(db, manifest_path)
-            self.assertEqual(len(manifest['files']), 58)
+            data_dir = os.path.join(ROOT, 'Data')
+            n_csv = len([n for n in os.listdir(data_dir)
+                         if n.lower().endswith('.csv')])
+            self.assertEqual(len(manifest['files']), n_csv)
             self.assertTrue(os.path.isfile(db))
             self.assertTrue(os.path.isfile(manifest_path))
 

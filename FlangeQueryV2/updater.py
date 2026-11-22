@@ -45,8 +45,8 @@ UPDATE_BASE_URL = os.environ.get(
     'file:///E:/AI作品/work/FlangeGetData/发布')   # 默认本地模拟；真实部署改 http(s)
 # Releases 源（Gitee 优先，其次 GitHub，最后回退 http/file）。
 # 设为 'owner/repo' 即启用对应源；也可通过环境变量覆盖（便于分发给不同仓库）。
-GITEE_REPO = os.environ.get('FLANGE_GITEE_REPO', 'zsh_salien/flange-get-data')
-GITHUB_REPO = os.environ.get('FLANGE_GITHUB_REPO', '')
+GITEE_REPO = os.environ.get('FLANGE_GITEE_REPO', '')       # 备用：设为 owner/repo 可切回 Gitee
+GITHUB_REPO = os.environ.get('FLANGE_GITHUB_REPO', 'wodeya163/FlangeGetData')  # 默认更新源
 GITHUB_API = 'https://api.github.com'
 GITEE_API = 'https://gitee.com/api/v5'
 UPDATE_DISABLED = os.environ.get('FLANGE_NO_UPDATE', '0') == '1'
@@ -125,9 +125,10 @@ def github_latest_release(repo):
 
 
 def gitee_latest_release(repo):
-    """Gitee 无 /latest 端点，且列表排序不保证最新在前（2026-11-21 实测：
-    per_page=1 返回的是最早的 release）。取前 20 项按 id 最大值（id 单调递增）。
-    公开仓库可免 token（限流较严），设 FLANGE_GITEE_TOKEN 提升稳定性/速率。"""
+    """Gitee 无 /latest 端点，且列表排序不保证最新在前。2026-11-22 实测当前
+    仓库 id 最大的 release 竟是临时测试 tag（v0.0.0-split-test），按 id 取会
+    误选中它并让客户端误报“已是最新”。改为按 tag 的语义版本取最大，并排除
+    prerelease；公开仓库可免 token（限流较严），设 FLANGE_GITEE_TOKEN 提升稳定性。"""
     tok = os.environ.get('FLANGE_GITEE_TOKEN')
     url = '%s/repos/%s/releases?per_page=20' % (GITEE_API, repo)
     if tok:
@@ -136,7 +137,10 @@ def gitee_latest_release(repo):
     with urllib.request.urlopen(req, timeout=60) as resp:
         data = json.loads(resp.read().decode('utf-8'))
     if isinstance(data, list) and data:
-        return max(data, key=lambda x: x.get('id') or 0)
+        # (is_stable, major, minor, patch)：测试/预发布 tag 永远排在正式版之后
+        return max(data, key=lambda x: (
+            0 if x.get('prerelease') else 1,
+        ) + parse_version(x.get('tag_name')))
     raise RuntimeError('Gitee 仓库 %s 暂无 release' % repo)
 
 
@@ -169,6 +173,15 @@ def fetch_version_info(base=None, repo=None, source=None):
                 return {'latest': None, 'files': {}}   # 仓库/Release 尚未建立
             raise
         assets = rel.get('assets') or []
+        # 发布完整性校验：Releases 源必须带 folder zip。缺包时若继续走后面的
+        # files.folder.url 分支，会错误回退到本机开发用的 file:// 发布目录，
+        # 在用户机器上表现为“下载失败”，在开发机上则因 SHA 不符而失败——
+        # 两种情况都掩盖了真正原因。2026-11-22 实测 v3.78.1 即缺该资产。
+        if not _asset_url(assets, '-folder.zip'):
+            raise RuntimeError(
+                '发布源(%s) 最新 release %s 缺少 *-folder.zip 更新包，'
+                '请先在 Gitee/GitHub Release 上传完整包'
+                % (source, rel.get('tag_name')))
         vj = next((a for a in assets if a['name'] == 'version.json'), None)
         if vj:
             raw = fetch_bytes(vj.get('browser_download_url') or vj.get('download_url'))
@@ -232,11 +245,11 @@ def verify_sha256(path, expected):
 
 
 def _resolve_folder_url(info, base):
-    # Releases 模式（gitee/github 通用）：直接从最新 release assets 取 folder zip 下载地址
-    assets = (info.get('_release') or {}).get('assets', []) if isinstance(info, dict) else []
-    rel_url = _asset_url(assets, '-folder.zip')
-    if rel_url:
-        return rel_url
+    # Releases 模式（gitee/github 通用）：直接从最新 release assets 取 folder zip 下载地址；
+    # 禁止回退到本机 file:// 发布目录（见 fetch_version_info 的完整性校验）。
+    rel = info.get('_release') if isinstance(info, dict) else None
+    if isinstance(rel, dict):
+        return _asset_url(rel.get('assets', []), '-folder.zip')
     # http/file 模式：从 version.json 的 files.folder.url 取
     f = info.get('files', {}).get('folder')
     if not isinstance(f, dict):

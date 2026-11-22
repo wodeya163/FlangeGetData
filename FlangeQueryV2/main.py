@@ -29,7 +29,8 @@ from PyQt5.QtWidgets import (
 from flange_export import (resolve_export_columns, rows_to_tsv, write_csv,
                            write_xlsx)
 from drawing import render_flange
-from version import APP_ID, APP_NAME, APP_TAGLINE, APP_VERSION_DISPLAY
+from version import (APP_ID, APP_NAME, APP_TAGLINE, APP_VERSION,
+                     APP_VERSION_DISPLAY)
 from updater import (UpdateChecker, UpdateDownloader, apply_and_restart,
                      UPDATE_DISABLED)
 from core.page_spec import PageSpec
@@ -247,14 +248,14 @@ PAGES = [
     ('GB/T 9124.1-2019（PN 系列·欧洲体系）', [
         ('WN 带颈对焊（GB/T 真值 PN2.5–400）', 'GBT9124_1_带颈对焊.csv',
          'WN-带颈对焊.bmp', WN_LABELS),
-        ('SO 带颈平焊',   'HGT20592_带颈平焊.csv',   'SO-带颈平焊.bmp',   GENERIC_LABELS),
-        ('PL 板式平焊',   'HGT20592_板式平焊.csv',   'PL板式平焊.bmp',    GENERIC_LABELS),
-        ('SW 承插焊',     'HGT20592_承插焊.csv',     'SW承插焊.bmp',      GENERIC_LABELS),
-        ('Th 螺纹',       'HGT20592_螺纹.csv',       'Th螺纹.bmp',        GENERIC_LABELS),
-        ('BL 法兰盖',     'HGT20592_法兰盖.csv',     'BL法兰盖.bmp',      GENERIC_LABELS),
-        ('IF 整体法兰',   'HGT20592_整体.csv',       'IF整体法兰.bmp',    GENERIC_LABELS),
-        ('PJSE 对焊环松套', 'HGT20592_对焊环松套.csv', 'PJSE对焊环松套592.bmp', GENERIC_LABELS),
-        ('PJRJ 平焊环松套', 'HGT20592_平焊环松套.csv', 'PJRJ平焊环松套.bmp',  GENERIC_LABELS),
+        ('SO 带颈平焊',   'GBT9124_1_带颈平焊.csv',   'SO-带颈平焊.bmp',   GENERIC_LABELS),
+        ('PL 板式平焊',   'GBT9124_1_板式平焊.csv',   'PL板式平焊.bmp',    GENERIC_LABELS),
+        ('SW 承插焊',     'GBT9124_1_承插焊.csv',     'SW承插焊.bmp',      GENERIC_LABELS),
+        ('Th 螺纹',       'GBT9124_1_螺纹.csv',       'Th螺纹.bmp',        GENERIC_LABELS),
+        ('BL 法兰盖',     'GBT9124_1_法兰盖.csv',     'BL法兰盖.bmp',      GENERIC_LABELS),
+        ('IF 整体法兰',   'GBT9124_1_整体.csv',       'IF整体法兰.bmp',    GENERIC_LABELS),
+        ('PJSE 对焊环松套', 'GBT9124_1_对焊环松套.csv', 'PJSE对焊环松套592.bmp', GENERIC_LABELS),
+        ('PJRJ 平焊环松套', 'GBT9124_1_平焊环松套.csv', 'PJRJ平焊环松套.bmp',  GENERIC_LABELS),
         ('BL(S) 衬里法兰盖', 'HGT20592_不锈钢衬里法兰盖.csv', 'BL法兰盖.bmp', GENERIC_LABELS),
     ]),
     ('GB/T 9124.2-2019（Class 系列·美洲体系）', [
