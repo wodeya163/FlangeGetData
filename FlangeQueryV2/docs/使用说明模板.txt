@@ -10,8 +10,14 @@
 应用图标：蓝调扁平法兰盘（程序窗口 / 任务栏 / exe 文件图标均已应用）
 
 
-一、两个版本怎么选
+一、三个版本怎么选
 ------------------------------------------------
+0. 安装版（setup.exe，推荐给需要开始菜单/桌面快捷方式的用户）
+   - 双击 FlangeQueryV2-<版本>-setup.exe，一路下一步即可
+   - 默认装到 %LOCALAPPDATA%\Programs\FlangeQuery（当前用户目录，无需管理员权限）
+   - 卸载：控制面板「程序和功能」或开始菜单卸载项，不写系统注册表深层
+   - 支持自更新：与文件夹版同一套更新器，更新脚本写入安装目录后覆盖，权限无问题
+
 1. 单文件版（文件夹：单文件版）
    - 只有一个 FlangeQueryV2.exe
    - 优点：拷到任何 Win10/Win11 64 位电脑，双击即用，无需安装 Python
@@ -109,13 +115,32 @@ DN / NPS 为辅助检索列（按 GB/T 1047 / HG/T 20553 惯例映射，标准�
 1. 单文件版首次启动慢（解压所致），后续启动会快
 2. 单文件版运行时任务管理器可能出现两个同名进程（引导程序 + 主程序），属正常机制
 3. 杀毒软件可能对首次运行的新 exe 扫描几秒，如弹窗选"允许"即可
-4. 本程序为纯本地运行，不联网；窗口位置和上次页签会写入当前用户配置
+4. 业务数据全部本地运行；仅启动时（约 4 秒后）静默访问公开 GitHub Releases 检查
+   更新，不收集任何用户数据；窗口位置和上次页签会写入当前用户配置
    （HKCU\Software\FlangeQuery\FlangeQueryV3），日志写入
    %LOCALAPPDATA%\FlangeQuery\logs\FlangeQuery.log（1 MB × 3 份轮转）
 5. exe 当前未做代码签名，Windows SmartScreen 可能提示未知发布者
 
 
-六、文件清单
+六、半自动更新（V3.78.2 起）
+------------------------------------------------
+- 默认更新源：GitHub Releases（公开仓库 wodeya163/FlangeGetData，免鉴权）。
+  启动约 4 秒后静默检查一次；「关于」对话框内可手动点「检查更新」。
+- 发现新版：弹窗确认 → 后台下载 → SHA256 校验 → 写更新脚本 → 程序退出并由脚本
+  覆盖文件后自动重启（仅文件夹版可自更新）。
+- 关闭检查：设置环境变量 FLANGE_NO_UPDATE=1（内网/调试环境）。
+- 切换更新源（改 updater.py 顶部常量或设同名环境变量）：
+  A) GitHub（默认）：FLANGE_GITHUB_REPO=owner/repo
+  B) Gitee（备用）：FLANGE_GITEE_REPO=owner/repo，需在 Gitee Release 上传
+     version.json + *-folder.zip
+  C) 通用 http(s)：两者留空，把 updater.UPDATE_BASE_URL 指向你的 http(s) 目录，
+     在该目录放 version.json + folder zip
+  ※ WorkBuddy 云存储与消费级网盘均无稳定免鉴权直链，不适合作为更新源。
+- 发布新版：改 version.py 的 APP_VERSION，然后运行
+  python tools\_publish_update.py --github wodeya163/FlangeGetData --notes "更新说明"
+
+
+七、文件清单
 ------------------------------------------------
 单文件版/FlangeQueryV2.exe     单文件便携版
 文件夹版/FlangeQueryV2/        本机文件夹版（含 _internal 资源目录）

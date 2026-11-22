@@ -24,12 +24,15 @@ def _version():
 
 def _find_iscc():
     env = os.environ.get('ISCC')
+    local = os.environ.get('LOCALAPPDATA', r'C:\Users\Administrator\AppData\Local')
     candidates = [
         env,
         shutil.which('iscc'),
         shutil.which('ISCC'),
+        os.path.join(local, 'Programs', 'Inno Setup 6', 'ISCC.exe'),  # winget 默认装到用户目录
         r'C:\Program Files (x86)\Inno Setup 6\ISCC.exe',
         r'C:\Program Files\Inno Setup 6\ISCC.exe',
+        r'C:\Program Files\Inno Setup 7\ISCC.exe',
     ]
     for path in candidates:
         if path and os.path.isfile(path):

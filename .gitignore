@@ -53,3 +53,8 @@ _icon_preview.png
 # CadQuery/OCP runtime and wheel cache (not part of source)
 _cadquery_env/
 _cadquery_wheels/
+
+# 临时/校对产物
+FlangeQueryV2/q
+FlangeQueryV2/tools/_tmp_pdf/
+

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Gitee 端到端更新链路真实验证（模拟旧版用户）。
+"""发布端到端更新链路真实验证（模拟旧版用户）。
 
 用法（受管 python + PYTHONPATH=pylibs）：
-  python tools/_test_gitee_e2e.py [本地版本号]
+  python tools/_test_gitee_e2e.py [本地版本号] [source]
 
-不设任何 token（验证公开仓库免鉴权拉取）；FLANGE_GITEE_REPO 若已设则以其为准，
-否则用 updater.py 内嵌默认仓库名——与真实分发场景一致。
+source 可传 github/gitee/http；不传时按 updater 默认优先级自动选。
+不设任何 token（验证公开仓库免鉴权拉取），与真实用户端一致。
 """
 import os
 import sys
@@ -13,11 +13,15 @@ import sys
 import updater
 
 LOCAL_VERSION = sys.argv[1] if len(sys.argv) > 1 else '0.0.0'
+SOURCE = sys.argv[2] if len(sys.argv) > 2 else None
 
 
 def main():
-    print('更新源: GITEE_REPO = %r (未设 token，模拟真实用户端)' % updater.GITEE_REPO)
-    info = updater.fetch_version_info()
+    src = SOURCE or ('github' if updater.GITHUB_REPO else
+                     ('gitee' if updater.GITEE_REPO else 'http'))
+    print('更新源: %s (GITEE_REPO=%r, GITHUB_REPO=%r)，模拟公开用户端免 token'
+          % (src, updater.GITEE_REPO, updater.GITHUB_REPO))
+    info = updater.fetch_version_info(source=SOURCE)
     latest = info.get('latest')
     print('[1] fetch_version_info ✅  latest=%s' % latest)
     assets = [a.get('name') for a in (info.get('_release', {}).get('assets') or [])]

@@ -48,10 +48,26 @@ class Gb9124DataTest(unittest.TestCase):
 
     def test_review_status_and_source(self):
         info = main.review_for(CSV, 'GB/T 9124.1-2019（PN 系列·欧洲体系）')
-        self.assertEqual(info['status'], 'partial')
+        self.assertEqual(info['status'], 'verified')
         self.assertIn('表27–38', info['source'])
         note = main.source_note('GB/T 9124.1-2019（PN 系列·欧洲体系）', CSV)
         self.assertIn('PN2.5–400', note)
+
+    def test_n_series_ii_matches_pdf(self):
+        """2026-11-22 逐项复核：大口径 N 系列Ⅱ与系列Ⅰ不同，不得再填同值。"""
+        # 直接从 CSV 读取关键复核点（PDF 表27/表30/表32 实测值）
+        import csv
+        csv_path = os.path.join(ROOT, 'Data', CSV)
+        rows = {}
+        with open(csv_path, encoding='utf-8-sig', newline='') as fh:
+            for r in csv.DictReader(fh):
+                rows[(r['PN'], r['DN'])] = r
+        self.assertEqual(rows[('2.5', '350')]['N_A'], '385')
+        self.assertEqual(rows[('2.5', '350')]['N_B'], '390')
+        self.assertEqual(rows[('10', '600')]['N_A'], '642')
+        self.assertEqual(rows[('10', '600')]['N_B'], '650')
+        self.assertEqual(rows[('40', '600')]['N_A'], '666')
+        self.assertEqual(rows[('40', '600')]['N_B'], '686')
 
     def test_page_is_registered(self):
         pages = [(name, csvf) for _g, items in main.PAGES
