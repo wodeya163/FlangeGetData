@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """把 folder zip 上传到已有 GitHub Release（用户在自己网络环境运行）。
 
-本环境（agent 沙箱）上行链路会在大文件传输数百 KB 后重置，
-43 MB 的 folder zip 无法自动上传；version.json（421 B）已成功上传。
-请在自己电脑的正常终端运行本脚本完成大资产上传，一次即可。
+用于把 43 MB 左右的 folder zip 补传到已有 Release；
+GitHub Release 必须同时包含 version.json 与 *-folder.zip，
+否则客户端会提示“缺少 *-folder.zip 更新包”。
 
 用法：
   python tools/_upload_asset.py wodeya163/FlangeGetData v3.78.2 发布/FlangeQueryV2-3.78.2-folder.zip
@@ -77,7 +77,7 @@ def main():
         'Content-Type': ct, 'Accept': 'application/vnd.github+json'}, method='POST')
     with urllib.request.urlopen(req, timeout=3600) as resp:
         result = __import__('json').loads(resp.read().decode('utf-8'))
-    print('✅ 上传成功：%s (%d bytes)' % (result.get('name'), result.get('size')))
+    print('[OK] 上传成功：%s (%d bytes)' % (result.get('name'), result.get('size')))
     print('发布页：https://github.com/%s/releases/tag/%s' % (repo, tag))
 
 
