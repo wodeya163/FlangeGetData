@@ -1,0 +1,106 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'FlangeQueryV2/version.py'
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: '更新说明（留空则自动生成）'
+        required: false
+        default: ''
+      force:
+        description: '该版本已存在时仍重新构建并覆盖发布'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: windows-latest
+    env:
+      PYTHONIOENCODING: utf-8
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Read version
+        id: ver
+        shell: pwsh
+        run: |
+          $m = Select-String -Path FlangeQueryV2/version.py -Pattern "APP_VERSION\s*=\s*'([^']+)'" | Select-Object -First 1
+          if (-not $m) { throw 'FlangeQueryV2/version.py 中找不到 APP_VERSION' }
+          $v = $m.Matches[0].Groups[1].Value
+          "version=$v" >> $env:GITHUB_OUTPUT
+          "tag=v$v" >> $env:GITHUB_OUTPUT
+          Write-Host "版本：V$v"
+
+      - name: Check existing release
+        id: check
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          $tag = '${{ steps.ver.outputs.tag }}'
+          $code = 0
+          try {
+            $r = Invoke-WebRequest -Uri "https://api.github.com/repos/${{ github.repository }}/releases/tags/$tag" `
+              -Headers @{ 'User-Agent' = 'release-check'; 'Authorization' = "Bearer $env:GH_TOKEN"; 'Accept' = 'application/vnd.github+json' } `
+              -UseBasicParsing -TimeoutSec 30
+            $code = [int]$r.StatusCode
+          } catch {
+            if ($_.Exception.Response) { $code = [int]$_.Exception.Response.StatusCode }
+          }
+          if ($code -eq 200 -and "$env:FORCE" -ne 'true') {
+            Write-Host "Release $tag 已存在，跳过构建。要重发请手动运行并勾选 force。"
+            "skip=true" >> $env:GITHUB_OUTPUT
+          } else {
+            "skip=false" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Install dependencies
+        if: steps.check.outputs.skip != 'true'
+        working-directory: FlangeQueryV2
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-build.txt
+
+      - name: Build and publish release
+        if: steps.check.outputs.skip != 'true'
+        working-directory: FlangeQueryV2
+        shell: pwsh
+        env:
+          FLANGE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_NOTES: ${{ inputs.notes }}
+          REPO: ${{ github.repository }}
+        run: |
+          $notes = $env:RELEASE_NOTES
+          if (-not $notes) { $notes = "管路智选 V${{ steps.ver.outputs.version }} 自动发布" }
+          python tools\_publish_update.py --build --github $env:REPO --notes $notes
+          if ($LASTEXITCODE -ne 0) { throw "发布失败，退出码 $LASTEXITCODE" }
+
+      - name: Summary
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          "## 已发布 ${{ steps.ver.outputs.tag }}" >> $env:GITHUB_STEP_SUMMARY
+          "version.json 与 folder zip 已上传到 Release；客户端下次启动检查到新版本后会提示更新。" >> $env:GITHUB_STEP_SUMMARY

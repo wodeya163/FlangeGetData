@@ -127,6 +127,27 @@ python tools\build_release.py --clean --installer
 
 发布前应在目标机器上手动启动 exe，检查打印预览、导出和中文显示。当前构建未做代码签名，Windows SmartScreen 可能提示未知发布者；如需签名，应在构建后使用单位代码签名证书处理。
 
+## 自动发版（GitHub Actions）
+
+`.github/workflows/release.yml` 已接管发版：**只改 `FlangeQueryV2/version.py` 的 `APP_VERSION` 并推送到 `main`**，CI 会自动构建并发布。
+
+流程：
+
+1. 在 `version.py` 把版本号加一（如 `3.78.4` → `3.78.5`）并提交；
+2. 推送到 `main`（仅 `version.py` 变更会触发，避免无关提交反复打包）；
+3. Actions 在 `windows-latest` 上安装依赖、跑测试，构建单文件版与文件夹版；
+4. 调用 `tools/_publish_update.py --build --github <repo>` 生成 `version.json` 与
+   `FlangeQueryV2-<版本>-folder.zip`，计算 SHA256，创建/更新同名 Release 并上传两个资产；
+5. 同名 Release 已存在时默认跳过；需要重发，在 Actions 页面手动运行并勾选 `force`。
+
+注意事项：
+
+- 必须升级 `APP_VERSION`。版本号不变，客户端 `need_update()` 判定为“已是最新”，不会下载。
+- 自动更新只覆盖**文件夹版（onedir）**；单文件版运行中文件被锁，只能提示用户手动下载。
+- 发布使用 `GITHUB_TOKEN`（工作流已声明 `permissions: contents: write`），无需额外配置 PAT。
+- 国内访问 `api.github.com` 可能失败；可把 `updater.GITEE_REPO` 指向 Gitee 镜像仓库，
+  或在分发时预设 `FLANGE_GITEE_REPO` 环境变量。
+
 ## 日志与设置
 
 - 日志：`%LOCALAPPDATA%\FlangeQuery\logs\FlangeQuery.log`，单文件 1 MB，保留 3 份。
