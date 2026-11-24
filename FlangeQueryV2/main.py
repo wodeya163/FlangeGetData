@@ -32,7 +32,7 @@ from drawing import render_flange
 from version import (APP_ID, APP_NAME, APP_TAGLINE, APP_VERSION,
                      APP_VERSION_DISPLAY)
 from updater import (UpdateChecker, UpdateDownloader, apply_and_restart,
-                     UPDATE_DISABLED)
+                     apply_exe_and_restart, UPDATE_DISABLED)
 from core.page_spec import PageSpec
 from core.page_kind import page_kind
 from core import storage
@@ -1164,6 +1164,7 @@ class MainWindow(QMainWindow):
     def _startup_check_update(self):
         if UPDATE_DISABLED:
             return
+        logger.info('开始检查更新（当前 %s）', APP_VERSION_DISPLAY)
         self._uc = UpdateChecker(APP_VERSION)
         self._uc.check_done.connect(self._on_check_done)
         self._uc.start()
@@ -1201,25 +1202,44 @@ class MainWindow(QMainWindow):
         msg = ('发现新版本 %s（当前 %s）\n\n更新内容：\n%s\n\n是否立即更新？'
                '（更新会下载新版并重启程序）'
                % (latest, APP_VERSION_DISPLAY, notes))
+        logger.info('提示更新：当前 %s → 最新 %s', APP_VERSION_DISPLAY, latest)
         btn = QMessageBox.question(
             self, '发现新版本', msg,
             QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         if btn == QMessageBox.Yes:
             self._do_update(info)
+        else:
+            logger.info('用户选择暂不更新')
 
     def _do_update(self, info):
+        logger.info('开始下载更新：%s', info.get('latest'))
         self.statusBar().showMessage('正在下载更新…（完成后自动重启）')
         self._dl = UpdateDownloader(APP_VERSION, info)
         self._dl.dl_done.connect(self._on_dl_done)
+        self._dl.dl_progress.connect(self._on_dl_progress)
         self._dl.start()
+
+    def _on_dl_progress(self, got, total):
+        if total:
+            self.statusBar().showMessage(
+                '正在下载更新… %d%%（%.1f / %.1f MB）'
+                % (got * 100 // total, got / 1048576.0, total / 1048576.0))
 
     def _on_dl_done(self, r):
         if not r.get('ok'):
+            logger.warning('下载更新失败：%s', r.get('error'))
             QMessageBox.critical(
-                self, '更新失败', '下载或校验失败：%s' % r['error'])
+                self, '更新失败', '下载或校验失败：%s' % r.get('error'))
             self.statusBar().showMessage('更新失败')
             return
-        if apply_and_restart(r['new_dir']):
+        new_exe = r.get('new_exe')
+        if new_exe:
+            ok = apply_exe_and_restart(new_exe)
+        else:
+            ok = apply_and_restart(r.get('new_dir'))
+        logger.info('更新包已就绪，触发重启=%s（%s）', ok,
+                    new_exe or r.get('new_dir'))
+        if ok:
             self.statusBar().showMessage('更新就绪，即将重启…')
             QApplication.quit()
         else:

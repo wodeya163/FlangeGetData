@@ -127,17 +127,20 @@ DN / NPS 为辅助检索列（按 GB/T 1047 / HG/T 20553 惯例映射，标准�
 - 默认更新源：GitHub Releases（公开仓库 wodeya163/FlangeGetData，免鉴权）。
   启动约 4 秒后静默检查一次；「关于」对话框内可手动点「检查更新」。
 - 发现新版：弹窗确认 → 后台下载 → SHA256 校验 → 写更新脚本 → 程序退出并由脚本
-  覆盖文件后自动重启（仅文件夹版可自更新）。
+  覆盖文件后自动重启。文件夹版覆盖整包，单文件版下载 *-onefile.exe 后替换 exe，
+  两种版本均支持自更新。
 - 关闭检查：设置环境变量 FLANGE_NO_UPDATE=1（内网/调试环境）。
 - 切换更新源（改 updater.py 顶部常量或设同名环境变量）：
   A) GitHub（默认）：FLANGE_GITHUB_REPO=owner/repo
   B) Gitee（备用）：FLANGE_GITEE_REPO=owner/repo，需在 Gitee Release 上传
-     version.json + *-folder.zip
+     version.json + *-folder.zip（单文件版另需 *-onefile.exe）
   C) 通用 http(s)：两者留空，把 updater.UPDATE_BASE_URL 指向你的 http(s) 目录，
      在该目录放 version.json + folder zip
   ※ WorkBuddy 云存储与消费级网盘均无稳定免鉴权直链，不适合作为更新源。
-- 发布新版：改 version.py 的 APP_VERSION，然后运行
-  python tools\_publish_update.py --github wodeya163/FlangeGetData --notes "更新说明"
+- 发布新版：改 version.py 的 APP_VERSION 并推送到 main，GitHub Actions 会自动
+  构建并发布 version.json + *-folder.zip + *-onefile.exe；也可本地手动运行
+  python tools\_publish_update.py --build --github wodeya163/FlangeGetData --notes "更新说明"
+- 网络抖动（WinError 10054/10060）会自动重试 3 次；若 github.com 下载域名被重置，会自动改走 GitHub API 资产通道（release-assets.githubusercontent.com）。
 
 
 七、文件清单

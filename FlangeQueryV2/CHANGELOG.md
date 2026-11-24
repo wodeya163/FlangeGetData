@@ -1,5 +1,16 @@
 # 更新记录
 
+## 3.78.5 - 2026-11-24
+
+### 修复 GitHub 资产域名被重置时自动更新失效
+- 现象：`api.github.com` 可访问，但 `github.com/.../releases/download/...` 返回 WinError 10054/10060，更新检查与下载均失败且只有一条静默日志；
+- 更新资产改为 **GitHub API 端点优先**（302 到 `release-assets.githubusercontent.com`），原 `browser_download_url` 兜底；大包直连优先、失败再走 API；
+- `version.json` 读取失败时，用 Release 的 tag / body / asset digest 降级，仍可判断版本与 SHA256；
+- 网络抖动自动重试 3 次；
+- 单文件版新增自更新：发布 `*-onefile.exe`，退出后替换 exe 并重启；文件夹版继续整包覆盖；
+- 下载进度显示在状态栏，检查/下载/应用/失败原因全部写入日志；
+- 发布脚本与 CI 同时上传 `version.json`、`*-folder.zip`、`*-onefile.exe` 三个资产。
+
 ## 3.78.4 - 2026-11-22
 
 ### GB/T 9124.1 PN 系列其余 8 类法兰按 PDF 全量复核
