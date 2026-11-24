@@ -16,7 +16,7 @@
    - 双击 FlangeQueryV2-<版本>-setup.exe，一路下一步即可
    - 默认装到 %LOCALAPPDATA%\Programs\FlangeQuery（当前用户目录，无需管理员权限）
    - 卸载：控制面板「程序和功能」或开始菜单卸载项，不写系统注册表深层
-   - 支持自更新：与文件夹版同一套更新器，更新脚本写入安装目录后覆盖，权限无问题
+   - 支持自更新：升级时静默运行新版 setup.exe（/VERYSILENT），自动关闭旧进程、覆盖文件并保留快捷方式与卸载项，无需管理员权限
 
 1. 单文件版（文件夹：单文件版）
    - 只有一个 FlangeQueryV2.exe
@@ -127,8 +127,8 @@ DN / NPS 为辅助检索列（按 GB/T 1047 / HG/T 20553 惯例映射，标准�
 - 默认更新源：GitHub Releases（公开仓库 wodeya163/FlangeGetData，免鉴权）。
   启动约 4 秒后静默检查一次；「关于」对话框内可手动点「检查更新」。
 - 发现新版：弹窗确认 → 后台下载 → SHA256 校验 → 写更新脚本 → 程序退出并由脚本
-  覆盖文件后自动重启。文件夹版覆盖整包，单文件版下载 *-onefile.exe 后替换 exe，
-  两种版本均支持自更新。
+  完成升级后自动重启。安装版静默运行 setup.exe，文件夹版覆盖整包，
+  单文件版替换 *-onefile.exe，三种版本均支持自更新。
 - 关闭检查：设置环境变量 FLANGE_NO_UPDATE=1（内网/调试环境）。
 - 切换更新源（改 updater.py 顶部常量或设同名环境变量）：
   A) GitHub（默认）：FLANGE_GITHUB_REPO=owner/repo

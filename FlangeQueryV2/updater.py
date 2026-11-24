@@ -104,6 +104,14 @@ def is_onefile():
     return os.path.normcase(os.path.abspath(meipass)) != os.path.normcase(exe_dir)
 
 
+def is_installed():
+    """Inno Setup 安装版：程序目录存在卸载程序 unins000.exe。"""
+    if not getattr(sys, 'frozen', False):
+        return False
+    prog_dir = os.path.dirname(os.path.abspath(sys.executable))
+    return os.path.isfile(os.path.join(prog_dir, 'unins000.exe'))
+
+
 def _read_url(req, timeout=60):
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return resp.read()
@@ -184,7 +192,8 @@ def _info_from_release(rel, assets):
 
     info = {'latest': str(rel.get('tag_name', '')).lstrip('vV') or None,
             'notes': rel.get('body', ''), 'files': {}}
-    for key, suffix in (('folder', '-folder.zip'), ('onefile', '-onefile.exe')):
+    for key, suffix in (('folder', '-folder.zip'), ('onefile', '-onefile.exe'),
+                        ('setup', '-setup.exe')):
         m = meta(_asset_item(assets, suffix))
         if m:
             info['files'][key] = m
@@ -430,6 +439,30 @@ def download_onefile(info, base=None, progress_cb=None):
     return exe_path
 
 
+def download_setup(info, base=None, progress_cb=None):
+    """下载安装版 setup.exe 并校验 SHA256，返回临时文件路径。"""
+    base = normalize_base(base or UPDATE_BASE_URL)
+    rel = info.get('_release') if isinstance(info, dict) else None
+    asset = (_asset_item(rel.get('assets', []), '-setup.exe')
+             if isinstance(rel, dict) else None)
+    meta = info.get('files', {}).get('setup') or {}
+    tmp = tempfile.mkdtemp(prefix='flange_upd_')
+    setup_path = os.path.join(tmp, 'FlangeQueryV2.setup.exe')
+    if asset:
+        _download_asset(asset, setup_path, progress_cb)
+    else:
+        f = info.get('files', {}).get('setup') or {}
+        url = f.get('url')
+        if not url:
+            raise ValueError('version.json 缺少安装包下载地址')
+        if not url.startswith(('http://', 'https://', 'file://')):
+            url = normalize_base(base) + '/' + url.lstrip('/')
+        download(url, setup_path, progress_cb)
+    if not verify_sha256(setup_path, meta.get('sha256')):
+        raise ValueError('安装包 SHA256 校验失败，可能损坏或被篡改')
+    return setup_path
+
+
 def download_and_extract(local_version, info, base=None, tmp_root=None,
                          progress_cb=None):
     """下载 folder zip → 校验 SHA256 → 解压，返回 new_dir（解压根）。异常向上抛。"""
@@ -508,6 +541,28 @@ def build_apply_exe_bat(prog_dir, new_exe, exe_name, pid):
     return bat
 
 
+def build_apply_setup_bat(prog_dir, setup_exe, exe_name, pid):
+    """安装版：等待旧进程退出 → 静默安装到原目录 → 启动新版本。"""
+    bat = os.path.join(prog_dir, '_apply_update.bat')
+    content = (
+        '@echo off\r\n'
+        'set "PROG=%~1"\r\n'
+        'set "NEW=%~2"\r\n'
+        'set "EXE=%~3"\r\n'
+        'set "PID=%~4"\r\n'
+        ':wait\r\n'
+        'tasklist /FI "PID eq %PID%" | find "%PID%" >nul\r\n'
+        'if %errorlevel%==0 (timeout /t 1 /nobreak >nul & goto wait)\r\n'
+        'timeout /t 2 /nobreak >nul\r\n'
+        'start /wait "" "%NEW%" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART '
+        '/CLOSEAPPLICATIONS /DIR="%PROG%" /LOG="%TEMP%\\flange_setup.log"\r\n'
+        'if exist "%PROG%\\%EXE%" start "" "%PROG%\\%EXE%"\r\n'
+    )
+    with open(bat, 'w', encoding='gbk', newline='') as f:
+        f.write(content)
+    return bat
+
+
 def _spawn_hidden(bat, *args):
     si = subprocess.STARTUPINFO()
     si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -533,6 +588,21 @@ def apply_and_restart(new_dir):
               % (bat, prog_dir, new_dir, exe_name, pid))
         return False
     _spawn_hidden(bat, prog_dir, new_dir, exe_name, str(pid))
+    return True
+
+
+def apply_setup_and_restart(setup_exe):
+    """安装版：静默运行 setup.exe 完成升级并重启。"""
+    prog_dir = os.path.dirname(sys.executable)
+    exe_name = os.path.basename(sys.executable)
+    pid = os.getpid()
+    bat = build_apply_setup_bat(prog_dir, setup_exe, exe_name, pid)
+    log.info('准备静默安装更新：程序目录 %s，安装包 %s，脚本 %s', prog_dir, setup_exe, bat)
+    if APPLY_DRY_RUN:
+        print('[DRY_RUN] 将启动安装更新脚本：%s\n  PROG=%s\n  NEW=%s\n  EXE=%s\n  PID=%s'
+              % (bat, prog_dir, setup_exe, exe_name, pid))
+        return False
+    _spawn_hidden(bat, prog_dir, setup_exe, exe_name, str(pid))
     return True
 
 
@@ -585,20 +655,32 @@ class UpdateDownloader(QThread):
 
     def run(self):
         try:
+            rel = self.info.get('_release') or {}
+            setup_asset = _asset_item(rel.get('assets', []), '-setup.exe')
             if is_onefile():
                 new_exe = download_onefile(self.info,
                                            progress_cb=self.dl_progress.emit)
                 log.info('单文件版更新包已就绪：%s', new_exe)
                 self.dl_done.emit({'ok': True, 'new_exe': new_exe,
-                                   'new_dir': None, 'error': None})
+                                   'new_setup': None, 'new_dir': None,
+                                   'error': None})
+            elif is_installed() and setup_asset:
+                new_setup = download_setup(self.info,
+                                           progress_cb=self.dl_progress.emit)
+                log.info('安装版更新包已就绪：%s', new_setup)
+                self.dl_done.emit({'ok': True, 'new_exe': None,
+                                   'new_setup': new_setup, 'new_dir': None,
+                                   'error': None})
             else:
                 new_dir = download_and_extract(
                     self.local_version, self.info,
                     progress_cb=self.dl_progress.emit)
                 log.info('文件夹版更新包已就绪：%s', new_dir)
                 self.dl_done.emit({'ok': True, 'new_exe': None,
-                                   'new_dir': new_dir, 'error': None})
+                                   'new_setup': None, 'new_dir': new_dir,
+                                   'error': None})
         except Exception as e:
             log.exception('下载更新失败')
             self.dl_done.emit({'ok': False, 'new_exe': None,
-                               'new_dir': None, 'error': str(e)})
+                               'new_setup': None, 'new_dir': None,
+                               'error': str(e)})

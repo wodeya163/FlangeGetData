@@ -86,10 +86,13 @@ def zip_folder(version):
     return zip_path
 
 
-def build():
-    print('重建发布包（build_release.py --clean）…')
-    subprocess.check_call(
-        [sys.executable, os.path.join('tools', 'build_release.py'), '--clean'])
+def build(installer=False):
+    print('重建发布包（build_release.py --clean%s）…'
+          % (' --installer' if installer else ''))
+    cmd = [sys.executable, os.path.join('tools', 'build_release.py'), '--clean']
+    if installer:
+        cmd.append('--installer')
+    subprocess.check_call(cmd)
 
 
 # --------------------------- GitHub Releases 发布 ---------------------------
@@ -144,13 +147,15 @@ def _upload_asset(upload_url, fp, tok):
     raise last
 
 
-def publish_github(repo, version, zip_path, version_json_path, notes, exe_path=None):
+def publish_github(repo, version, zip_path, version_json_path, notes,
+                   exe_path=None, setup_path=None):
     """创建/复用 latest release，上传 version.json + folder zip（覆盖同名旧资产）。"""
     tag = 'v' + version
     tok = _github_token()
     if not tok:
         print('⚠️ 未检测到 GitHub 凭据（gh CLI / FLANGE_GITHUB_TOKEN / git credential）。')
-        _manual_upload_tip(version, zip_path, version_json_path, repo, 'github', exe_path)
+        _manual_upload_tip(version, zip_path, version_json_path, repo, 'github',
+                          exe_path, setup_path)
         return False
 
     try:
@@ -177,6 +182,8 @@ def publish_github(repo, version, zip_path, version_json_path, notes, exe_path=N
     files = [version_json_path, zip_path]
     if exe_path:
         files.append(exe_path)
+    if setup_path:
+        files.append(setup_path)
     for fp in files:
         name = os.path.basename(fp)
         if name in existing:
@@ -222,13 +229,15 @@ def _gitee_api(url, data=None, files=None, tok=None, method='POST', timeout=120)
         return json.loads(txt) if txt else {}
 
 
-def publish_gitee(repo, version, zip_path, version_json_path, notes, exe_path=None):
+def publish_gitee(repo, version, zip_path, version_json_path, notes,
+                  exe_path=None, setup_path=None):
     """创建 Gitee release 并上传 version.json + folder zip。
     需要 FLANGE_GITEE_TOKEN（gitee.com→设置→私人令牌，勾 projects 权限）。"""
     tok = os.environ.get('FLANGE_GITEE_TOKEN')
     if not tok:
         print('⚠️ 未设置 FLANGE_GITEE_TOKEN。Gitee 发布需要私人令牌。')
-        _manual_upload_tip(version, zip_path, version_json_path, repo, 'gitee', exe_path)
+        _manual_upload_tip(version, zip_path, version_json_path, repo, 'gitee',
+                          exe_path, setup_path)
         return False
     tag = 'v' + version
     # 已有同名 release 则复用（支持断点重跑），否则创建
@@ -256,13 +265,16 @@ def publish_gitee(repo, version, zip_path, version_json_path, notes, exe_path=No
         have = set()
         if not rid:
             print('⚠️ 创建 Gitee release 失败（可能令牌权限不足）：%s' % rel)
-            _manual_upload_tip(version, zip_path, version_json_path, repo, 'gitee', exe_path)
+            _manual_upload_tip(version, zip_path, version_json_path, repo, 'gitee',
+                          exe_path, setup_path)
             return False
         print('✅ 已创建 Gitee release %s (id=%s)' % (tag, rid))
     # 逐个上传缺失资产（大文件走 600s 超时；已存在则跳过）
     files = [version_json_path, zip_path]
     if exe_path:
         files.append(exe_path)
+    if setup_path:
+        files.append(setup_path)
     for fp in files:
         if os.path.basename(fp) in have:
             print('   已存在，跳过：%s' % os.path.basename(fp))
@@ -277,7 +289,7 @@ def publish_gitee(repo, version, zip_path, version_json_path, notes, exe_path=No
 
 
 def _manual_upload_tip(version, zip_path, version_json_path, repo, platform,
-                       exe_path=None):
+                       exe_path=None, setup_path=None):
     print('   本地产物已生成，请任选其一上传到 %s：' % platform)
     print('   1) 设置私人令牌环境变量后重跑本脚本（自动上传）；')
     print('   2) 网页手动到 %s 新建 release v%s，拖入：' % (repo, version))
@@ -285,6 +297,8 @@ def _manual_upload_tip(version, zip_path, version_json_path, repo, platform,
     print('        %s' % zip_path)
     if exe_path:
         print('        %s' % exe_path)
+    if setup_path:
+        print('        %s' % setup_path)
 
 
 def _upload(pubdir, version):
@@ -295,6 +309,8 @@ def _upload(pubdir, version):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--build', action='store_true', help='发布前先重建')
+    ap.add_argument('--installer', action='store_true',
+                    help='同时构建并发布 Inno Setup 安装包（需 ISCC）')
     ap.add_argument('--github', metavar='owner/repo', default=None,
                     help='发布到 GitHub Releases，如 --github zhang/FlangeQueryV2')
     ap.add_argument('--gitee', metavar='owner/repo', default=None,
@@ -303,7 +319,7 @@ def main():
     args = ap.parse_args()
 
     if args.build:
-        build()
+        build(args.installer)
 
     if not os.path.isdir(FOLDER):
         sys.exit('缺少文件夹版产物：%s\n先用 --build 或 tools/build_release.py' % FOLDER)
@@ -326,6 +342,19 @@ def main():
         else:
             onefile_meta['url'] = os.path.basename(onefile_path)
 
+    setup_src = os.path.join(DIST, 'installer',
+                             'FlangeQueryV2-%s-setup.exe' % version)
+    setup_path = None
+    setup_meta = None
+    if args.installer and os.path.isfile(setup_src):
+        setup_path = setup_src
+        setup_meta = {'sha256': sha256_of(setup_path),
+                      'size': os.path.getsize(setup_path)}
+        if args.gitee or args.github:
+            setup_meta['name'] = os.path.basename(setup_path)
+        else:
+            setup_meta['url'] = os.path.basename(setup_path)
+
     folder_meta = {'sha256': sha, 'size': size}
     if args.gitee or args.github:
         folder_meta['name'] = os.path.basename(zip_path)   # Releases 模式：updater 从 assets 取
@@ -341,6 +370,8 @@ def main():
     }
     if onefile_meta:
         info['files']['onefile'] = onefile_meta
+    if setup_meta:
+        info['files']['setup'] = setup_meta
 
     os.makedirs(PUBDIR, exist_ok=True)
     vj = os.path.join(PUBDIR, 'version.json')
@@ -349,6 +380,8 @@ def main():
     shutil.copy2(zip_path, PUBDIR)
     if onefile_path:
         shutil.copy2(onefile_path, PUBDIR)
+    if setup_path:
+        shutil.copy2(setup_path, PUBDIR)
 
     print('发布完成：V%s' % version)
     print('  version.json -> %s' % vj)
@@ -360,11 +393,17 @@ def main():
         print('  onefile exe  -> %s (%d MB)' % (
             os.path.join(PUBDIR, os.path.basename(onefile_path)),
             os.path.getsize(onefile_path) // 1024 // 1024))
+    if setup_path:
+        print('  setup exe    -> %s (%d MB)' % (
+            os.path.join(PUBDIR, os.path.basename(setup_path)),
+            os.path.getsize(setup_path) // 1024 // 1024))
 
     if args.gitee:
-        publish_gitee(args.gitee, version, zip_path, vj, info['notes'], onefile_path)
+        publish_gitee(args.gitee, version, zip_path, vj, info['notes'],
+                      onefile_path, setup_path)
     elif args.github:
-        publish_github(args.github, version, zip_path, vj, info['notes'], onefile_path)
+        publish_github(args.github, version, zip_path, vj, info['notes'],
+                       onefile_path, setup_path)
     elif not _upload(PUBDIR, version):
         print('（本地发布模式：把 %s 整目录同步到 http(s) 托管即可上线）' % PUBDIR)
 

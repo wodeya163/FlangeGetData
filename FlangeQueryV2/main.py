@@ -32,7 +32,8 @@ from drawing import render_flange
 from version import (APP_ID, APP_NAME, APP_TAGLINE, APP_VERSION,
                      APP_VERSION_DISPLAY)
 from updater import (UpdateChecker, UpdateDownloader, apply_and_restart,
-                     apply_exe_and_restart, UPDATE_DISABLED)
+                     apply_exe_and_restart, apply_setup_and_restart,
+                     UPDATE_DISABLED)
 from core.page_spec import PageSpec
 from core.page_kind import page_kind
 from core import storage
@@ -1233,12 +1234,15 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage('更新失败')
             return
         new_exe = r.get('new_exe')
+        new_setup = r.get('new_setup')
         if new_exe:
             ok = apply_exe_and_restart(new_exe)
+        elif new_setup:
+            ok = apply_setup_and_restart(new_setup)
         else:
             ok = apply_and_restart(r.get('new_dir'))
         logger.info('更新包已就绪，触发重启=%s（%s）', ok,
-                    new_exe or r.get('new_dir'))
+                    new_exe or new_setup or r.get('new_dir'))
         if ok:
             self.statusBar().showMessage('更新就绪，即将重启…')
             QApplication.quit()

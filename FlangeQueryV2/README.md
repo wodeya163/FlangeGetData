@@ -136,16 +136,16 @@ python tools\build_release.py --clean --installer
 1. 在 `version.py` 把版本号加一（如 `3.78.4` → `3.78.5`）并提交；
 2. 推送到 `main`（仅 `version.py` 变更会触发，避免无关提交反复打包）；
 3. Actions 在 `windows-latest` 上安装依赖、跑测试，构建单文件版与文件夹版；
-4. 调用 `tools/_publish_update.py --build --github <repo>` 生成 `version.json`、
-   `FlangeQueryV2-<版本>-folder.zip` 与 `FlangeQueryV2-<版本>-onefile.exe`，
-   计算 SHA256，创建/更新同名 Release 并上传三个资产；
+4. 调用 `tools/_publish_update.py --build --installer --github <repo>` 生成
+   `version.json`、`*-folder.zip`、`*-onefile.exe` 与 `*-setup.exe`，
+   计算 SHA256，创建/更新同名 Release 并上传四个资产；
 5. 同名 Release 已存在时默认跳过；需要重发，在 Actions 页面手动运行并勾选 `force`。
 
 注意事项：
 
 - 必须升级 `APP_VERSION`。版本号不变，客户端 `need_update()` 判定为“已是最新”，不会下载。
-- 文件夹版下载整包覆盖，单文件版下载 `*-onefile.exe` 后由脚本在退出后替换 exe，
-  两种版本都支持自更新。
+- 安装版静默运行 `*-setup.exe` 完成升级（保留快捷方式与卸载项），文件夹版下载整包覆盖，
+  单文件版下载 `*-onefile.exe` 后替换 exe；三种版本都支持自更新。
 - 发布使用 `GITHUB_TOKEN`（工作流已声明 `permissions: contents: write`），无需额外配置 PAT。
 - 国内访问 `api.github.com` 可能失败；可把 `updater.GITEE_REPO` 指向 Gitee 镜像仓库，
   或在分发时预设 `FLANGE_GITEE_REPO` 环境变量。

@@ -84,6 +84,12 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install -r requirements-build.txt
 
+      - name: Install Inno Setup
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          choco install innosetup --no-progress -y
+
       - name: Build and publish release
         if: steps.check.outputs.skip != 'true'
         working-directory: FlangeQueryV2
@@ -95,7 +101,7 @@ jobs:
         run: |
           $notes = $env:RELEASE_NOTES
           if (-not $notes) { $notes = "管路智选 V${{ steps.ver.outputs.version }} 自动发布" }
-          python tools\_publish_update.py --build --github $env:REPO --notes $notes
+          python tools\_publish_update.py --build --installer --github $env:REPO --notes $notes
           if ($LASTEXITCODE -ne 0) { throw "发布失败，退出码 $LASTEXITCODE" }
 
       - name: Summary

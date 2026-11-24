@@ -4,6 +4,6 @@
 APP_ID = 'FlangeQuery'
 APP_NAME = '管路智选'
 APP_TAGLINE = '法兰管件 · 管道附件 · 机械选型 · 离线查询'
-APP_VERSION = '3.78.5'
+APP_VERSION = '3.78.6'
 APP_VERSION_DISPLAY = 'V' + APP_VERSION
 

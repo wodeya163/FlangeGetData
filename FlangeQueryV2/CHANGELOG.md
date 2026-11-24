@@ -1,5 +1,15 @@
 # 更新记录
 
+## 3.78.6 - 2026-11-25
+
+### 安装版支持静默升级
+- CI 额外构建并发布 Inno Setup 安装包 `*-setup.exe`；`version.json` 增加 `files.setup`；
+- 安装版（目录内存在 `unins000.exe`）检测到新版时，退出后静默运行
+  `setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /CLOSEAPPLICATIONS /DIR=<原目录>`，
+  自动关闭旧进程、覆盖文件、保留快捷方式与卸载项，无需管理员权限；
+- 文件夹版仍整包覆盖，单文件版仍替换 exe；三种版本共用同一检查/下载/校验链路；
+- 安装日志写入 `%TEMP%\flange_setup.log`，便于排查升级失败。
+
 ## 3.78.5 - 2026-11-24
 
 ### 修复 GitHub 资产域名被重置时自动更新失效
